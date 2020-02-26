@@ -1,16 +1,19 @@
+<?php
+require_once("database/tables.php"); 
+?>
 
 <html>
-
 <head>
   <title>Lyfestyle</title>
+  <link rel="stylesheet" type="text/css", href="assets/css/main.css">
   <link rel="icon" type="image/png" href="assets/Lyfestyle_favicon.png">
 </head>
 
 <body>
-<h1>Lyfestyle</h1>
+<img id="lyfestyle-logo" src="assets/images/Lyfestyle_banner_wip_01.png"><br>
 
-Username:<input type="text"><br>
-Password: <input type="text"><br>
+Username <input type="text"><br>
+Password <input type="text"><br>
 
 <input type="submit" onClick="location.href='pages/dashboard.php'" value="Login">
   
