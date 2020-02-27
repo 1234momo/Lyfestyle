@@ -12,5 +12,5 @@ if ($conn -> connect_error) die($conn -> connect_error);
 
 // Create database if it does not exist and then connects to tbe database. 
 $conn -> query("CREATE DATABASE IF NOT EXISTS $database");
-$conn = mysqli_connect($servername, $username, $password, $database);
+$conn = mysqli_connect($hostname, $username, $password, $database);
 ?>
