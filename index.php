@@ -6,7 +6,7 @@ require_once("database/tables.php");
 <head>
   <title>Lyfestyle</title>
   <link rel="stylesheet" type="text/css", href="assets/css/main.css">
-  <link rel="icon" type="image/png" href="assets/Lyfestyle_favicon.png">
+  <link rel="icon" type="image/png" href="assets/images/Lyfestyle_favicon.png">
 </head>
 
 <body>
