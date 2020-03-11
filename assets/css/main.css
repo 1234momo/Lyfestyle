@@ -1,10 +1,40 @@
 
 body {
-  font-family: sans-serif;
-  margin: 2em;
+  background: url(../images/Lyfestyle_background_2.png); 
+/*  background-repeat: no-repeat; */
+  background-size: 100%; 
+  color: white; 
+  font-family: sans-serif; 
+  padding: 2%; 
+}
+
+h1 {
+  color: white; 
 }
 
 #lyfestyle-logo {
-  margin-bottom: 2em; 
-  height: 18em; 
+/*  margin-bottom: 2em; */
+  height: 16em; 
+}
+
+.main-login-form {
+/*  background: grey; */
+  color: grey; 
+  padding: 2% 0 1% 0;
+  font-weight: bold; 
+  width: 40em; 
+}
+
+.login-group input {
+/*  background-color: red; */
+  padding-bottom: 0.2em;
+}
+
+
+.etc-login-form {
+  color: white;
+}
+
+.etc-login-form a {
+  color: white;
 }
