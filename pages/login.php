@@ -31,7 +31,7 @@ require_once("../database/connection.php");
 </div>
   
 <div class="etc-login-form">
-don't have an account? <a href="signup.php" >signup here</a>
+Don't have an account? <a href="signup.php" >Signup here</a>
 </div>
   
 </body>

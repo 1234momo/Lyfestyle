@@ -43,7 +43,7 @@ require_once("../database/connection.php");
 </div>
   
 <div class="etc-login-form">
-already have an account? <a href="login.php" >login here</a>
+Already have an account? <a href="login.php" >Login here</a>
 </div>
   
 </body>
