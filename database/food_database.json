@@ -1,0 +1,1174 @@
+{
+    "Sheet1": [
+        {
+            "undefined": "0",
+            "Category": "Candy",
+            "Food_name": "100 Grand",
+            "Calories_per_oz": "126.654"
+        },
+        {
+            "undefined": "1",
+            "Category": "Candy",
+            "Food_name": "Air heads",
+            "Calories_per_oz": "109.0909091"
+        },
+        {
+            "undefined": "2",
+            "Category": "Meats & Fish",
+            "Food_name": "Anchovies tinned",
+            "Calories_per_oz": "85.71428571"
+        },
+        {
+            "undefined": "3",
+            "Category": "Cheese",
+            "Food_name": "Appenzell",
+            "Calories_per_oz": "112"
+        },
+        {
+            "undefined": "4",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Apple",
+            "Calories_per_oz": "12.57142857"
+        },
+        {
+            "undefined": "5",
+            "Category": "Cereal",
+            "Food_name": "Apple Jacks",
+            "Calories_per_oz": "120"
+        },
+        {
+            "undefined": "6",
+            "Category": "Candy",
+            "Food_name": "Baby Ruth ",
+            "Calories_per_oz": "129"
+        },
+        {
+            "undefined": "7",
+            "Category": "Cheese",
+            "Food_name": "Babybel",
+            "Calories_per_oz": "90"
+        },
+        {
+            "undefined": "8",
+            "Category": "Meats & Fish",
+            "Food_name": "Bacon (fried)",
+            "Calories_per_oz": "142.8571429"
+        },
+        {
+            "undefined": "9",
+            "Category": "Meats & Fish",
+            "Food_name": "Bacon (grilled)",
+            "Calories_per_oz": "108.5714286"
+        },
+        {
+            "undefined": "10",
+            "Category": "Bread & cereal",
+            "Food_name": "Bagel",
+            "Calories_per_oz": "88.57142857"
+        },
+        {
+            "undefined": "11",
+            "Category": "Chips",
+            "Food_name": "Baked Lays",
+            "Calories_per_oz": "120"
+        },
+        {
+            "undefined": "12",
+            "Category": "Chips",
+            "Food_name": "Baked ruffles",
+            "Calories_per_oz": "120"
+        },
+        {
+            "undefined": "13",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Banana",
+            "Calories_per_oz": "18.57142857"
+        },
+        {
+            "undefined": "14",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Beans (baked)",
+            "Calories_per_oz": "22.85714286"
+        },
+        {
+            "undefined": "15",
+            "Category": "Meats & Fish",
+            "Food_name": "Beef (burger)",
+            "Calories_per_oz": "80"
+        },
+        {
+            "undefined": "16",
+            "Category": "Meats & Fish",
+            "Food_name": "Beef (Roast)",
+            "Calories_per_oz": "69"
+        },
+        {
+            "undefined": "17",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Blackberries",
+            "Calories_per_oz": "7.142857143"
+        },
+        {
+            "undefined": "18",
+            "Category": "Cheese",
+            "Food_name": "Bonbel",
+            "Calories_per_oz": "90"
+        },
+        {
+            "undefined": "19",
+            "Category": "Cheese",
+            "Food_name": "Boursin",
+            "Calories_per_oz": "40"
+        },
+        {
+            "undefined": "20",
+            "Category": "Bread & cereal",
+            "Food_name": "Bread (wheat)",
+            "Calories_per_oz": "72"
+        },
+        {
+            "undefined": "21",
+            "Category": "Bread & cereal",
+            "Food_name": "Bread (white)",
+            "Calories_per_oz": "68.57142857"
+        },
+        {
+            "undefined": "22",
+            "Category": "Cheese",
+            "Food_name": "Brie",
+            "Calories_per_oz": "90"
+        },
+        {
+            "undefined": "23",
+            "Category": "Cheese",
+            "Food_name": "Brie blue",
+            "Calories_per_oz": "126"
+        },
+        {
+            "undefined": "24",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Broccoli",
+            "Calories_per_oz": "9.142857142"
+        },
+        {
+            "undefined": "25",
+            "Category": "Fat/Sugars",
+            "Food_name": "Butter",
+            "Calories_per_oz": "214.2857143"
+        },
+        {
+            "undefined": "26",
+            "Category": "Candy",
+            "Food_name": "Butterfinger",
+            "Calories_per_oz": "129.6296296"
+        },
+        {
+            "undefined": "27",
+            "Category": "Cheese",
+            "Food_name": "buxton blue",
+            "Calories_per_oz": "119"
+        },
+        {
+            "undefined": "28",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Cabbage (boiled)",
+            "Calories_per_oz": "5.714285714"
+        },
+        {
+            "undefined": "29",
+            "Category": "Cheese",
+            "Food_name": "Canadian Cheddar",
+            "Calories_per_oz": "115"
+        },
+        {
+            "undefined": "30",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Carrot (boiled)",
+            "Calories_per_oz": "5.714285714"
+        },
+        {
+            "undefined": "31",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Cauliflower (boiled)",
+            "Calories_per_oz": "8.571428571"
+        },
+        {
+            "undefined": "32",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Celery (boiled)",
+            "Calories_per_oz": "2.857142857"
+        },
+        {
+            "undefined": "33",
+            "Category": "Bread & cereal",
+            "Food_name": "Chapatis",
+            "Calories_per_oz": "85.71428571"
+        },
+        {
+            "undefined": "34",
+            "Category": "Cheese",
+            "Food_name": "Cheddar",
+            "Calories_per_oz": "116"
+        },
+        {
+            "undefined": "35",
+            "Category": "Cheese",
+            "Food_name": "Cheddar (half fat)",
+            "Calories_per_oz": "75"
+        },
+        {
+            "undefined": "36",
+            "Category": "Cheese",
+            "Food_name": "Cheese spread",
+            "Calories_per_oz": "40"
+        },
+        {
+            "undefined": "37",
+            "Category": "Cereal",
+            "Food_name": "Cherios",
+            "Calories_per_oz": "100"
+        },
+        {
+            "undefined": "38",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Cherry ",
+            "Calories_per_oz": "14.28571429"
+        },
+        {
+            "undefined": "39",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Cherry tomato",
+            "Calories_per_oz": "4.857142857"
+        },
+        {
+            "undefined": "40",
+            "Category": "Cheese",
+            "Food_name": "Cheshire",
+            "Calories_per_oz": "107"
+        },
+        {
+            "undefined": "41",
+            "Category": "Chips",
+            "Food_name": "Chex mix cheddar",
+            "Calories_per_oz": "120"
+        },
+        {
+            "undefined": "42",
+            "Category": "Meats & Fish",
+            "Food_name": "Chicken",
+            "Calories_per_oz": "57.14285714"
+        },
+        {
+            "undefined": "43",
+            "Category": "Meats & Fish",
+            "Food_name": "Chicken (Leg)",
+            "Calories_per_oz": "49"
+        },
+        {
+            "undefined": "44",
+            "Category": "Meats & Fish",
+            "Food_name": "Chicken (Liver)",
+            "Calories_per_oz": "47"
+        },
+        {
+            "undefined": "45",
+            "Category": "Meats & Fish",
+            "Food_name": "Chicken (thigh)",
+            "Calories_per_oz": "64"
+        },
+        {
+            "undefined": "46",
+            "Category": "Meats & Fish",
+            "Food_name": "Chicken (wing)",
+            "Calories_per_oz": "74"
+        },
+        {
+            "undefined": "47",
+            "Category": "Fat/Sugars",
+            "Food_name": "Chocolate",
+            "Calories_per_oz": "142.8571429"
+        },
+        {
+            "undefined": "48",
+            "Category": "Cereal",
+            "Food_name": "Cinnamon Toast Crunch",
+            "Calories_per_oz": "173.33"
+        },
+        {
+            "undefined": "49",
+            "Category": "Meats & Fish",
+            "Food_name": "Cockles",
+            "Calories_per_oz": "14.28571429"
+        },
+        {
+            "undefined": "50",
+            "Category": "Cereal",
+            "Food_name": "Cocoa pebbles",
+            "Calories_per_oz": "110"
+        },
+        {
+            "undefined": "51",
+            "Category": "Meats & Fish",
+            "Food_name": "Cod (fresh)",
+            "Calories_per_oz": "57.14285714"
+        },
+        {
+            "undefined": "52",
+            "Category": "Fruits & vegetables",
+            "Food_name": "corn",
+            "Calories_per_oz": "37.14285714"
+        },
+        {
+            "undefined": "53",
+            "Category": "Cereal",
+            "Food_name": "Corn flakes",
+            "Calories_per_oz": "100"
+        },
+        {
+            "undefined": "54",
+            "Category": "Cereal",
+            "Food_name": "Corn pops",
+            "Calories_per_oz": "120"
+        },
+        {
+            "undefined": "55",
+            "Category": "Fat/Sugars",
+            "Food_name": "Corn snack",
+            "Calories_per_oz": "142.8571429"
+        },
+        {
+            "undefined": "56",
+            "Category": "Cheese",
+            "Food_name": "Cottage",
+            "Calories_per_oz": "27"
+        },
+        {
+            "undefined": "57",
+            "Category": "Meats & Fish",
+            "Food_name": "Crab (fresh)",
+            "Calories_per_oz": "31.42857143"
+        },
+        {
+            "undefined": "58",
+            "Category": "Bread & cereal",
+            "Food_name": "Crackerbread",
+            "Calories_per_oz": "92.85714286"
+        },
+        {
+            "undefined": "59",
+            "Category": "Cheese",
+            "Food_name": "Cream cheese",
+            "Calories_per_oz": "125"
+        },
+        {
+            "undefined": "60",
+            "Category": "Bread & cereal",
+            "Food_name": "Cream crackers",
+            "Calories_per_oz": "125.7142857"
+        },
+        {
+            "undefined": "61",
+            "Category": "Milk & Dairy",
+            "Food_name": "cream fresh (double)",
+            "Calories_per_oz": "122.8571429"
+        },
+        {
+            "undefined": "62",
+            "Category": "Milk & Dairy",
+            "Food_name": "Cream fresh (half)",
+            "Calories_per_oz": "45.71428571"
+        },
+        {
+            "undefined": "63",
+            "Category": "Milk & Dairy",
+            "Food_name": "cream fresh (single)",
+            "Calories_per_oz": "57.14285714"
+        },
+        {
+            "undefined": "64",
+            "Category": "Bread & cereal",
+            "Food_name": "Crumptes",
+            "Calories_per_oz": "56.57142857"
+        },
+        {
+            "undefined": "65",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Cucumber ",
+            "Calories_per_oz": "2.857142857"
+        },
+        {
+            "undefined": "66",
+            "Category": "Cheese",
+            "Food_name": "Curd",
+            "Calories_per_oz": "50"
+        },
+        {
+            "undefined": "67",
+            "Category": "Milk & Dairy",
+            "Food_name": "Custard",
+            "Calories_per_oz": "28.57142857"
+        },
+        {
+            "undefined": "68",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Dates",
+            "Calories_per_oz": "67.14285714"
+        },
+        {
+            "undefined": "69",
+            "Category": "Cheese",
+            "Food_name": "Derby",
+            "Calories_per_oz": "113"
+        },
+        {
+            "undefined": "70",
+            "Category": "Meats & Fish",
+            "Food_name": "Duck Roast",
+            "Calories_per_oz": "122.8571429"
+        },
+        {
+            "undefined": "71",
+            "Category": "Milk & Dairy",
+            "Food_name": "Eggs ",
+            "Calories_per_oz": "42.85714286"
+        },
+        {
+            "undefined": "72",
+            "Category": "Milk & Dairy",
+            "Food_name": "Eggs (fried)",
+            "Calories_per_oz": "51.42857143"
+        },
+        {
+            "undefined": "73",
+            "Category": "Cheese",
+            "Food_name": "Feta (cow)",
+            "Calories_per_oz": "75"
+        },
+        {
+            "undefined": "74",
+            "Category": "Cheese",
+            "Food_name": "Feta (sheep)",
+            "Calories_per_oz": "84"
+        },
+        {
+            "undefined": "75",
+            "Category": "Cereal",
+            "Food_name": "Fiber One",
+            "Calories_per_oz": "120"
+        },
+        {
+            "undefined": "76",
+            "Category": "Meats & Fish",
+            "Food_name": "Filet Mignon",
+            "Calories_per_oz": "75"
+        },
+        {
+            "undefined": "77",
+            "Category": "Meats & Fish",
+            "Food_name": "Fish (cake)",
+            "Calories_per_oz": "57.14285714"
+        },
+        {
+            "undefined": "78",
+            "Category": "Meats & Fish",
+            "Food_name": "Fish (fingers)",
+            "Calories_per_oz": "62.85714285"
+        },
+        {
+            "undefined": "79",
+            "Category": "Meats & Fish",
+            "Food_name": "Flank Steak",
+            "Calories_per_oz": "38"
+        },
+        {
+            "undefined": "80",
+            "Category": "Bread & cereal",
+            "Food_name": "Flapjacks mix",
+            "Calories_per_oz": "142.8571429"
+        },
+        {
+            "undefined": "81",
+            "Category": "Cereal",
+            "Food_name": "Froot Loops",
+            "Calories_per_oz": "120"
+        },
+        {
+            "undefined": "82",
+            "Category": "Cereal",
+            "Food_name": "Frosted Mini-wheats",
+            "Calories_per_oz": "200"
+        },
+        {
+            "undefined": "83",
+            "Category": "Cereal",
+            "Food_name": "Fruity pebbles",
+            "Calories_per_oz": "110"
+        },
+        {
+            "undefined": "84",
+            "Category": "Meats & Fish",
+            "Food_name": "Gammon",
+            "Calories_per_oz": "80"
+        },
+        {
+            "undefined": "85",
+            "Category": "Cheese",
+            "Food_name": "Goat cheese",
+            "Calories_per_oz": "95"
+        },
+        {
+            "undefined": "86",
+            "Category": "Cheese",
+            "Food_name": "Gorgonzola",
+            "Calories_per_oz": "109"
+        },
+        {
+            "undefined": "87",
+            "Category": "Cheese",
+            "Food_name": "Gouda",
+            "Calories_per_oz": "106"
+        },
+        {
+            "undefined": "88",
+            "Category": "Fruits & vegetables",
+            "Food_name": "GrapeFruit",
+            "Calories_per_oz": "9.142857142"
+        },
+        {
+            "undefined": "89",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Graphes",
+            "Calories_per_oz": "17.71428571"
+        },
+        {
+            "undefined": "90",
+            "Category": "Meats & Fish",
+            "Food_name": "Haddock (fresh)",
+            "Calories_per_oz": "31.42857143"
+        },
+        {
+            "undefined": "91",
+            "Category": "Meats & Fish",
+            "Food_name": "Halibut (fresh)",
+            "Calories_per_oz": "35.71428571"
+        },
+        {
+            "undefined": "92",
+            "Category": "Meats & Fish",
+            "Food_name": "Ham",
+            "Calories_per_oz": "68.57142857"
+        },
+        {
+            "undefined": "93",
+            "Category": "Cheese",
+            "Food_name": "Havarti",
+            "Calories_per_oz": "117"
+        },
+        {
+            "undefined": "94",
+            "Category": "Candy",
+            "Food_name": "Hersheys almond",
+            "Calories_per_oz": "95.9904"
+        },
+        {
+            "undefined": "95",
+            "Category": "Candy",
+            "Food_name": "Hersheys Cookies and cream ",
+            "Calories_per_oz": "153.318"
+        },
+        {
+            "undefined": "96",
+            "Category": "Candy",
+            "Food_name": "Hersheys dark",
+            "Calories_per_oz": "119.988"
+        },
+        {
+            "undefined": "97",
+            "Category": "Candy",
+            "Food_name": "Hersheys milk chocolate (r)",
+            "Calories_per_oz": "143.255814"
+        },
+        {
+            "undefined": "98",
+            "Category": "Candy",
+            "Food_name": "Hersheys Toffee",
+            "Calories_per_oz": "139.986"
+        },
+        {
+            "undefined": "99",
+            "Category": "Fat/Sugars",
+            "Food_name": "Honey",
+            "Calories_per_oz": "80"
+        },
+        {
+            "undefined": "100",
+            "Category": "Cereal",
+            "Food_name": "Honey Nut cheerios",
+            "Calories_per_oz": "146.67"
+        },
+        {
+            "undefined": "101",
+            "Category": "Cereal",
+            "Food_name": "Honey Smacks",
+            "Calories_per_oz": "125"
+        },
+        {
+            "undefined": "102",
+            "Category": "Milk & Dairy",
+            "Food_name": "Ice cream",
+            "Calories_per_oz": "51.42857143"
+        },
+        {
+            "undefined": "103",
+            "Category": "Fat/Sugars",
+            "Food_name": "Jam",
+            "Calories_per_oz": "71.42857143"
+        },
+        {
+            "undefined": "104",
+            "Category": "Meats & Fish",
+            "Food_name": "Kidney",
+            "Calories_per_oz": "45.71428571"
+        },
+        {
+            "undefined": "105",
+            "Category": "Candy",
+            "Food_name": "Kit Kat",
+            "Calories_per_oz": "145"
+        },
+        {
+            "undefined": "106",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Kiwi",
+            "Calories_per_oz": "14.28571429"
+        },
+        {
+            "undefined": "107",
+            "Category": "Meats & Fish",
+            "Food_name": "Lamb (roast)",
+            "Calories_per_oz": "85.71428571"
+        },
+        {
+            "undefined": "108",
+            "Category": "Fat/Sugars",
+            "Food_name": "Lard",
+            "Calories_per_oz": "254.2857143"
+        },
+        {
+            "undefined": "109",
+            "Category": "Chips",
+            "Food_name": "Lays BBq",
+            "Calories_per_oz": "160"
+        },
+        {
+            "undefined": "110",
+            "Category": "Chips",
+            "Food_name": "Lays classic",
+            "Calories_per_oz": "160"
+        },
+        {
+            "undefined": "111",
+            "Category": "Chips",
+            "Food_name": "Lays kettle cooked",
+            "Calories_per_oz": "150"
+        },
+        {
+            "undefined": "112",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Leek (boiled)",
+            "Calories_per_oz": "5.714285714"
+        },
+        {
+            "undefined": "113",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Lentils",
+            "Calories_per_oz": "28.57142857"
+        },
+        {
+            "undefined": "114",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Lettuce",
+            "Calories_per_oz": "4.285714286"
+        },
+        {
+            "undefined": "115",
+            "Category": "Meats & Fish",
+            "Food_name": "Liver",
+            "Calories_per_oz": "42.85714286"
+        },
+        {
+            "undefined": "116",
+            "Category": "Meats & Fish",
+            "Food_name": "Lobster (boiled)",
+            "Calories_per_oz": "28.57142857"
+        },
+        {
+            "undefined": "117",
+            "Category": "Fat/Sugars",
+            "Food_name": "Low fat spread",
+            "Calories_per_oz": "114.2857143"
+        },
+        {
+            "undefined": "118",
+            "Category": "Cereal",
+            "Food_name": "Lucky charms",
+            "Calories_per_oz": "146.67"
+        },
+        {
+            "undefined": "119",
+            "Category": "Meats & Fish",
+            "Food_name": "Luncheon meat",
+            "Calories_per_oz": "114.2857143"
+        },
+        {
+            "undefined": "120",
+            "Category": "Candy",
+            "Food_name": "M&M peanut",
+            "Calories_per_oz": "144"
+        },
+        {
+            "undefined": "121",
+            "Category": "Candy",
+            "Food_name": "M&M regular",
+            "Calories_per_oz": "142"
+        },
+        {
+            "undefined": "122",
+            "Category": "Bread & cereal",
+            "Food_name": "Macaroni",
+            "Calories_per_oz": "28"
+        },
+        {
+            "undefined": "123",
+            "Category": "Meats & Fish",
+            "Food_name": "Mackeral",
+            "Calories_per_oz": "85.71428571"
+        },
+        {
+            "undefined": "124",
+            "Category": "Fat/Sugars",
+            "Food_name": "Margarine",
+            "Calories_per_oz": "214.2857143"
+        },
+        {
+            "undefined": "125",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Melon",
+            "Calories_per_oz": "8"
+        },
+        {
+            "undefined": "126",
+            "Category": "Milk & Dairy",
+            "Food_name": "Milk (skimmed)",
+            "Calories_per_oz": "10.85714286"
+        },
+        {
+            "undefined": "127",
+            "Category": "Milk & Dairy",
+            "Food_name": "Milk (whole)",
+            "Calories_per_oz": "20"
+        },
+        {
+            "undefined": "128",
+            "Category": "Cheese",
+            "Food_name": "Monterey Jack",
+            "Calories_per_oz": "106"
+        },
+        {
+            "undefined": "129",
+            "Category": "Cheese",
+            "Food_name": "Mozzarella",
+            "Calories_per_oz": "88"
+        },
+        {
+            "undefined": "130",
+            "Category": "Cheese",
+            "Food_name": "Mozzarella (half fat)",
+            "Calories_per_oz": "55"
+        },
+        {
+            "undefined": "131",
+            "Category": "Bread & cereal",
+            "Food_name": "Muesli",
+            "Calories_per_oz": "111.4285714"
+        },
+        {
+            "undefined": "132",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Mushrooms (boiled)",
+            "Calories_per_oz": "3.428571428"
+        },
+        {
+            "undefined": "133",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Mushrooms (fried)",
+            "Calories_per_oz": "41.42857143"
+        },
+        {
+            "undefined": "134",
+            "Category": "Meats & Fish",
+            "Food_name": "Mussels ",
+            "Calories_per_oz": "25.71428571"
+        },
+        {
+            "undefined": "135",
+            "Category": "Bread & cereal",
+            "Food_name": "Naan bread",
+            "Calories_per_oz": "91.42857143"
+        },
+        {
+            "undefined": "136",
+            "Category": "Meats & Fish",
+            "Food_name": "New York Strip Steak",
+            "Calories_per_oz": "56"
+        },
+        {
+            "undefined": "137",
+            "Category": "Bread & cereal",
+            "Food_name": "Noodles (boiled)",
+            "Calories_per_oz": "20"
+        },
+        {
+            "undefined": "138",
+            "Category": "Candy",
+            "Food_name": "Now and later",
+            "Calories_per_oz": "86.15384615"
+        },
+        {
+            "undefined": "139",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Olives",
+            "Calories_per_oz": "22.85714286"
+        },
+        {
+            "undefined": "140",
+            "Category": "Milk & Dairy",
+            "Food_name": "Omelette (cheese)",
+            "Calories_per_oz": "76"
+        },
+        {
+            "undefined": "141",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Orange",
+            "Calories_per_oz": "8.571428571"
+        },
+        {
+            "undefined": "142",
+            "Category": "Cheese",
+            "Food_name": "Parmesan",
+            "Calories_per_oz": "108"
+        },
+        {
+            "undefined": "143",
+            "Category": "Candy",
+            "Food_name": "Payday",
+            "Calories_per_oz": "124.4444444"
+        },
+        {
+            "undefined": "144",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Peach",
+            "Calories_per_oz": "8.571428571"
+        },
+        {
+            "undefined": "145",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Pear",
+            "Calories_per_oz": "10.85714286"
+        },
+        {
+            "undefined": "146",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Peas",
+            "Calories_per_oz": "42.28571428"
+        },
+        {
+            "undefined": "147",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Pineapple",
+            "Calories_per_oz": "11.42857143"
+        },
+        {
+            "undefined": "148",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Plum",
+            "Calories_per_oz": "11.14285714"
+        },
+        {
+            "undefined": "149",
+            "Category": "Meats & Fish",
+            "Food_name": "Pork",
+            "Calories_per_oz": "82.85714285"
+        },
+        {
+            "undefined": "150",
+            "Category": "Meats & Fish",
+            "Food_name": "Pork Pie",
+            "Calories_per_oz": "128.5714286"
+        },
+        {
+            "undefined": "151",
+            "Category": "Bread & cereal",
+            "Food_name": "Porridge oats",
+            "Calories_per_oz": "15.71428571"
+        },
+        {
+            "undefined": "152",
+            "Category": "Bread & cereal",
+            "Food_name": "Potato (boiled)",
+            "Calories_per_oz": "20"
+        },
+        {
+            "undefined": "153",
+            "Category": "Bread & cereal",
+            "Food_name": "Potato (Roasted)",
+            "Calories_per_oz": "40"
+        },
+        {
+            "undefined": "154",
+            "Category": "Meats & Fish",
+            "Food_name": "Prawns",
+            "Calories_per_oz": "28.57142857"
+        },
+        {
+            "undefined": "155",
+            "Category": "Chips",
+            "Food_name": "Pringles Original",
+            "Calories_per_oz": "160"
+        },
+        {
+            "undefined": "156",
+            "Category": "Chips",
+            "Food_name": "Pringles sour cream & onion",
+            "Calories_per_oz": "150"
+        },
+        {
+            "undefined": "157",
+            "Category": "Cheese",
+            "Food_name": "Processed cheese",
+            "Calories_per_oz": "94"
+        },
+        {
+            "undefined": "158",
+            "Category": "Cheese",
+            "Food_name": "Provolone",
+            "Calories_per_oz": "100"
+        },
+        {
+            "undefined": "159",
+            "Category": "Meats & Fish",
+            "Food_name": "Rabbit ",
+            "Calories_per_oz": "51.42857143"
+        },
+        {
+            "undefined": "160",
+            "Category": "Cereal",
+            "Food_name": "Raisin Bran",
+            "Calories_per_oz": "190"
+        },
+        {
+            "undefined": "161",
+            "Category": "Candy",
+            "Food_name": "Reese's fast break",
+            "Calories_per_oz": "132.5"
+        },
+        {
+            "undefined": "162",
+            "Category": "Candy",
+            "Food_name": "Reese's peanut butter bar",
+            "Calories_per_oz": "144"
+        },
+        {
+            "undefined": "163",
+            "Category": "Cereal",
+            "Food_name": "Reese's Puffs",
+            "Calories_per_oz": "160"
+        },
+        {
+            "undefined": "164",
+            "Category": "Bread & cereal",
+            "Food_name": "Rice (brown)",
+            "Calories_per_oz": "38.57142857"
+        },
+        {
+            "undefined": "165",
+            "Category": "Bread & cereal",
+            "Food_name": "Rice (egg fried)",
+            "Calories_per_oz": "57.14285714"
+        },
+        {
+            "undefined": "166",
+            "Category": "Bread & cereal",
+            "Food_name": "Rice (white)",
+            "Calories_per_oz": "40"
+        },
+        {
+            "undefined": "167",
+            "Category": "Bread & cereal",
+            "Food_name": "Rice cakes",
+            "Calories_per_oz": "106.5714286"
+        },
+        {
+            "undefined": "168",
+            "Category": "Cereal",
+            "Food_name": "Rice Krispies",
+            "Calories_per_oz": "90"
+        },
+        {
+            "undefined": "169",
+            "Category": "Cheese",
+            "Food_name": "Ricotta",
+            "Calories_per_oz": "53"
+        },
+        {
+            "undefined": "170",
+            "Category": "Candy",
+            "Food_name": "Rolo",
+            "Calories_per_oz": "129.4117647"
+        },
+        {
+            "undefined": "171",
+            "Category": "Chips",
+            "Food_name": "Ruffles",
+            "Calories_per_oz": "160"
+        },
+        {
+            "undefined": "172",
+            "Category": "Meats & Fish",
+            "Food_name": "Salmon (fresh)",
+            "Calories_per_oz": "51.42857143"
+        },
+        {
+            "undefined": "173",
+            "Category": "Meats & Fish",
+            "Food_name": "Sausage pork fried",
+            "Calories_per_oz": "91.42857142"
+        },
+        {
+            "undefined": "174",
+            "Category": "Meats & Fish",
+            "Food_name": "Sausage roll",
+            "Calories_per_oz": "137.1428571"
+        },
+        {
+            "undefined": "175",
+            "Category": "Meats & Fish",
+            "Food_name": "Sausauge pork grilled",
+            "Calories_per_oz": "80"
+        },
+        {
+            "undefined": "176",
+            "Category": "Candy",
+            "Food_name": "skittles",
+            "Calories_per_oz": "115"
+        },
+        {
+            "undefined": "177",
+            "Category": "Candy",
+            "Food_name": "Skittles Sour",
+            "Calories_per_oz": "111"
+        },
+        {
+            "undefined": "178",
+            "Category": "Candy",
+            "Food_name": "Snickers almond ",
+            "Calories_per_oz": "129.0581162"
+        },
+        {
+            "undefined": "179",
+            "Category": "Cereal",
+            "Food_name": "Special K ",
+            "Calories_per_oz": "120"
+        },
+        {
+            "undefined": "180",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Spinach",
+            "Calories_per_oz": "2.285714286"
+        },
+        {
+            "undefined": "181",
+            "Category": "Candy",
+            "Food_name": "Starburst",
+            "Calories_per_oz": "101"
+        },
+        {
+            "undefined": "182",
+            "Category": "Meats & Fish",
+            "Food_name": "Steak & kidney Pie",
+            "Calories_per_oz": "100"
+        },
+        {
+            "undefined": "183",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Strawberries",
+            "Calories_per_oz": "8.571428571"
+        },
+        {
+            "undefined": "184",
+            "Category": "Fat/Sugars",
+            "Food_name": "Syrup",
+            "Calories_per_oz": "85.71428571"
+        },
+        {
+            "undefined": "185",
+            "Category": "Fruits & vegetables",
+            "Food_name": "Tomato",
+            "Calories_per_oz": "5.714285714"
+        },
+        {
+            "undefined": "186",
+            "Category": "Cereal",
+            "Food_name": "Trix",
+            "Calories_per_oz": "120"
+        },
+        {
+            "undefined": "187",
+            "Category": "Meats & Fish",
+            "Food_name": "Turkey",
+            "Calories_per_oz": "45.71428571"
+        },
+        {
+            "undefined": "188",
+            "Category": "Candy",
+            "Food_name": "Twizzlers",
+            "Calories_per_oz": "95"
+        },
+        {
+            "undefined": "189",
+            "Category": "Candy",
+            "Food_name": "Watchamacallit",
+            "Calories_per_oz": "231.25"
+        },
+        {
+            "undefined": "190",
+            "Category": "Candy",
+            "Food_name": "Weight watchers ice cream bar",
+            "Calories_per_oz": "61.76470588"
+        },
+        {
+            "undefined": "191",
+            "Category": "Cereal",
+            "Food_name": "Wheaties",
+            "Calories_per_oz": "120"
+        },
+        {
+            "undefined": "192",
+            "Category": "Milk & Dairy",
+            "Food_name": "Yogurt (natural)",
+            "Calories_per_oz": "17.14285714"
+        },
+        {
+            "undefined": "193",
+            "Category": "Milk & Dairy",
+            "Food_name": "Yogurt (reduced)",
+            "Calories_per_oz": "12.85714286"
+        },
+        {
+            "undefined": "194",
+            "Category": "Candy",
+            "Food_name": "York peppermint",
+            "Calories_per_oz": "136.0465116"
+        }
+    ]
+}

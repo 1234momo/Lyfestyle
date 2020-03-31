@@ -12,15 +12,17 @@ h1 {
   color: white; 
 }
 
+label {
+  color: rgb(53, 53, 53);
+}
+
 #lyfestyle-logo {
 /*  margin-bottom: 2em; */
   height: 16em; 
 }
 
 .main-login-form {
-/*  background: grey; */
-  color: grey; 
-  padding: 2% 0 1% 0;
+  padding: 0 0 1% 0;
   font-weight: bold; 
   width: 40em; 
 }
@@ -40,5 +42,78 @@ h1 {
 }
 
 .etc-login-form a {
+  color: white;
+}
+
+ul {
+  /* Remove default list styling */
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  color: white;
+}
+
+#search-area {
+  align-content: center;
+}
+
+ul li a {
+  border: 1px solid white; /* Add a border to all links */
+  margin-top: -1px; /* Prevent double borders */
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove default text underline */
+  font-size: 18px; /* Increase the font-size */
+  display: block; /* Make it into a block element to fill the whole list */
+  text-align: center;
+  background-color: rgba(106, 107, 167, 0.658);
+}
+
+ul li:hover {
+  background-color: rgb(57, 204, 209);
+}
+
+#search-list {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  max-height: 70%; /* 1.5 x 3 */
+  overflow-y: auto;
+  width: 80%;
+}
+
+#keyword, #search-list, #add-log-btn {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#keyword {
+  margin-top: 2em;
+}
+
+#keyword {
+  min-width: 25em;
+  min-height: 2em;
+}
+
+#search-foods {
+  display: table;
+}
+
+#info-log-area {
+  float: left;
+}
+
+#search-container, #list-container {
+  width: 50%;
+  float: left;
+}
+
+#overall-container {
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#add-log-btn {
   color: white;
 }

@@ -11,28 +11,31 @@ require_once("../database/connection.php");
 </head>
 
 <body>
-<img id="lyfestyle-logo" src="../assets/images/Lyfestyle_banner_02.png">
+  <img id="lyfestyle-logo" src="../assets/images/Lyfestyle_banner_02.png">
 
-<h1 style="color: white; font-weight: bold; ">Login</h1>
-<div class="main-login-form">
-  <form method="POST">
-    <div class="login-group">  
-      <input type="email" name="login_email" placeholder="Email">
-    </div>
+  <h1 style="color: white; font-weight: bold; ">Login</h1>
+
+  <div class="main-login-form">
+    <form method="POST">
+      <div class="login-group"> 
+        <label for="email">Email:</label><br> 
+        <input type="email" id="email" name="login_email" required>
+      </div>
+      
+      <div class="login-group">  
+        <label for="password">Password:</label><br> 
+        <input type="password" id="password" name="login_password" required>
+      </div>
+      
+      <div class="login-group">
+        <input type="submit" name="login" value="Login">
+      </div>
+    </form>
+  </div>
     
-    <div class="login-group">  
-      <input type="password" name="login_password" placeholder="Password">
-    </div>
-    
-    <div class="login-group">
-      <input type="submit" name="login" value="Login">
-    </div>
-  </form>
-</div>
-  
-<div class="etc-login-form">
-Don't have an account? <a href="signup.php" >Signup here</a>
-</div>
+  <div class="etc-login-form">
+  Don't have an account? <a href="signup.php" >Signup here</a>
+  </div>
   
 </body>
   

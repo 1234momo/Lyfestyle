@@ -30,6 +30,16 @@ $users_table = "CREATE TABLE IF NOT EXISTS `users` (
   
 $conn -> query($users_table);
 
+// Creates the food table
+$food_table = "CREATE TABLE IF NOT EXISTS `food` ( 
+  `id` INT PRIMARY KEY UNIQUE NOT NULL , 
+  `breakfast` VARCHAR(256) NOT NULL , 
+  `lunch` VARCHAR(256) NOT NULL , 
+  `dinner` VARCHAR(256) NOT NULL, 
+  `everything` LONGTEXT NOT NULL
+)";
+
+$conn -> query($food_table);
 
 //----------------------------------------------------------------------
 // SIGN UP (WIP)

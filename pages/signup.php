@@ -17,23 +17,28 @@ require_once("../database/connection.php");
 <div class="main-login-form">
   <form method="POST">
     <div class="login-group">  
-      <input type="email" name="signup_email" placeholder="Email">
+      <label for="email">Email:</label><br> 
+      <input type="email" id="email" name="signup_email" required>
+    </div>
+    
+    <div class="login-group"> 
+      <label for="firstName">First name:</label><br> 
+      <input type="text" id="firstName" name="signup_first_name" required>
     </div>
     
     <div class="login-group">  
-      <input type="text" name="signup_first_name" placeholder="First name">
+      <label for="lastName">Last name:</label><br> 
+      <input type="text" id="lastName" name="signup_last_name" required>
     </div>
     
     <div class="login-group">  
-      <input type="text" name="signup_last_name" placeholder="Last name">
+      <label for="password">Password:</label><br> 
+      <input type="password" id="password" name="signup_password1" required>
     </div>
     
     <div class="login-group">  
-      <input type="password" name="signup_password1" placeholder="Password">
-    </div>
-    
-    <div class="login-group">  
-      <input type="password" name="signup_password2" placeholder="Confirm password">
+      <label for="email">Confirm password:</label><br> 
+      <input type="password" id="confirmPassword" name="signup_password2" required>
     </div>
     
     <div class="login-group">  
