@@ -105,6 +105,7 @@ function createForm(itemName, resultsArea, itemNum) {
     labelElem.setAttribute('name', `item${numOfItemsChosen}`);
     labelElem.setAttribute('type', 'text');
     labelElem.setAttribute('value', itemName);
+    labelElem.required = true;
 
     let inputOZElement = document.createElement("input");
     inputOZElement.setAttribute('type', 'number');

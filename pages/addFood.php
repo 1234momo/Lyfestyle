@@ -16,7 +16,7 @@
             $itemWeight = sanitizeMySQL($connection, $_POST["item{$itemNum}weight"]);
             $itemDayEaten = sanitizeMySQL($connection, $_POST["item{$itemNum}dayeaten"]);            
 
-            $allInfoToArray[] = array("name" => $itemName, "weight" => $itemWeight);
+            $allInfoToArray = array("name" => $itemName, "weight" => $itemWeight);
             $infoArray = serialize($allInfoToArray);
 
             $stmt = $connection->prepare("UPDATE food set {$itemDayEaten}=concat({$itemDayEaten},'|{$infoArray}') where id={$id}");
@@ -32,7 +32,7 @@
             $customWeight = sanitizeMySQL($connection, $_POST["custom{$customNum}weight"]);
             $customDayEaten = sanitizeMySQL($connection, $_POST["custom{$customNum}dayeaten"]);            
 
-            $allInfoToArray[] = array("name" => $customName, "weight" => $customWeight);
+            $allInfoToArray = array("name" => $customName, "weight" => $customWeight);
             $infoArray = serialize($allInfoToArray);
 
             $stmt = $connection->prepare("UPDATE food set {$itemDayEaten}=concat({$itemDayEaten},'|{$infoArray}') where id={$id}");
