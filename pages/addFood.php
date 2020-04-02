@@ -85,10 +85,10 @@
             
             </div>
             <div id="list-container">
-                <button id="add-customItem-btn" class="btn btn-primary" onClick="addCustomItem()">Add custom food</button>
+                <button id="addOwnFood-btn" class="btn btn-primary" onClick="addCustomItem()">Add own food</button>
 
                 <form id="eatenForm" action="#" method="POST">
-                    <button id="add-log-btn" class="btn btn-primary" type="submit" name="submit" onClick="location.href = '#'">Add log</button><br>
+                    <button id="addLog-btn" class="btn btn-primary" type="submit" name="submit" onClick="location.href = '#'">Add log</button><br><br>
                 </form>
             </div>
         </div>

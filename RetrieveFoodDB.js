@@ -77,13 +77,19 @@ function displayData(data) {
             }
         }
 
-        // TODO: If no results show, display message
-        // if (foundAName == false) {
-        //     let liItem = document.createElement("li");
-        //     // liItem.onclick = addItem(data.Sheet1[i].undefined);
-        //     liItem.innerHTML = "Sorry database doesn't have your food item";
-        //     ul.appendChild(liItem);
-        // }
+        // If no results show, display message
+        if (foundAName == false) {
+            let msg = document.createTextNode("Sorry, we can't find what you're looking for. Instead, add your own item.");
+            let liItem = document.createElement("li");
+            let aElem = document.createElement("a");
+
+            liItem.setAttribute('class', 'noResults');
+
+            aElem.appendChild(msg);
+            liItem.appendChild(aElem);
+
+            ul.appendChild(liItem);
+        }
     }
 }
 
@@ -92,18 +98,20 @@ function addItem(itemNum, itemName) {
     createForm(itemName, resultsArea, itemNum);
 
     let newItem = document.getElementById(itemNum);
-    newItem.setAttribute('onClick', 'removeItem(this)');
+    newItem.setAttribute('onClick', `removeItem(${this}, ${itemName})`);
     itemsChosen.push(itemName);
 }
 
-function removeItem(elm) {
-    elm.remove();
+function removeItem(elm, itemName) {
+    mainContainer.removeChild(elm);
+    itemsChosen.remove(itemName);
 } 
 
 function createForm(itemName, resultsArea, itemNum) {
     let labelElem = document.createElement("input");
     labelElem.setAttribute('name', `item${numOfItemsChosen}`);
     labelElem.setAttribute('type', 'text');
+    labelElem.setAttribute('placeholder', 'Food name');
     labelElem.setAttribute('value', itemName);
     labelElem.required = true;
 

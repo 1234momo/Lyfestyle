@@ -80,7 +80,7 @@ ul li:hover {
   width: 80%;
 }
 
-#keyword, #search-list, #add-log-btn {
+#keyword, #search-list {
   display: block;
   margin-right: auto;
   margin-left: auto;
@@ -114,10 +114,16 @@ ul li:hover {
   margin-left: auto;
 }
 
-#add-log-btn {
-  color: white;
+#list-container {
+  text-align: center;
 }
 
-#add-customItem-btn, #add-log-btn {
-  display: inline-flex;
+ul li.noResults, ul li.noResults a {
+  pointer-events: none;
+  border: none;
+  background-color: transparent;
 }
+
+#eatenForm {
+  display: inline;
+} 
