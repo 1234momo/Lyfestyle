@@ -1,9 +1,12 @@
+let numOfItemsChosen = 0;
+let numOfCustomItems = 0;
 let itemsChosen = [];
 
 function showFoods(e) {
     // Prevent page from reloading
     e.preventDefault();
 
+    // Call json file with foods and then display the data
     fetch("../database/food_database.json")
     .then(function (response) {
         return response.json();
@@ -16,6 +19,7 @@ function showFoods(e) {
     });
 }
 
+// Display all the foods in the json file
 function displayData(data) {
     let searchTextBox = document.getElementById("keyword");
     let queryItem = searchTextBox.value;
@@ -84,7 +88,6 @@ function displayData(data) {
 }
 
 function addItem(itemNum, itemName) {
-    // alert(itemName + " selected with id of " + itemNum);
     let resultsArea = document.getElementById('eatenForm');
     createForm(itemName, resultsArea, itemNum);
 
@@ -98,18 +101,21 @@ function removeItem(elm) {
 } 
 
 function createForm(itemName, resultsArea, itemNum) {
-    let labelElem = document.createElement("label");
-    labelElem.setAttribute('for', itemNum);
-    labelElem.innerHTML = itemName;
+    let labelElem = document.createElement("input");
+    labelElem.setAttribute('name', `item${numOfItemsChosen}`);
+    labelElem.setAttribute('type', 'text');
+    labelElem.setAttribute('value', itemName);
 
     let inputOZElement = document.createElement("input");
     inputOZElement.setAttribute('type', 'number');
-    inputOZElement.setAttribute('id', itemNum);
+    inputOZElement.setAttribute('name', `item${numOfItemsChosen}weight`);
     inputOZElement.setAttribute('placeholder', 'Enter weight in oz eaten...');
     inputOZElement.setAttribute('step', '0.01');
     inputOZElement.setAttribute('min', '0');
+    inputOZElement.required = true;
 
     let dayEatenElem = document.createElement("select");
+    dayEatenElem.setAttribute('name', `item${numOfItemsChosen}dayeaten`);
     let breakfastElem = document.createElement("option");
     let lunchElem = document.createElement("option");
     let dinnerElem = document.createElement("option");
@@ -127,5 +133,46 @@ function createForm(itemName, resultsArea, itemNum) {
     resultsArea.appendChild(inputOZElement);
     resultsArea.appendChild(dayEatenElem);
     resultsArea.appendChild(linebreakElem);
+
+    numOfItemsChosen++;
 }
 
+function addCustomItem() {
+    let resultsArea = document.getElementById('eatenForm');
+
+    let foodItemElem = document.createElement("input");
+    foodItemElem.setAttribute('type', 'text');
+    foodItemElem.setAttribute('name', `custom${numOfCustomItems}`);
+    foodItemElem.setAttribute('placeholder', 'Food name');
+    foodItemElem.required = true;
+
+    let inputOZElement = document.createElement("input");
+    inputOZElement.setAttribute('type', 'number');
+    inputOZElement.setAttribute('name', `custom${numOfCustomItems}weight`);
+    inputOZElement.setAttribute('placeholder', 'Enter weight in oz eaten...');
+    inputOZElement.setAttribute('step', '0.01');
+    inputOZElement.setAttribute('min', '0');
+    inputOZElement.required = true;
+
+    let dayEatenElem = document.createElement("select");
+    dayEatenElem.setAttribute('name', `custom${numOfCustomItems}dayeaten`);
+    let breakfastElem = document.createElement("option");
+    let lunchElem = document.createElement("option");
+    let dinnerElem = document.createElement("option");
+    dayEatenElem.setAttribute('class', 'form-control');
+    breakfastElem.innerHTML = "Breakfast";
+    lunchElem.innerHTML = "Lunch";
+    dinnerElem.innerHTML = "Dinner";
+    dayEatenElem.appendChild(breakfastElem);
+    dayEatenElem.appendChild(lunchElem);
+    dayEatenElem.appendChild(dinnerElem);
+
+    let linebreakElem = document.createElement("br");
+    
+    resultsArea.appendChild(foodItemElem);
+    resultsArea.appendChild(inputOZElement);
+    resultsArea.appendChild(dayEatenElem);
+    resultsArea.appendChild(linebreakElem);
+    
+    numOfCustomItems++;
+}

@@ -1,5 +1,67 @@
 <?php 
-require_once("../database/connection.php"); 
+    require_once("../database/connection.php"); 
+    $connection = new mysqli($hostname, $username, $password, $database);
+    if ($connection->connect_error) die($connection->connect_error);
+    
+    session_start();
+
+    if (isset($_POST['submit']) && isset($_SESSION['id'])) {
+        $id = $_SESSION['id'];
+        $itemNum = 0;
+        $customNum = 0;
+
+        // Insert items from DB
+        while (array_key_exists("item{$itemNum}", $_POST)) {
+            $itemName = sanitizeMySQL($connection, $_POST["item{$itemNum}"]);
+            $itemWeight = sanitizeMySQL($connection, $_POST["item{$itemNum}weight"]);
+            $itemDayEaten = sanitizeMySQL($connection, $_POST["item{$itemNum}dayeaten"]);            
+
+            $allInfoToArray[] = array("name" => $itemName, "weight" => $itemWeight);
+            $infoArray = serialize($allInfoToArray);
+
+            $stmt = $connection->prepare("UPDATE food set {$itemDayEaten}=concat({$itemDayEaten},'|{$infoArray}') where id={$id}");
+            $stmt -> execute();
+
+            $stmt->close();
+            $itemNum += 1;
+        }
+
+        // Insert custom items
+        while (array_key_exists("custom{$customNum}", $_POST)) {
+            $customName = sanitizeMySQL($connection, $_POST["custom{$customNum}"]);
+            $customWeight = sanitizeMySQL($connection, $_POST["custom{$customNum}weight"]);
+            $customDayEaten = sanitizeMySQL($connection, $_POST["custom{$customNum}dayeaten"]);            
+
+            $allInfoToArray[] = array("name" => $customName, "weight" => $customWeight);
+            $infoArray = serialize($allInfoToArray);
+
+            $stmt = $connection->prepare("UPDATE food set {$itemDayEaten}=concat({$itemDayEaten},'|{$infoArray}') where id={$id}");
+            $stmt -> execute();
+
+            $stmt->close();
+            $customNum += 1;
+        }
+
+        header('location: ../pages/dashboard.php');
+    }
+
+    // Close connection
+    $connection -> close();
+
+    // Sanitizes a string
+    function sanitizeString($var) {
+        $var = stripslashes($var);
+        $var = strip_tags($var);
+        $var = htmlentities($var);
+        return $var;
+    }
+
+    // Sanitizes with mysqli connection object and sanitizeString method
+    function sanitizeMySQL($connection, $var) {
+        $var = $connection -> real_escape_string($var);
+        $var = sanitizeString($var);
+        return $var;
+    }
 ?>
 
 <html>
@@ -23,8 +85,10 @@ require_once("../database/connection.php");
             
             </div>
             <div id="list-container">
-                <form id="eatenForm" action="postToDB.php" method="post">
-                    <input id="add-log-btn" class="btn btn-primary" type="submit" onClick="location.href = './dashboard.php'" value="Add log">
+                <button id="add-customItem-btn" class="btn btn-primary" onClick="addCustomItem()">Add custom food</button>
+
+                <form id="eatenForm" action="#" method="POST">
+                    <button id="add-log-btn" class="btn btn-primary" type="submit" name="submit" onClick="location.href = '#'">Add log</button><br>
                 </form>
             </div>
         </div>

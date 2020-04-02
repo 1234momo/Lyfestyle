@@ -33,10 +33,9 @@ $conn -> query($users_table);
 // Creates the food table
 $food_table = "CREATE TABLE IF NOT EXISTS `food` ( 
   `id` INT PRIMARY KEY UNIQUE NOT NULL , 
-  `breakfast` VARCHAR(256) NOT NULL , 
-  `lunch` VARCHAR(256) NOT NULL , 
-  `dinner` VARCHAR(256) NOT NULL, 
-  `everything` LONGTEXT NOT NULL
+  `Breakfast` LONGTEXT NOT NULL , 
+  `Lunch` LONGTEXT NOT NULL , 
+  `Dinner` LONGTEXT NOT NULL
 )";
 
 $conn -> query($food_table);
@@ -68,14 +67,39 @@ if(isset($_POST['login'])) {
   
   $email = $_POST["login_email"];
   $password = hash("ripemd128", $_POST["login_password"]); 
-  
-  echo "email = $email<br> password = $password<br>"; 
-  
+    
   $query = "SELECT * FROM users WHERE email='$email' AND password='$password'";
   $results = mysqli_query($conn, $query);
+
+  if (!$results) die ($connection -> error);
+  elseif ($results -> num_rows) {
+    $row = $results -> fetch_array(MYSQLI_NUM);
+
+    // Check password
+    if ($password == $row[4]) {
+      session_start();
+      $id = $row[0];
+      $_SESSION['id'] = $id;
+      
+      // Query food db to check if the user exists
+      $query = "SELECT * FROM food WHERE id = {$id}";
+      $isIDInFood = mysqli_query($conn, $query);
+
+      // If user doesn't exist in the food db, add the user
+      if (mysqli_num_rows($isIDInFood) == 0) {
+        $space = " ";
+        $query = "INSERT INTO food VALUES('$id', '$space','$space', '$space')";
+        $isIDInFood = mysqli_query($conn, $query);
+      }
+    }
+    else echo "Invalid username/password";
+  }
+  else echo "Invalid username/password";
   
   if (mysqli_num_rows($results) == 1) {
-   header('location: dashboard.php');
+   header('location: ../pages/dashboard.php');
   }
+
+  $results -> close();
 }
 ?>
