@@ -100,7 +100,6 @@ function addItem(itemNum, itemName) {
 }
 
 function removeListItem(liItem) {
-    console.log("came here to delete");
     let liElem = document.getElementById(liItem);
     liElem.parentNode.removeChild(liElem);
 }
@@ -139,7 +138,7 @@ function createForm(itemName, resultsArea, itemNum) {
     labelElem.setAttribute('placeholder', 'Food name');
     labelElem.setAttribute('value', itemName);
     labelElem.required = true;
-    labelElem.disabled = true;
+    labelElem.readOnly = true;
 
     let inputOZElement = document.createElement("input");
     inputOZElement.setAttribute('type', 'number');
