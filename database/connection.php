@@ -36,7 +36,7 @@ $food_table = "CREATE TABLE IF NOT EXISTS `food` (
 
 // Creates the tables in MySQL
 $queries = array($users_table, 
-                 $foods_table); 
+                 $food_table); 
 
 foreach ($queries as $query) {
   $conn -> query($query);

@@ -1,5 +1,4 @@
 let numOfItemsChosen = 0;
-let numOfCustomItems = 0;
 let itemsChosen = [];
 
 function showFoods(e) {
@@ -103,8 +102,7 @@ function addItem(itemNum, itemName) {
 }
 
 function removeItem(elm, itemName) {
-    mainContainer.removeChild(elm);
-    itemsChosen.remove(itemName);
+    elm.remove();
 } 
 
 function createForm(itemName, resultsArea, itemNum) {
@@ -151,20 +149,20 @@ function addCustomItem() {
 
     let foodItemElem = document.createElement("input");
     foodItemElem.setAttribute('type', 'text');
-    foodItemElem.setAttribute('name', `custom${numOfCustomItems}`);
+    foodItemElem.setAttribute('name', `item${numOfItemsChosen}`);
     foodItemElem.setAttribute('placeholder', 'Food name');
     foodItemElem.required = true;
 
     let inputOZElement = document.createElement("input");
     inputOZElement.setAttribute('type', 'number');
-    inputOZElement.setAttribute('name', `custom${numOfCustomItems}weight`);
+    inputOZElement.setAttribute('name', `item${numOfItemsChosen}weight`);
     inputOZElement.setAttribute('placeholder', 'Enter weight in oz eaten...');
     inputOZElement.setAttribute('step', '0.01');
     inputOZElement.setAttribute('min', '0');
     inputOZElement.required = true;
 
     let dayEatenElem = document.createElement("select");
-    dayEatenElem.setAttribute('name', `custom${numOfCustomItems}dayeaten`);
+    dayEatenElem.setAttribute('name', `item${numOfItemsChosen}dayeaten`);
     let breakfastElem = document.createElement("option");
     let lunchElem = document.createElement("option");
     let dinnerElem = document.createElement("option");
@@ -183,5 +181,5 @@ function addCustomItem() {
     resultsArea.appendChild(dayEatenElem);
     resultsArea.appendChild(linebreakElem);
     
-    numOfCustomItems++;
+    numOfItemsChosen++;
 }

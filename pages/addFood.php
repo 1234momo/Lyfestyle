@@ -8,38 +8,53 @@
     if (isset($_POST['submit']) && isset($_SESSION['id'])) {
         $id = $_SESSION['id'];
         $itemNum = 0;
-        $customNum = 0;
 
         // Insert items from DB
         while (array_key_exists("item{$itemNum}", $_POST)) {
             $itemName = sanitizeMySQL($connection, $_POST["item{$itemNum}"]);
             $itemWeight = sanitizeMySQL($connection, $_POST["item{$itemNum}weight"]);
-            $itemDayEaten = sanitizeMySQL($connection, $_POST["item{$itemNum}dayeaten"]);            
-
-            $allInfoToArray = array("name" => $itemName, "weight" => $itemWeight);
-            $infoArray = serialize($allInfoToArray);
-
-            $stmt = $connection->prepare("UPDATE food set {$itemDayEaten}=concat({$itemDayEaten},'|{$infoArray}') where id={$id}");
+            $itemDayEaten = sanitizeMySQL($connection, $_POST["item{$itemNum}dayeaten"]);    
+            
+            $stmt = $connection->prepare("SELECT id, {$itemDayEaten} FROM food WHERE id={$id}");
             $stmt -> execute();
 
-            $stmt->close();
+            // Retrieve the data corresponding to the day eaten and spit data according to ","
+            $result = $stmt -> get_result();
+            $elements = explode(",", ($result->fetch_array(MYSQLI_NUM))[1]);
+
+            $duplicate = false;
+
+            // Check if food item already exists
+            for ($i = 0; $i < sizeof($elements); $i += 2) {
+
+                // If a food item has the same name, add the weight entered to the weight in DB
+                // There should only be only unique names
+                if ($elements[$i] == $itemName) {
+                    $elements[$i + 1] += $itemWeight;
+                    $duplicate = true;
+                    break;
+                }
+            }
+
+            $query = "";
+
+            // If a duplicate exists, update the entire data
+            if ($duplicate == true) {
+                $infoStr = implode(",", $elements);
+                $query = "UPDATE food set {$itemDayEaten}='{$infoStr}' where id={$id}";
+            }
+
+            // If a duplicate doesn't exist, append food item entered into data
+            else {
+                $infoStr = $itemName . "," . $itemWeight . ",";
+                $query = "UPDATE food set {$itemDayEaten}=concat({$itemDayEaten},'{$infoStr}') where id={$id}";
+            }
+            
+            $stmt = $connection->prepare($query);
+            $stmt -> execute();
+            $stmt -> close();
+
             $itemNum += 1;
-        }
-
-        // Insert custom items
-        while (array_key_exists("custom{$customNum}", $_POST)) {
-            $customName = sanitizeMySQL($connection, $_POST["custom{$customNum}"]);
-            $customWeight = sanitizeMySQL($connection, $_POST["custom{$customNum}weight"]);
-            $customDayEaten = sanitizeMySQL($connection, $_POST["custom{$customNum}dayeaten"]);            
-
-            $allInfoToArray = array("name" => $customName, "weight" => $customWeight);
-            $infoArray = serialize($allInfoToArray);
-
-            $stmt = $connection->prepare("UPDATE food set {$itemDayEaten}=concat({$itemDayEaten},'|{$infoArray}') where id={$id}");
-            $stmt -> execute();
-
-            $stmt->close();
-            $customNum += 1;
         }
 
         header('location: ../pages/dashboard.php');
