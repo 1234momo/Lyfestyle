@@ -43,7 +43,7 @@ function displayData(data) {
                 let aElem = document.createElement("a");
                 let link = document.createTextNode(data.Sheet1[i].Food_name); 
     
-                aElem.setAttribute('onClick', `addItem(${data.Sheet1[i].undefined}, "${data.Sheet1[i].Food_name}")`);
+                aElem.setAttribute('onClick', `addItem(${data.Sheet1[i].undefined}, "${data.Sheet1[i].Food_name}"); removeListItem(${data.Sheet1[i].undefined});`);
                 aElem.appendChild(link);
     
                 liItem.setAttribute('id', data.Sheet1[i].undefined);
@@ -65,7 +65,7 @@ function displayData(data) {
                 let aElem = document.createElement("a");
                 let link = document.createTextNode(data.Sheet1[i].Food_name); 
 
-                aElem.setAttribute('onClick', `addItem(${data.Sheet1[i].undefined}, "${data.Sheet1[i].Food_name}")`);
+                aElem.setAttribute('onClick', `addItem(${data.Sheet1[i].undefined}, "${data.Sheet1[i].Food_name}"); removeListItem(${data.Sheet1[i].undefined})`);
                 aElem.appendChild(link);
 
                 liItem.setAttribute('id', data.Sheet1[i].undefined);
@@ -99,7 +99,21 @@ function addItem(itemNum, itemName) {
     itemsChosen.push(itemName);
 }
 
-function removeItem(nameInput, weightInput, selector, removeBtn, br1, br2) {
+function removeListItem(liItem) {
+    console.log("came here to delete");
+    let liElem = document.getElementById(liItem);
+    liElem.parentNode.removeChild(liElem);
+}
+
+function removeItem(nameInput, weightInput, selector, removeBtn, br1, br2, isFromList) {
+    // Remove the name of the food item from the itemsChosen array
+    if (isFromList) {
+        const index = itemsChosen.indexOf(nameInput.value);
+        if (index > -1) {
+            itemsChosen.splice(index, 1);
+        }
+    }
+
     let elem = document.getElementById(nameInput.id);
     elem.remove();
     elem = document.getElementById(weightInput.id);
@@ -112,6 +126,8 @@ function removeItem(nameInput, weightInput, selector, removeBtn, br1, br2) {
     elem.remove();
     elem = document.getElementById(br2.id);
     elem.remove();
+
+    showFoods(event);
 } 
 
 function createForm(itemName, resultsArea, itemNum) {
@@ -123,6 +139,7 @@ function createForm(itemName, resultsArea, itemNum) {
     labelElem.setAttribute('placeholder', 'Food name');
     labelElem.setAttribute('value', itemName);
     labelElem.required = true;
+    labelElem.disabled = true;
 
     let inputOZElement = document.createElement("input");
     inputOZElement.setAttribute('type', 'number');
@@ -164,7 +181,8 @@ function createForm(itemName, resultsArea, itemNum) {
                                         `item${numOfItemsChosen}selector,` + 
                                         `remove${numOfItemsChosen}Entry,` +
                                         `br1${numOfItemsChosen},` +
-                                        `br2${numOfItemsChosen})`);
+                                        `br2${numOfItemsChosen},` +
+                                        `true)`);
     
     resultsArea.appendChild(labelElem);
     resultsArea.appendChild(inputOZElement);
@@ -227,7 +245,8 @@ function addCustomItem() {
                                         `item${numOfItemsChosen}selector,` + 
                                         `remove${numOfItemsChosen}Entry,` +
                                         `br1${numOfItemsChosen},` +
-                                        `br2${numOfItemsChosen})`);
+                                        `br2${numOfItemsChosen},` +
+                                        `false)`);
     
     resultsArea.appendChild(foodItemElem);
     resultsArea.appendChild(inputOZElement);
