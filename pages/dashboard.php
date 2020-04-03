@@ -1,5 +1,32 @@
 <?php 
   require_once("../database/connection.php"); 
+  $connection = new mysqli($hostname, $username, $password, $database);
+  if ($connection->connect_error) die($connection->connect_error);
+    
+  session_start();
+
+  if (!isset($_SESSION['id'])) {
+    echo "<p style='text-align:center; color:red'>
+            Please <a href='./login.php'>sign in</a> to view your dashboard
+         </p>";     
+    exit();      
+  }
+  elseif (isset($_POST['submit'])) {
+    destroy_session_and_data();
+    echo "<p style='text-align:center; color:red'>
+            You have been signed out. Please <a href='./login.php'>sign in</a> again if you wish
+         </p>";     
+    exit(); 
+  }
+
+  // Close connection
+  $connection -> close();
+
+  function destroy_session_and_data() {
+    $_SESSION = array();
+    setcookie(session_name(), '', time() - 2592000, '/');
+    session_destroy();
+  }     
 ?>
 
 <html>
@@ -14,7 +41,10 @@
   <body>
     <h1>Welcome!</h1>
 
-    <input type="submit" class="btn btn-primary" onClick="location.href='login.php'" value="Logout">
+    <form action="./dashboard.php" class="form-inline" method="POST">
+      <button type="submit" name="submit" class="btn btn-primary">Logout</button>
+    </form>
+
     <button type="button" class="btn btn-primary" onClick="location.href = './addFood.php'">Add food log</button>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

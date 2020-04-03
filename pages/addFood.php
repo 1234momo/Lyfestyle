@@ -52,6 +52,16 @@
             
             $stmt = $connection->prepare($query);
             $stmt -> execute();
+
+            if (!$stmt) {
+                $stmt -> close();
+                destroy_session_and_data();
+                echo "<p style='text-align:center;color:red'>
+                        Unable to insert your data into the database, you have been logged out. Please try again later.
+                      </p>";
+                exit();
+            }
+
             $stmt -> close();
 
             $itemNum += 1;
@@ -59,10 +69,16 @@
 
         header('location: ../pages/dashboard.php');
     }
-
+    elseif (!isset($_SESSION['id'])) {
+        echo "<p style='text-align:center;color:red'>
+                Please <a href='./login.php'>sign in</a> to add to your food log
+             </p>";     
+        exit();      
+    }
+    
     // Close connection
     $connection -> close();
-
+    
     // Sanitizes a string
     function sanitizeString($var) {
         $var = stripslashes($var);
@@ -70,13 +86,19 @@
         $var = htmlentities($var);
         return $var;
     }
-
+    
     // Sanitizes with mysqli connection object and sanitizeString method
     function sanitizeMySQL($connection, $var) {
         $var = $connection -> real_escape_string($var);
         $var = sanitizeString($var);
         return $var;
     }
+
+    function destroy_session_and_data() {
+        $_SESSION = array();
+        setcookie(session_name(), '', time() - 2592000, '/');
+        session_destroy();
+    }    
 ?>
 
 <html>
@@ -102,8 +124,8 @@
             <div id="list-container">
                 <button id="addOwnFood-btn" class="btn btn-primary" onClick="addCustomItem()">Add own food</button>
 
-                <form id="eatenForm" class="form-inline" action="#" method="POST">
-                    <button id="addLog-btn" class="btn btn-primary" type="submit" name="submit" onClick="location.href = '#'">Add log</button><br><br>
+                <form id="eatenForm" class="form-inline" method="POST">
+                    <button id="addLog-btn" class="btn btn-primary" type="submit" name="submit">Add log</button><br><br>
                 </form>
             </div>
         </div>
