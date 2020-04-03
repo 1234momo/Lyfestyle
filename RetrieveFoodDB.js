@@ -218,9 +218,9 @@ function addCustomItem() {
     removeEntry.innerHTML = "X";
     
     let linebreakElem = document.createElement("br");
-    linebreakElem.setAttribute('id', `${numOfItemsChosen}br1`);
+    linebreakElem.setAttribute('id', `br1${numOfItemsChosen}`);
     let linebreakElem2 = document.createElement("br");
-    linebreakElem2.setAttribute('id', `${numOfItemsChosen}br2`);
+    linebreakElem2.setAttribute('id', `br2${numOfItemsChosen}`);
 
     removeEntry.setAttribute('onClick', `removeItem(item${numOfItemsChosen}nameInput,` + 
                                         `item${numOfItemsChosen}weightInput,` + 
