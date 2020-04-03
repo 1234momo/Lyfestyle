@@ -102,7 +102,7 @@
             <div id="list-container">
                 <button id="addOwnFood-btn" class="btn btn-primary" onClick="addCustomItem()">Add own food</button>
 
-                <form id="eatenForm" action="#" method="POST">
+                <form id="eatenForm" class="form-inline" action="#" method="POST">
                     <button id="addLog-btn" class="btn btn-primary" type="submit" name="submit" onClick="location.href = '#'">Add log</button><br><br>
                 </form>
             </div>
