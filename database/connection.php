@@ -19,7 +19,6 @@ $conn = mysqli_connect($hostname, $username, $password, $database);
 // CREATING TABLES
 //----------------------------------------------------------------------
 
-// Creates the users table
 $users_table = "CREATE TABLE IF NOT EXISTS `users` ( 
   `id` INT PRIMARY KEY UNIQUE NOT NULL AUTO_INCREMENT , 
   `email` VARCHAR(128) NOT NULL , 
@@ -27,10 +26,7 @@ $users_table = "CREATE TABLE IF NOT EXISTS `users` (
   `last_name` VARCHAR(128) NOT NULL, 
   `password` VARCHAR(256) NOT NULL
 )";
-  
-$conn -> query($users_table);
 
-// Creates the food table
 $food_table = "CREATE TABLE IF NOT EXISTS `food` ( 
   `id` INT PRIMARY KEY UNIQUE NOT NULL , 
   `Breakfast` LONGTEXT NOT NULL , 
@@ -38,7 +34,14 @@ $food_table = "CREATE TABLE IF NOT EXISTS `food` (
   `Dinner` LONGTEXT NOT NULL
 )";
 
-$conn -> query($food_table);
+// Creates the tables in MySQL
+$queries = array($users_table, 
+                 $foods_table); 
+
+foreach ($queries as $query) {
+  $conn -> query($query);
+}
+
 
 //----------------------------------------------------------------------
 // SIGN UP (WIP)
@@ -55,9 +58,30 @@ if(isset($_POST['signup'])) {
       VALUES('$email', '$first_name', '$last_name', '$password1')";
   mysqli_query($conn, $query);
   
-  header('location: login.php');
+  header('location: fitness_goal.php');
 }
 
+//----------------------------------------------------------------------
+// SIGN UP FITNESS GOAL (WIP)
+//----------------------------------------------------------------------
+//if(isset($_POST['signup_weight_loss']) or 
+//   isset($_POST['signup_muscle_building']) or
+//   isset($_POST['signup_stamina'])) {
+//  
+//    $fitness_goal = NULL; 
+//  
+//  if (isset($_POST['signup_weight_loss'])) {
+//    $fitness_goal = "weight loss";
+//  }
+//  else if (isset($_POST['signup_muscle_building'])) {
+//    $fitness_goal = "muscle building";
+//  }
+//  else {
+//    $fitness_goal = "stamina";
+//  }
+//  
+//  // echo $fitness_goal; 
+//}
 
 //----------------------------------------------------------------------
 // LOGIN (TODO)

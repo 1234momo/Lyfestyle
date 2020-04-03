@@ -14,7 +14,7 @@
   <body>
     <h1>Welcome!</h1>
 
-    <input type="submit" class="btn btn-primary" onClick="location.href='../index.php'" value="Logout">
+    <input type="submit" class="btn btn-primary" onClick="location.href='login.php'" value="Logout">
     <button type="button" class="btn btn-primary" onClick="location.href = './addFood.php'">Add food log</button>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

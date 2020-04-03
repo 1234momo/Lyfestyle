@@ -14,33 +14,37 @@ require_once("../database/connection.php");
 <img id="lyfestyle-logo" src="../assets/images/Lyfestyle_banner_02.png">
 
 <h1 style="color: white; font-weight: bold; ">Signup</h1>
+
+<!--  SIGNUP INPUTS -->
 <div class="main-login-form">
-  <form method="POST">
+  <form method="POST"> <!-- action="fitness_goal.php" --> 
+    
+    <!--  EMAIL -->
     <div class="login-group">  
-      <label for="email">Email:</label><br> 
-      <input type="email" id="email" name="signup_email" required>
+      <input type="email" id="email" name="signup_email" placeholder="Email" required>
     </div>
     
+    <!--  FIRST NAME -->
     <div class="login-group"> 
-      <label for="firstName">First name:</label><br> 
-      <input type="text" id="firstName" name="signup_first_name" required>
+      <input type="text" id="firstName" name="signup_first_name" placeholder="First name" required>
     </div>
     
+    <!--  LAST NAME -->
     <div class="login-group">  
-      <label for="lastName">Last name:</label><br> 
-      <input type="text" id="lastName" name="signup_last_name" required>
+      <input type="text" id="lastName" name="signup_last_name" placeholder="Last name" required>
     </div>
     
+    <!--  PASSWORD -->
     <div class="login-group">  
-      <label for="password">Password:</label><br> 
-      <input type="password" id="password" name="signup_password1" required>
+      <input type="password" id="password" name="signup_password1" placeholder="Password" required>
     </div>
     
+    <!--  CONFIRM PASSWORD -->
     <div class="login-group">  
-      <label for="email">Confirm password:</label><br> 
-      <input type="password" id="confirmPassword" name="signup_password2" required>
+      <input type="password" id="confirmPassword" name="signup_password2"  placeholder="Confirm password" required>
     </div>
     
+    <!--  SUBMIT -->
     <div class="login-group">  
       <input type="submit" name="signup" value="Signup">
     </div>

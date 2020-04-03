@@ -9,7 +9,9 @@ body {
 }
 
 h1 {
-  color: white; 
+  color: white;
+  font-weight: bold; 
+  text-shadow: 2px 2px black;
 }
 
 label {
