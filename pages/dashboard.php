@@ -3,8 +3,6 @@
   $connection = new mysqli($hostname, $username, $password, $database);
   if ($connection->connect_error) die($connection->connect_error);
     
-  session_start();
-
   if (!isset($_SESSION['id'])) {
     echo "<p style='text-align:center; color:red'>
             Please <a href='./login.php'>sign in</a> to view your dashboard

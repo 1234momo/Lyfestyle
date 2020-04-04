@@ -3,8 +3,6 @@
     $connection = new mysqli($hostname, $username, $password, $database);
     if ($connection->connect_error) die($connection->connect_error);
     
-    session_start();
-
     if (isset($_POST['submit']) && isset($_SESSION['id'])) {
         $id = $_SESSION['id'];
         $itemNum = 0;
