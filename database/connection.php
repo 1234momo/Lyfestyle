@@ -46,7 +46,7 @@ foreach ($queries as $query) {
 
 
 //----------------------------------------------------------------------
-// SIGN UP (WIP)
+// SIGN UP
 //----------------------------------------------------------------------
 if(isset($_POST['signup'])) {
   
@@ -77,10 +77,6 @@ if(isset($_POST['signup'])) {
   // CREATE USER IF NO ERRORS
   if (count($signup_errors) == 0) {
     
-//    $query = "INSERT INTO users (email, first_name, last_name, password) 
-//        VALUES('$email', '$first_name', '$last_name', '$password1')";
-//    mysqli_query($conn, $query);
-
     $_SESSION["signup_email"] = $email; 
     $_SESSION["signup_first_name"] = $first_name; 
     $_SESSION["signup_last_name"] = $last_name; 
@@ -88,7 +84,6 @@ if(isset($_POST['signup'])) {
     
     header('location: fitness_goal.php');
   }
-  
   
   // OTHERWISE PRINTS ERRORS
   else {
@@ -99,7 +94,7 @@ if(isset($_POST['signup'])) {
 }
 
 //----------------------------------------------------------------------
-// SIGN UP FITNESS GOAL (WIP)
+// SIGN UP FITNESS GOAL
 //----------------------------------------------------------------------
 if(isset($_POST['signup_weight_loss']) or 
    isset($_POST['signup_muscle_building']) or
@@ -132,8 +127,9 @@ if(isset($_POST['signup_weight_loss']) or
   header('location: login.php');
 }
 
+
 //----------------------------------------------------------------------
-// LOGIN (TODO)
+// LOGIN
 //----------------------------------------------------------------------
 
 if(isset($_POST['login'])) {
