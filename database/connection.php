@@ -1,10 +1,12 @@
 <?php
+
+session_start(); 
+
 // Information needed to connect to the MySQL database.
 $hostname = "localhost";
 $username = "root";
 $password = "password";
 $database = "lyfestyle";
-
 
 // Connects to the MySQL database. Error message if unable to connect.
 $conn = mysqli_connect($hostname, $username, $password);
@@ -20,11 +22,11 @@ $conn = mysqli_connect($hostname, $username, $password, $database);
 //----------------------------------------------------------------------
 
 $users_table = "CREATE TABLE IF NOT EXISTS `users` ( 
-  `id` INT PRIMARY KEY UNIQUE NOT NULL AUTO_INCREMENT , 
-  `email` VARCHAR(128) NOT NULL , 
+  `email` VARCHAR(128) PRIMARY KEY UNIQUE NOT NULL , 
   `first_name` VARCHAR(128) NOT NULL , 
   `last_name` VARCHAR(128) NOT NULL, 
-  `password` VARCHAR(256) NOT NULL
+  `password` VARCHAR(256) NOT NULL, 
+  `fitness_goal` VARCHAR(128)
 )";
 
 $food_table = "CREATE TABLE IF NOT EXISTS `food` ( 
@@ -48,40 +50,87 @@ foreach ($queries as $query) {
 //----------------------------------------------------------------------
 if(isset($_POST['signup'])) {
   
-  $email = $_POST["signup_email"]; 
-  $first_name = $_POST["signup_first_name"]; 
-  $last_name = $_POST["signup_last_name"]; 
+  $email = mysqli_real_escape_string($conn, $_POST["signup_email"]); 
+  $first_name = mysqli_real_escape_string($conn, $_POST["signup_first_name"]); 
+  $last_name = mysqli_real_escape_string($conn, $_POST["signup_last_name"]); 
   $password1 = hash("ripemd128", $_POST["signup_password1"]); 
   $password2 = hash("ripemd128", $_POST["signup_password2"]); 
   
-  $query = "INSERT INTO users (email, first_name, last_name, password) 
-      VALUES('$email', '$first_name', '$last_name', '$password1')";
-  mysqli_query($conn, $query);
+  $signup_errors = array(); 
   
-  header('location: fitness_goal.php');
+  
+  // CHECK IF EMAIL IS TAKEN
+  $query = "SELECT * FROM `users` WHERE `email` = '$email'"; 
+  $check_email = mysqli_query($conn, $query); 
+  
+  if ($check_email -> num_rows != 0) {
+    array_push($signup_errors, "Email is already taken");
+  }
+  
+  
+  // CHECK IF PASSWORDS MATCH
+  if ($password1 != $password2) {
+    array_push($signup_errors, "Passwords did not match");
+  }
+  
+  
+  // CREATE USER IF NO ERRORS
+  if (count($signup_errors) == 0) {
+    
+//    $query = "INSERT INTO users (email, first_name, last_name, password) 
+//        VALUES('$email', '$first_name', '$last_name', '$password1')";
+//    mysqli_query($conn, $query);
+
+    $_SESSION["signup_email"] = $email; 
+    $_SESSION["signup_first_name"] = $first_name; 
+    $_SESSION["signup_last_name"] = $last_name; 
+    $_SESSION["signup_password"] = $password1; 
+    
+    header('location: fitness_goal.php');
+  }
+  
+  
+  // OTHERWISE PRINTS ERRORS
+  else {
+    foreach ($signup_errors as $error_message) {
+      echo "$error_message<br>"; 
+    }
+  }
 }
 
 //----------------------------------------------------------------------
 // SIGN UP FITNESS GOAL (WIP)
 //----------------------------------------------------------------------
-//if(isset($_POST['signup_weight_loss']) or 
-//   isset($_POST['signup_muscle_building']) or
-//   isset($_POST['signup_stamina'])) {
-//  
-//    $fitness_goal = NULL; 
-//  
-//  if (isset($_POST['signup_weight_loss'])) {
-//    $fitness_goal = "weight loss";
-//  }
-//  else if (isset($_POST['signup_muscle_building'])) {
-//    $fitness_goal = "muscle building";
-//  }
-//  else {
-//    $fitness_goal = "stamina";
-//  }
-//  
-//  // echo $fitness_goal; 
-//}
+if(isset($_POST['signup_weight_loss']) or 
+   isset($_POST['signup_muscle_building']) or
+   isset($_POST['signup_stamina'])) {
+  
+  // Defining the fitness goal
+  $fitness_goal = NULL; 
+  
+  if (isset($_POST['signup_weight_loss'])) {
+    $fitness_goal = "weight loss";
+  }
+  else if (isset($_POST['signup_muscle_building'])) {
+    $fitness_goal = "muscle building";
+  }
+  else {
+    $fitness_goal = "stamina";
+  }
+  
+  // Create new user in database
+  $email = $_SESSION["signup_email"];
+  $first_name = $_SESSION["signup_first_name"];
+  $last_name = $_SESSION["signup_last_name"];
+  $password = $_SESSION["signup_password"];
+  
+  $query = "INSERT INTO users (email, first_name, last_name, password, fitness_goal) 
+    VALUES('$email', '$first_name', '$last_name', '$password', '$fitness_goal')";
+  mysqli_query($conn, $query);
+  
+  // Redirect to login page
+  header('location: login.php');
+}
 
 //----------------------------------------------------------------------
 // LOGIN (TODO)
@@ -100,7 +149,7 @@ if(isset($_POST['login'])) {
     $row = $results -> fetch_array(MYSQLI_NUM);
 
     // Check password
-    if ($password == $row[4]) {
+    if ($password == $row[3]) {
       session_start();
       $id = $row[0];
       $_SESSION['id'] = $id;
@@ -121,7 +170,8 @@ if(isset($_POST['login'])) {
   else echo "Invalid username/password";
   
   if (mysqli_num_rows($results) == 1) {
-   header('location: ../pages/dashboard.php');
+    // session_destroy(); 
+    header('location: ../pages/dashboard.php');
   }
 
   $results -> close();

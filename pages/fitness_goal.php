@@ -1,3 +1,7 @@
+<?php 
+require_once("../database/connection.php"); 
+?>
+
 <html>
 <head>
   <title>Lyfestyle | Signup</title>
@@ -13,7 +17,7 @@
 
 <!--  SELECT FITNESS GOAL -->
 <div class="container">
-  <form action="login.php" method=POST>
+  <form method=POST>
     <div class="row">
     
       <!--  WEIGHT LOSS -->
