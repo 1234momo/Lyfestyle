@@ -3,8 +3,8 @@
     $connection = new mysqli($hostname, $username, $password, $database);
     if ($connection->connect_error) die($connection->connect_error);
     
-    if (isset($_POST['submit']) && isset($_SESSION['id'])) {
-        $id = $_SESSION['id'];
+    if (isset($_POST['submit']) && isset($_SESSION['email'])) {
+        $email = $_SESSION['email'];
         $itemNum = 0;
 
         // Insert items from DB
@@ -13,7 +13,7 @@
             $itemWeight = sanitizeMySQL($connection, $_POST["item{$itemNum}weight"]);
             $itemDayEaten = sanitizeMySQL($connection, $_POST["item{$itemNum}dayeaten"]);    
             
-            $stmt = $connection->prepare("SELECT id, {$itemDayEaten} FROM food WHERE id={$id}");
+            $stmt = $connection->prepare("SELECT email, {$itemDayEaten} FROM food WHERE email='{$email}'");
             $stmt -> execute();
 
             // Retrieve the data corresponding to the day eaten and spit data according to ","
@@ -39,13 +39,13 @@
             // If a duplicate exists, update the entire data
             if ($duplicate == true) {
                 $infoStr = implode(",", $elements);
-                $query = "UPDATE food set {$itemDayEaten}='{$infoStr}' where id={$id}";
+                $query = "UPDATE food set {$itemDayEaten}='{$infoStr}' where email='{$email}'";
             }
 
             // If a duplicate doesn't exist, append food item entered into data
             else {
                 $infoStr = $itemName . "," . $itemWeight . ",";
-                $query = "UPDATE food set {$itemDayEaten}=concat({$itemDayEaten},'{$infoStr}') where id={$id}";
+                $query = "UPDATE food set {$itemDayEaten}=concat({$itemDayEaten},'{$infoStr}') where email='{$email}'";
             }
             
             $stmt = $connection->prepare($query);
@@ -67,7 +67,7 @@
 
         header('location: ../pages/dashboard.php');
     }
-    elseif (!isset($_SESSION['id'])) {
+    elseif (!isset($_SESSION['email'])) {
         echo "<p style='text-align:center;color:red'>
                 Please <a href='./login.php'>sign in</a> to add to your food log
              </p>";     

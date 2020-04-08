@@ -30,7 +30,7 @@ $users_table = "CREATE TABLE IF NOT EXISTS `users` (
 )";
 
 $food_table = "CREATE TABLE IF NOT EXISTS `food` ( 
-  `id` INT PRIMARY KEY UNIQUE NOT NULL , 
+  `email` VARCHAR(128) PRIMARY KEY UNIQUE NOT NULL , 
   `Breakfast` LONGTEXT NOT NULL , 
   `Lunch` LONGTEXT NOT NULL , 
   `Dinner` LONGTEXT NOT NULL
@@ -147,17 +147,17 @@ if(isset($_POST['login'])) {
     // Check password
     if ($password == $row[3]) {
       session_start();
-      $id = $row[0];
-      $_SESSION['id'] = $id;
+      $email = $row[0];
+      $_SESSION['email'] = $email;
       
       // Query food db to check if the user exists
-      $query = "SELECT * FROM food WHERE id = {$id}";
+      $query = "SELECT * FROM food WHERE email = '{$email}'";
       $isIDInFood = mysqli_query($conn, $query);
 
       // If user doesn't exist in the food db, add the user
       if (mysqli_num_rows($isIDInFood) == 0) {
         $space = " ";
-        $query = "INSERT INTO food VALUES('$id', '$space','$space', '$space')";
+        $query = "INSERT INTO food VALUES('$email', '$space','$space', '$space')";
         $isIDInFood = mysqli_query($conn, $query);
       }
     }
