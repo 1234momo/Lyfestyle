@@ -1,0 +1,174 @@
+{
+    "Sheet1": [
+        {
+            "undefined": "0",
+            "Exercise_name": "Aerobics (low impact)",
+            "Calories_per_minute": "0.04"
+        },
+        {
+            "undefined": "1",
+            "Exercise_name": "Aerobics (high impact)",
+            "Calories_per_minute": "0.055555556"
+        },
+        {
+            "undefined": "2",
+            "Exercise_name": "Basketball",
+            "Calories_per_minute": "0.063888889"
+        },
+        {
+            "undefined": "3",
+            "Exercise_name": "Bowling",
+            "Calories_per_minute": "0.010555556"
+        },
+        {
+            "undefined": "4",
+            "Exercise_name": "Circuit Training",
+            "Calories_per_minute": "0.063888889"
+        },
+        {
+            "undefined": "5",
+            "Exercise_name": "Climbing hills",
+            "Calories_per_minute": "0.055"
+        },
+        {
+            "undefined": "6",
+            "Exercise_name": "Cycling (10mph)",
+            "Calories_per_minute": "0.031666667"
+        },
+        {
+            "undefined": "7",
+            "Exercise_name": "Cycling (14mph)",
+            "Calories_per_minute": "0.063888889"
+        },
+        {
+            "undefined": "8",
+            "Exercise_name": "Cycling (19mph)",
+            "Calories_per_minute": "0.095555556"
+        },
+        {
+            "undefined": "9",
+            "Exercise_name": "Dancing",
+            "Calories_per_minute": "0.5"
+        },
+        {
+            "undefined": "10",
+            "Exercise_name": "Football",
+            "Calories_per_minute": "0.072072072"
+        },
+        {
+            "undefined": "11",
+            "Exercise_name": "Gardening",
+            "Calories_per_minute": "0.020555556"
+        },
+        {
+            "undefined": "12",
+            "Exercise_name": "Golf",
+            "Calories_per_minute": "0.038"
+        },
+        {
+            "undefined": "13",
+            "Exercise_name": "Jump rope",
+            "Calories_per_minute": "0.08"
+        },
+        {
+            "undefined": "14",
+            "Exercise_name": "Kayaking",
+            "Calories_per_minute": "0.04"
+        },
+        {
+            "undefined": "15",
+            "Exercise_name": "Mowing the lawn",
+            "Calories_per_minute": "0.036111111"
+        },
+        {
+            "undefined": "16",
+            "Exercise_name": "Raquetball",
+            "Calories_per_minute": "0.055555556"
+        },
+        {
+            "undefined": "17",
+            "Exercise_name": "Rock Climbing",
+            "Calories_per_minute": "0.063963964"
+        },
+        {
+            "undefined": "18",
+            "Exercise_name": "Running (6mph)",
+            "Calories_per_minute": "0.08"
+        },
+        {
+            "undefined": "19",
+            "Exercise_name": "Running (7.5mph)",
+            "Calories_per_minute": "0.099444444"
+        },
+        {
+            "undefined": "20",
+            "Exercise_name": "Skateboarding",
+            "Calories_per_minute": "0.04"
+        },
+        {
+            "undefined": "21",
+            "Exercise_name": "Skiing downhill",
+            "Calories_per_minute": "0.047777778"
+        },
+        {
+            "undefined": "22",
+            "Exercise_name": "Soccer",
+            "Calories_per_minute": "0.028796296"
+        },
+        {
+            "undefined": "23",
+            "Exercise_name": "Squats",
+            "Calories_per_minute": "0.096"
+        },
+        {
+            "undefined": "24",
+            "Exercise_name": "Swimming laps",
+            "Calories_per_minute": "0.055555556"
+        },
+        {
+            "undefined": "25",
+            "Exercise_name": "Table tennis",
+            "Calories_per_minute": "0.031"
+        },
+        {
+            "undefined": "26",
+            "Exercise_name": "Tai chi",
+            "Calories_per_minute": "0.032072072"
+        },
+        {
+            "undefined": "27",
+            "Exercise_name": "Tennis",
+            "Calories_per_minute": "0.063888889"
+        },
+        {
+            "undefined": "28",
+            "Exercise_name": "Volleyball",
+            "Calories_per_minute": "0.063888889"
+        },
+        {
+            "undefined": "29",
+            "Exercise_name": "Walking (2mph)",
+            "Calories_per_minute": "0.02"
+        },
+        {
+            "undefined": "30",
+            "Exercise_name": "Walking (3mph)",
+            "Calories_per_minute": "0.026111111"
+        },
+        {
+            "undefined": "31",
+            "Exercise_name": "Walking (4mph)",
+            "Calories_per_minute": "0.044444444"
+        },
+        {
+            "undefined": "32",
+            "Exercise_name": "Water aerobics",
+            "Calories_per_minute": "0.036111111"
+        },
+        {
+            "undefined": "33",
+            "Exercise_name": "Weightlifting",
+            "Calories_per_minute": "0.047777778"
+        }
+    ]
+}

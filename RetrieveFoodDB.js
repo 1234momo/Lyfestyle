@@ -92,6 +92,7 @@ function displayData(data) {
     }
 }
 
+// Adds a form entry
 function addItem(itemNum, itemName) {
     let resultsArea = document.getElementById('eatenForm');
     createForm(itemName, resultsArea, itemNum);
@@ -99,11 +100,13 @@ function addItem(itemNum, itemName) {
     itemsChosen.push(itemName);
 }
 
+// Remove the selected exercise name from the list of exercises
 function removeListItem(liItem) {
     let liElem = document.getElementById(liItem);
     liElem.parentNode.removeChild(liElem);
 }
 
+// Remove a form entry
 function removeItem(nameInput, weightInput, selector, removeBtn, br1, br2, isFromList) {
     // Remove the name of the food item from the itemsChosen array
     if (isFromList) {
@@ -113,23 +116,36 @@ function removeItem(nameInput, weightInput, selector, removeBtn, br1, br2, isFro
         }
     }
 
+    // Remove nameInput element
     let elem = document.getElementById(nameInput.id);
     elem.remove();
+
+    // Remove timeInput element
     elem = document.getElementById(weightInput.id);
     elem.remove();
+
+    // Remove the drop down list (Breakfast, Lunch, Dinner) element
     elem = document.getElementById(selector.id);
     elem.remove();
+
+    // Remove the remove button element
     elem = document.getElementById(removeBtn.id);
     elem.remove();
+
+    // Remove first line break
     elem = document.getElementById(br1.id);
     elem.remove();
+
+    // Remove second line break
     elem = document.getElementById(br2.id);
     elem.remove();
 
     showFoods(event);
 } 
 
+// Creates the components of a form entry from the list of foods
 function createForm(itemName, resultsArea, itemNum) {
+    // Name input, but disabled because the name is from json file
     let labelElem = document.createElement("input");
     labelElem.setAttribute('name', `item${numOfItemsChosen}`);
     labelElem.setAttribute('class', 'form-control mr-3');
@@ -140,6 +156,7 @@ function createForm(itemName, resultsArea, itemNum) {
     labelElem.required = true;
     labelElem.readOnly = true;
 
+    // Weight of food input
     let inputOZElement = document.createElement("input");
     inputOZElement.setAttribute('type', 'number');
     inputOZElement.setAttribute('name', `item${numOfItemsChosen}weight`);
@@ -150,6 +167,7 @@ function createForm(itemName, resultsArea, itemNum) {
     inputOZElement.setAttribute('min', '0');
     inputOZElement.required = true;
 
+    // Breakfast, Lunch, and Dinner selector
     let dayEatenElem = document.createElement("select");
     dayEatenElem.setAttribute('name', `item${numOfItemsChosen}dayeaten`);
     dayEatenElem.setAttribute('id', `item${numOfItemsChosen}selector`);
@@ -164,17 +182,20 @@ function createForm(itemName, resultsArea, itemNum) {
     dayEatenElem.appendChild(lunchElem);
     dayEatenElem.appendChild(dinnerElem);
 
+    // Remove (X) button
     let removeEntry = document.createElement("button");
     removeEntry.setAttribute('id', `remove${numOfItemsChosen}Entry`);
     removeEntry.setAttribute('class', 'btn btn-light');
     removeEntry.setAttribute('type', 'button');
     removeEntry.innerHTML = "X";
 
+    // 2 line breakers for space consistency between entries
     let linebreakElem = document.createElement("br");
     linebreakElem.setAttribute('id', `br1${numOfItemsChosen}`);
     let linebreakElem2 = document.createElement("br");
     linebreakElem2.setAttribute('id', `br2${numOfItemsChosen}`);
 
+    // Create onclick listner to know when to remove an entry
     removeEntry.setAttribute('onClick', `removeItem(item${numOfItemsChosen}nameInput,` + 
                                         `item${numOfItemsChosen}weightInput,` + 
                                         `item${numOfItemsChosen}selector,` + 
@@ -182,7 +203,8 @@ function createForm(itemName, resultsArea, itemNum) {
                                         `br1${numOfItemsChosen},` +
                                         `br2${numOfItemsChosen},` +
                                         `true)`);
-    
+
+    // Appends the entry components to the entry area
     resultsArea.appendChild(labelElem);
     resultsArea.appendChild(inputOZElement);
     resultsArea.appendChild(dayEatenElem);
@@ -193,9 +215,11 @@ function createForm(itemName, resultsArea, itemNum) {
     numOfItemsChosen++;
 }
 
+// Creates the components of a form entry based off of user input
 function addCustomItem() {
     let resultsArea = document.getElementById('eatenForm');
 
+    // Name input, which can be edited
     let foodItemElem = document.createElement("input");
     foodItemElem.setAttribute('type', 'text');
     foodItemElem.setAttribute('name', `item${numOfItemsChosen}`);
@@ -204,6 +228,7 @@ function addCustomItem() {
     foodItemElem.setAttribute('placeholder', 'Food name');
     foodItemElem.required = true;
 
+    // Weight of food input
     let inputOZElement = document.createElement("input");
     inputOZElement.setAttribute('type', 'number');
     inputOZElement.setAttribute('name', `item${numOfItemsChosen}weight`);
@@ -214,6 +239,7 @@ function addCustomItem() {
     inputOZElement.setAttribute('min', '0');
     inputOZElement.required = true;
 
+    // Breakfast, Lunch, and Dinner selector
     let dayEatenElem = document.createElement("select");
     dayEatenElem.setAttribute('name', `item${numOfItemsChosen}dayeaten`);
     dayEatenElem.setAttribute('id', `item${numOfItemsChosen}selector`);
@@ -227,18 +253,21 @@ function addCustomItem() {
     dayEatenElem.appendChild(breakfastElem);
     dayEatenElem.appendChild(lunchElem);
     dayEatenElem.appendChild(dinnerElem);
-    
+
+    // Remove (X) button
     let removeEntry = document.createElement("button");
     removeEntry.setAttribute('id', `remove${numOfItemsChosen}Entry`);
     removeEntry.setAttribute('class', 'btn btn-light');
     removeEntry.setAttribute('type', 'button');
     removeEntry.innerHTML = "X";
-    
+
+    // 2 line breakers for space consistency between entries
     let linebreakElem = document.createElement("br");
     linebreakElem.setAttribute('id', `br1${numOfItemsChosen}`);
     let linebreakElem2 = document.createElement("br");
     linebreakElem2.setAttribute('id', `br2${numOfItemsChosen}`);
 
+    // Create onclick listner to know when to remove an entry
     removeEntry.setAttribute('onClick', `removeItem(item${numOfItemsChosen}nameInput,` + 
                                         `item${numOfItemsChosen}weightInput,` + 
                                         `item${numOfItemsChosen}selector,` + 
@@ -246,7 +275,8 @@ function addCustomItem() {
                                         `br1${numOfItemsChosen},` +
                                         `br2${numOfItemsChosen},` +
                                         `false)`);
-    
+
+    // Appends the entry components to the entry area
     resultsArea.appendChild(foodItemElem);
     resultsArea.appendChild(inputOZElement);
     resultsArea.appendChild(dayEatenElem);

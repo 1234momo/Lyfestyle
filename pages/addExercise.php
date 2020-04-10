@@ -9,44 +9,48 @@
 
         // Insert items to DB
         while (array_key_exists("item{$itemNum}", $_POST)) {
-            $itemName = sanitizeMySQL($connection, $_POST["item{$itemNum}"]);
-            $itemWeight = sanitizeMySQL($connection, $_POST["item{$itemNum}weight"]);
-            $itemDayEaten = sanitizeMySQL($connection, $_POST["item{$itemNum}dayeaten"]);    
+            $exerciseName = sanitizeMySQL($connection, trim($_POST["item{$itemNum}"]));
+            $timeExercised = sanitizeMySQL($connection, $_POST["item{$itemNum}time"]);
             
-            // Select the email column and column where the item should belong in
-            $stmt = $connection->prepare("SELECT email, {$itemDayEaten} FROM food WHERE email='{$email}'");
+            // Select the row of the user from DB
+            $stmt = $connection->prepare("SELECT * FROM exercise WHERE email='{$email}'");
             $stmt -> execute();
 
-            // Retrieve the data corresponding to the day eaten and spit data according to ","
+            // Retrieve the data of the user and split it according to ","
             $result = $stmt -> get_result();
             $elements = explode(",", ($result->fetch_array(MYSQLI_NUM))[1]);
 
             $duplicate = false;
 
-            // Check if food item already exists
-            for ($i = 0; $i < sizeof($elements); $i += 2) {
-
-                // If a food item has the same name, add the weight entered to the weight in DB
-                // There should only be only unique names
-                if ($elements[$i] == $itemName) {
-                    $elements[$i + 1] += $itemWeight;
-                    $duplicate = true;
-                    break;
+            if (sizeof($elements) != 0) {
+                // Look through the user's data to determine if exercise name already exists
+                for ($i = 0; $i < sizeof($elements); $i += 2) {
+    
+                    // If a duplicate exercise name exist, add the time entered to the time of the duplicate exercise name in the DB
+                    // There should only be only unique names
+                    if (trim($elements[$i]) == $exerciseName) {
+                        $elements[$i + 1] += $timeExercised;
+                        $duplicate = true;
+                        break;
+                    }
                 }
-            }
+            } 
 
             $query = "";
 
             // If a duplicate exists, update the entire data
             if ($duplicate == true) {
+                // Combine the updated together with a "," separating each element
                 $infoStr = implode(",", $elements);
-                $query = "UPDATE food set {$itemDayEaten}='{$infoStr}' where email='{$email}'";
+
+                // Update the data in the DB with the new data
+                $query = "UPDATE exercise set workout='{$infoStr}' where email='{$email}'";
             }
 
-            // If a duplicate doesn't exist, append food item entered into data
+            // If a duplicate doesn't exist, append exercise name and time into DB data
             else {
-                $infoStr = $itemName . "," . $itemWeight . ",";
-                $query = "UPDATE food set {$itemDayEaten}=concat({$itemDayEaten},'{$infoStr}') where email='{$email}'";
+                $infoStr = $exerciseName . "," . $timeExercised . ",";
+                $query = "UPDATE exercise set workout=concat(workout,'{$infoStr}') where email='{$email}'";
             }
             
             $stmt = $connection->prepare($query);
@@ -70,7 +74,7 @@
     }
     elseif (!isset($_SESSION['email'])) {
         echo "<p style='text-align:center;color:red'>
-                Please <a href='./login.php'>sign in</a> to add to your food log
+                Please <a href='./login.php'>sign in</a> to add to your exercise log
              </p>";     
         exit();      
     }
@@ -102,28 +106,28 @@
 
 <html>
     <head>
-        <title>Lyfestyle | Add Food</title>
+        <title>Lyfestyle | Add Exercise</title>
         <link rel="stylesheet" type="text/css", href="../assets/css/main.css">
         <link rel="icon" type="image/png" href="../assets/images/Lyfestyle_favicon.png">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="../RetrieveFoodDB.js"></script>
+        <script src="../RetrieveExerciseDB.js"></script>
     </head>
 
-    <body onload="showFoods(event)">
-        <h1>Insert Your Food Intake</h1>
+    <body onload="showExercises(event)">
+        <h1>Insert Your Exercise</h1>
 
         <div id="overall-container">
             <div id="search-container">
-                <div class="search-foods">
-                    <input id="keyword" oninput="showFoods(event)" type="text" placeholder="Search food item..">
+                <div class="search-exercises">
+                    <input id="keyword" oninput="showExercises(event)" type="text" placeholder="Search here for an exercise">
                     <div id="search-list"></div>
                 </div>
             
             </div>
             <div id="list-container">
-                <button id="addOwnFood-btn" class="btn btn-primary" onClick="addCustomItem()">Add own food</button>
+                <button id="addOwnExercise-btn" class="btn btn-primary" onClick="addCustomItem()">Add own exercise</button>
 
-                <form id="eatenForm" class="form-inline" method="POST">
+                <form id="exerciseForm" class="form-inline" method="POST">
                     <button id="addLog-btn" class="btn btn-primary" type="submit" name="submit">Add log</button><br><br>
                 </form>
             </div>

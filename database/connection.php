@@ -36,9 +36,21 @@ $food_table = "CREATE TABLE IF NOT EXISTS `food` (
   `Dinner` LONGTEXT NOT NULL
 )";
 
+$exercise_table = "CREATE TABLE IF NOT EXISTS `exercise` ( 
+  `email` VARCHAR(128) PRIMARY KEY UNIQUE NOT NULL , 
+  `workout` LONGTEXT NOT NULL
+)";
+
+$water_table = "CREATE TABLE IF NOT EXISTS `water` ( 
+  `email` VARCHAR(128) PRIMARY KEY UNIQUE NOT NULL , 
+  `consumption` DOUBLE NOT NULL
+)";
+
 // Creates the tables in MySQL
 $queries = array($users_table, 
-                 $food_table); 
+                 $food_table,
+                 $exercise_table,
+                 $water_table); 
 
 foreach ($queries as $query) {
   $conn -> query($query);
@@ -152,13 +164,56 @@ if(isset($_POST['login'])) {
       
       // Query food db to check if the user exists
       $query = "SELECT * FROM food WHERE email = '{$email}'";
-      $isIDInFood = mysqli_query($conn, $query);
+      $isEmailInFood = mysqli_query($conn, $query);
 
       // If user doesn't exist in the food db, add the user
-      if (mysqli_num_rows($isIDInFood) == 0) {
-        $space = " ";
-        $query = "INSERT INTO food VALUES('$email', '$space','$space', '$space')";
-        $isIDInFood = mysqli_query($conn, $query);
+      if (mysqli_num_rows($isEmailInFood) == 0) {
+        $query = "INSERT INTO food VALUES('$email', '','', '')";
+        $isEmailInFood = mysqli_query($conn, $query);
+
+        // If something went wrong adding the user into the food db, output msg
+        if (!$isEmailInFood) {
+          echo "<p style='text-align:center;color:red'>
+                  Uh oh... Something seems to be wrong. Please come back later.
+                </p>";
+          exit();
+        }
+      }
+      
+      // Query exercise db to check if the user exists
+      $query = "SELECT * FROM exercise WHERE email = '{$email}'";
+      $isEmailInExer = mysqli_query($conn, $query);
+
+      // If user doesn't exist in the exercise db, add the user
+      if (mysqli_num_rows($isEmailInExer) == 0) {
+        $query = "INSERT INTO exercise VALUES('$email', '')";
+        $isEmailInExer = mysqli_query($conn, $query);
+
+        // If something went wrong adding the user into the exercise db, output msg
+        if (!$isEmailInExer) {
+          echo "<p style='text-align:center;color:red'>
+                  Uh oh... Something seems to be wrong. Please come back later.
+                </p>";
+          exit();
+        }
+      }
+
+      // Query water db to check if the user exists
+      $query = "SELECT * FROM water WHERE email = '{$email}'";
+      $isEmailInWater = mysqli_query($conn, $query);
+
+      // If user doesn't exist in the water db, add the user
+      if (mysqli_num_rows($isEmailInWater) == 0) {
+        $query = "INSERT INTO water VALUES('$email', '')";
+        $isEmailInWater = mysqli_query($conn, $query);
+
+        // If something went wrong adding the user into the exercise db, output msg
+        if (!$isEmailInWater) {
+          echo "<p style='text-align:center;color:red'>
+                  Uh oh... Something seems to be wrong. Please come back later.
+                </p>";
+          exit();
+        }
       }
     }
     else echo "Invalid username/password";

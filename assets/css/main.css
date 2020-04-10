@@ -97,7 +97,7 @@ ul li:hover {
   min-height: 2em;
 }
 
-#search-foods {
+#search-foods, #search-exercises {
   display: table;
 }
 
@@ -126,6 +126,6 @@ ul li.noResults, ul li.noResults a {
   background-color: transparent;
 }
 
-#eatenForm {
+#eatenForm, #exerciseForm {
   display: inline;
 } 
