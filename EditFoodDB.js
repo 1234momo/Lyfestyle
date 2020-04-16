@@ -7,18 +7,17 @@ function displayFoods() {
 
     breakfast_data = food_array[1].split(",");
     for (let i = 0; i < breakfast_data.length - 1; i += 2) {
-        createForm(breakfast_data[i], breakfast_data[i + 1], "Breakfast", displayBreakfastArea);
+        createForm(breakfast_data[i], breakfast_data[i + 1], "Breakfast", displayBreakfastArea, -1);
     }
     
     lunch_data = food_array[2].split(",");
-    console.log(lunch_data);
     for (let i = 0; i < lunch_data.length - 1; i += 2) {
-        createForm(lunch_data[i], lunch_data[i + 1], "Lunch", displayLunchArea);
+        createForm(lunch_data[i], lunch_data[i + 1], "Lunch", displayLunchArea, -1);
     }
     
     dinner_data = food_array[3].split(",");
     for (let i = 0; i < dinner_data.length - 1; i += 2) {
-        createForm(dinner_data[i], dinner_data[i + 1], "Dinner", displayDinnerArea);
+        createForm(dinner_data[i], dinner_data[i + 1], "Dinner", displayDinnerArea, -1);
     }
 }
 
@@ -49,14 +48,40 @@ function removeItem(nameInput, weightInput, selector, removeBtn, br1, br2) {
     elem.remove();
 } 
 
-function changePlaces(itemName, itemWeight, numItem) {
-    let day_eaten = document.getElementById(`item${numItem}selector`);
-    let displayArea = document.getElementById(`${day_eaten.value}-forms`);
-    createForm(itemName, itemWeight, day_eaten.value, displayArea);
+function changePlaces(label, numInput, selector, removeEntry, linebreak1, linebreak2) {
+    let nameInput = document.getElementById(label);
+    let itemName = nameInput.value;
+
+    let weightInput = document.getElementById(numInput);
+    let itemWeight = weightInput.value;
+
+    let dayEatenSelector = document.getElementById(selector);
+    let dayEaten = dayEatenSelector.value;
+
+    let removeBtn = document.getElementById(removeEntry);
+    let br1 = document.getElementById(linebreak1);
+    let br2 = document.getElementById(linebreak2);
+
+    let displayArea = document.getElementById(`${dayEaten}-forms`);
+    let numItem = linebreak1.replace('br1', '');
+
+    removeItem(nameInput, weightInput, dayEatenSelector, removeBtn, br1, br2);
+    createForm(itemName, itemWeight, dayEaten, displayArea, numItem);
 }
 
 // Creates the components of a form entry from the list of foods
-function createForm(itemName, itemWeight, day_eaten, displayArea) {
+function createForm(itemName, itemWeight, day_eaten, displayArea, numItem) {
+    let itemNum = 0;
+
+    // If numItem is -1, we loading the page so post info from the DB
+    // else, a form item's position is changing
+    if (numItem == -1) {
+        itemNum = numOfItemsChosen;
+    }
+    else {
+        itemNum = numItem;
+    }
+
     // <div class="form-row"></div>
     let row_div = document.createElement("div");
     row_div.className = "form-row";
@@ -67,9 +92,9 @@ function createForm(itemName, itemWeight, day_eaten, displayArea) {
 
     // Name input, but disabled because the name is from json file
     let labelElem = document.createElement("input");
-    labelElem.setAttribute('name', `item${numOfItemsChosen}`);
+    labelElem.setAttribute('name', `item${itemNum}`);
     labelElem.setAttribute('class', 'form-control');
-    labelElem.setAttribute('id', `item${numOfItemsChosen}nameInput`);
+    labelElem.setAttribute('id', `item${itemNum}nameInput`);
     labelElem.setAttribute('type', 'text');
     labelElem.setAttribute('placeholder', 'Food name');
     labelElem.setAttribute('value', itemName);
@@ -84,8 +109,8 @@ function createForm(itemName, itemWeight, day_eaten, displayArea) {
     // Weight of food input
     let inputOZElement = document.createElement("input");
     inputOZElement.setAttribute('type', 'number');
-    inputOZElement.setAttribute('name', `item${numOfItemsChosen}weight`);
-    inputOZElement.setAttribute('id', `item${numOfItemsChosen}weightInput`);
+    inputOZElement.setAttribute('name', `item${itemNum}weight`);
+    inputOZElement.setAttribute('id', `item${itemNum}weightInput`);
     inputOZElement.setAttribute('class', 'form-control');
     inputOZElement.setAttribute('placeholder', 'Weight');
     inputOZElement.setAttribute('step', '0.01');
@@ -101,8 +126,8 @@ function createForm(itemName, itemWeight, day_eaten, displayArea) {
 
     // Breakfast, Lunch, and Dinner selector
     let dayEatenElem = document.createElement("select");
-    dayEatenElem.setAttribute('name', `item${numOfItemsChosen}dayeaten`);
-    dayEatenElem.setAttribute('id', `item${numOfItemsChosen}selector`);
+    dayEatenElem.setAttribute('name', `item${itemNum}dayeaten`);
+    dayEatenElem.setAttribute('id', `item${itemNum}selector`);
     let breakfastElem = document.createElement("option");
     let lunchElem = document.createElement("option");
     let dinnerElem = document.createElement("option");
@@ -123,7 +148,7 @@ function createForm(itemName, itemWeight, day_eaten, displayArea) {
 
     // Remove (X) button
     let removeEntry = document.createElement("button");
-    removeEntry.setAttribute('id', `remove${numOfItemsChosen}Entry`);
+    removeEntry.setAttribute('id', `remove${itemNum}Entry`);
     removeEntry.setAttribute('class', 'btn btn-light');
     removeEntry.setAttribute('type', 'button');
     removeEntry.innerHTML = "X";
@@ -132,36 +157,27 @@ function createForm(itemName, itemWeight, day_eaten, displayArea) {
 
     // 2 line breakers for space consistency between entries
     let linebreakElem = document.createElement("br");
-    linebreakElem.setAttribute('id', `br1${numOfItemsChosen}`);
+    linebreakElem.setAttribute('id', `br1${itemNum}`);
     let linebreakElem2 = document.createElement("br");
-    linebreakElem2.setAttribute('id', `br2${numOfItemsChosen}`);
+    linebreakElem2.setAttribute('id', `br2${itemNum}`);
 
     // Create onclick listner to know when to remove an entry
-    removeEntry.setAttribute('onClick', `removeItem(item${numOfItemsChosen}nameInput,` + 
-                                        `item${numOfItemsChosen}weightInput,` + 
-                                        `item${numOfItemsChosen}selector,` + 
-                                        `remove${numOfItemsChosen}Entry,` +
-                                        `br1${numOfItemsChosen},` +
-                                        `br2${numOfItemsChosen})`);
+    removeEntry.setAttribute('onClick', `renameAttributes('${labelElem.id}',` +
+                                        `'${inputOZElement.id}',` +
+                                        `'${dayEatenElem.id}',` +
+                                        `'${removeEntry.id}',` +
+                                        `'${linebreakElem.id}',` +
+                                        `'${linebreakElem2.id}')`);
 
-    dayEatenElem.setAttribute('onChange', `changePlaces('${itemName}',` +
-                                          `${itemWeight},` +
-                                          `${numOfItemsChosen});` +
-                                          `removeItem(item${numOfItemsChosen}nameInput,` + 
-                                          `item${numOfItemsChosen}weightInput,` + 
-                                          `item${numOfItemsChosen}selector,` + 
-                                          `remove${numOfItemsChosen}Entry,` +
-                                          `br1${numOfItemsChosen},` +
-                                          `br2${numOfItemsChosen})`);
-                                        
-                                        
-    // Appends the entry components to the entry area
-    // row_div.appendChild(labelElem);
-    // row_div.appendChild(inputOZElement);
-    // row_div.appendChild(dayEatenElem);
-    // row_div.appendChild(removeEntry);
-    // row_div.appendChild(linebreakElem);
-    // row_div.appendChild(linebreakElem2);
+    inputOZElement.setAttribute('oninput', `updateWeight(this.value, '${inputOZElement.id}')`);
+    labelElem.setAttribute('oninput', `updateWeight(this.value, '${labelElem.id}')`);
+
+    dayEatenElem.setAttribute('onChange', `changePlaces('${labelElem.id}',` +
+                                          `'${inputOZElement.id}',` +
+                                          `'${dayEatenElem.id}',` +
+                                          `'${removeEntry.id}',` +
+                                          `'${linebreakElem.id}',` +
+                                          `'${linebreakElem2.id}')`);
 
     row_div.appendChild(name_div);
     row_div.appendChild(weight_div);
@@ -172,5 +188,56 @@ function createForm(itemName, itemWeight, day_eaten, displayArea) {
     displayArea.appendChild(linebreakElem);
     displayArea.appendChild(linebreakElem2);
     
-    numOfItemsChosen++;
+    if (numItem == -1) {
+        numOfItemsChosen++;
+    }
+}
+
+function updateWeight(newWeight, weightElement_id) {
+    document.getElementById(weightElement_id).value = newWeight;
+}
+
+function updateName(newName, nameElement_id) {
+    document.getElementById(nameElement_id).value = newName;
+}
+
+function renameAttributes(label, numInput, selector, removeEntry, linebreak1, linebreak2) {
+    let nameInput = document.getElementById(label);
+    let weightInput = document.getElementById(numInput);
+    let dayEatenSelector = document.getElementById(selector);
+    let removeBtn = document.getElementById(removeEntry);
+    let br1 = document.getElementById(linebreak1);
+    let br2 = document.getElementById(linebreak2);
+
+    let itemNum = parseInt(linebreak1.replace('br1', ''));
+
+    console.log(itemNum);
+
+    removeItem(nameInput, weightInput, dayEatenSelector, removeBtn, br1, br2);
+
+    for (let i = itemNum + 1; i <= numOfItemsChosen; i++) {
+        console.log(i);
+        nameInput = document.getElementById(`item${i}nameInput`);
+        weightInput = document.getElementById(`item${i}weightInput`);
+        dayEatenSelector = document.getElementById(`item${i}selector`);
+        removeBtn = document.getElementById(`remove${i}Entry`);
+        br1 = document.getElementById(`br1${i}`);
+        br2 = document.getElementById(`br2${i}`);
+
+        nameInput.setAttribute('id', `item${i - 1}nameInput`);
+        nameInput.setAttribute('name', `item${i - 1}`);
+        
+        weightInput.setAttribute('id', `item${i - 1}weightInput`);
+        weightInput.setAttribute('name', `item${i - 1}weight`);
+
+        dayEatenSelector.setAttribute('id', `item${i - 1}selector`);       
+        dayEatenSelector.setAttribute('name', `item${i - 1}dayeaten`);
+        
+        removeBtn.setAttribute('id', `remove${i - 1}Entry`);
+        br1.setAttribute('id', `br1${i - 1}`);
+        br2.setAttribute('id', `br2${i - 1}`);
+        console.log(nameInput.id);
+    }
+
+    numOfItemsChosen -= 1;
 }
