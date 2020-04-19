@@ -28,9 +28,8 @@
 
         if (!$stmt) {
             $stmt -> close();
-            destroy_session_and_data();
             echo "<p style='text-align:center;color:red'>
-                    Unable to insert your data into the database, you have been logged out. Please try again later.
+                    Unable to insert your data into the database. Please try again later.
                     </p>";
             exit();
         }

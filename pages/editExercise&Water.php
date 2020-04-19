@@ -2,12 +2,43 @@
     require_once("../database/connection.php"); 
     $connection = new mysqli($hostname, $username, $password, $database);
     if ($connection->connect_error) die($connection->connect_error);
+
+    // Checks if email is set. If it isn't set, ask user to log in
+    if (!isset($_SESSION['email'])) {
+        echo "<p style='text-align:center;color:red'>
+                Please <a href='./login.php'>sign in</a> to add to your water log
+             </p>";     
+        exit();      
+    }
+
+    $email = $_SESSION['email'];
     
+    // Save edit changes to database
     if (isset($_POST['submit']) && isset($_SESSION['email'])) {
-        $email = $_SESSION['email'];
+        $water_value = floatval(sanitizeMySQL($connection, $_POST["consumptionNum"]));
+        
+        // Update the water value first
+        $stmt = $connection->prepare("UPDATE water set consumption={$water_value} where email='{$email}'");
+        $stmt -> execute();
+
+        // If updating water value went wrong, output a message
+        if (!$stmt) {
+            $stmt -> close();
+            echo "<p style='text-align:center;color:red'>
+            Unable to insert your data into the database. Please try again later.
+            </p>";
+            exit();
+        }
+
+        $stmt -> close();
+
+        // Clear the exercise table for the email
+        $stmt = $connection->prepare("UPDATE exercise set workout='' where email='{$email}'");
+        $stmt -> execute();
+        
         $itemNum = 0;
 
-        // Insert items to DB
+        // Insert edited data to DB
         while (array_key_exists("item{$itemNum}", $_POST)) {
             $exerciseName = sanitizeMySQL($connection, trim($_POST["item{$itemNum}"]));
             $timeExercised = sanitizeMySQL($connection, $_POST["item{$itemNum}time"]);
@@ -18,7 +49,7 @@
 
             // Retrieve the data of the user and split it according to ","
             $result = $stmt -> get_result();
-            $elements = explode(",", ($result->fetch_array(MYSQLI_NUM))[1]);
+            $elements = explode(",", ($result -> fetch_array(MYSQLI_NUM))[1]);
 
             $duplicate = false;
 
@@ -71,14 +102,23 @@
 
         header('location: ../pages/dashboard.php');
     }
-    elseif (!isset($_SESSION['email'])) {
-        echo "<p style='text-align:center;color:red'>
-                Please <a href='./login.php'>sign in</a> to add to your exercise log
-             </p>";     
-        exit();      
-    }
     
-    // Close connection
+    $stmt = $connection->prepare("SELECT * FROM exercise WHERE email='{$email}'");
+    $stmt -> execute();
+
+    // Retrieve the data
+    $exercise_result = $stmt -> get_result();
+    $exercise_result = $exercise_result->fetch_array(MYSQLI_NUM);
+
+    $stmt = $connection->prepare("SELECT * FROM water WHERE email='{$email}'");
+    $stmt -> execute();
+
+    // Retrieve the data
+    $water_result = $stmt -> get_result();
+    $water_result = $water_result->fetch_array(MYSQLI_NUM)[1];
+    
+    // Close all connections
+    $stmt -> close();
     $connection -> close();
     
     // Sanitizes a string
@@ -105,32 +145,46 @@
 
 <html>
     <head>
-        <title>Lyfestyle | Add Exercise</title>
+        <title>Lyfestyle | edit exercise & water</title>
         <link rel="stylesheet" type="text/css", href="../assets/css/main.css">
         <link rel="icon" type="image/png" href="../assets/images/Lyfestyle_favicon.png">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="../RetrieveExerciseDB.js"></script>
+        <script type="text/javascript"> var exercise_array =<?php echo json_encode($exercise_result); ?>;</script>
+        <script src="../EditExerciseDB.js"></script>
+        <!-- <script src="../EditWaterDB.js"></script> -->
     </head>
 
-    <body onload="showExercises(event)">
-        <h1>Insert Your Exercise</h1>
+    <body onload="displayExerciseLog()">
+        <h1>Edit your exercise & water log</h1>
 
-        <div id="overall-container">
-            <div id="search-container">
-                <div class="search-exercises">
-                    <input id="keyword" oninput="showExercises(event)" type="text" placeholder="Search here for an exercise">
-                    <div id="search-list"></div>
+        <br><br>
+        
+        <form method="POST">
+            <div class="container-fluid">
+                <div class="row text-center">
+                    <div class="col-6">
+                        <h2>Exercise</h2>
+                        <div id="Exercise-forms" class="mt-3"></div>
+                    </div>
+                    <div class="col-6">
+                        <h2>Water</h2>
+                        <div id="Water-forms" class="form-group row text-center justify-content-center">
+                            <div class="col-4 mt-3">
+                                <input type="number" class="form-control" name="consumptionNum" id="waterInput" 
+                                       placeholder="Water drank in OZ" min="0.1" max="100" step="0.1" 
+                                       value="<?php echo $water_result ?>" required><br><br>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
             
+            <div class="form-row text-center">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary" name="submit">Save changes</button>
+                </div>
             </div>
-            <div id="list-container">
-                <button id="addOwnExercise-btn" class="btn btn-primary" onClick="addCustomItem()">Add own exercise</button>
-
-                <form id="exerciseForm" class="form-inline" method="POST">
-                    <button id="addLog-btn" class="btn btn-primary" type="submit" name="submit">Add log</button><br><br>
-                </form>
-            </div>
-        </div>
+        </form>
 
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

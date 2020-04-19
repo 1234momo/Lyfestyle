@@ -2,6 +2,14 @@
     require_once("../database/connection.php"); 
     $connection = new mysqli($hostname, $username, $password, $database);
     if ($connection->connect_error) die($connection->connect_error);
+
+    if (!isset($_SESSION['email'])) {
+        echo "<p style='text-align:center;color:red'>
+                Please <a href='./login.php'>sign in</a> to add to your water log
+             </p>";     
+        exit();      
+    }
+
     $email = $_SESSION['email'];
     
     if (isset($_POST['submit']) && isset($_SESSION['email'])) {
@@ -70,9 +78,8 @@
 
             if (!$stmt) {
                 $stmt -> close();
-                destroy_session_and_data();
                 echo "<p style='text-align:center;color:red'>
-                        Unable to insert your data into the database, you have been logged out. Please try again later.
+                        Unable to insert your data into the database. Please try again later.
                       </p>";
                 exit();
             }
@@ -84,13 +91,7 @@
 
         header('location: ../pages/dashboard.php');
     }
-    elseif (!isset($_SESSION['email'])) {
-        echo "<p style='text-align:center;color:red'>
-                Please <a href='./login.php'>sign in</a> to add to your water log
-             </p>";     
-        exit();      
-    }
-
+    
     $stmt = $connection->prepare("SELECT * FROM food WHERE email='{$email}'");
     $stmt -> execute();
 
