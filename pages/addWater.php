@@ -22,7 +22,6 @@
         } 
 
         $query = "UPDATE water set consumption={$consumption} where email='{$email}'";
-            
         $stmt = $connection->prepare($query);
         $stmt -> execute();
 

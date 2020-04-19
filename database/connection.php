@@ -46,11 +46,19 @@ $water_table = "CREATE TABLE IF NOT EXISTS `water` (
   `consumption` DOUBLE NOT NULL
 )";
 
+$calories_table = "CREATE TABLE IF NOT EXISTS `calories` ( 
+  `email` VARCHAR(128) PRIMARY KEY UNIQUE NOT NULL , 
+  `food_calories` DOUBLE NOT NULL,
+  `exercise_calories` DOUBLE NOT NULL,
+  `goal` INT NOT NULL
+)";
+
 // Creates the tables in MySQL
 $queries = array($users_table, 
                  $food_table,
                  $exercise_table,
-                 $water_table); 
+                 $water_table,
+                 $calories_table); 
 
 foreach ($queries as $query) {
   $conn -> query($query);
@@ -117,12 +125,15 @@ if(isset($_POST['signup_weight_loss']) or
   
   if (isset($_POST['signup_weight_loss'])) {
     $fitness_goal = "weight loss";
+    $_SESSION["fitness_goal"] = "weight loss";
   }
   else if (isset($_POST['signup_muscle_building'])) {
     $fitness_goal = "muscle building";
+    $_SESSION["fitness_goal"] = "muscle building";
   }
   else {
-    $fitness_goal = "stamina";
+    $fitness_goal = "weight gain";
+    $_SESSION["fitness_goal"] = "weight gain";
   }
   
   // Create new user in database
@@ -138,7 +149,6 @@ if(isset($_POST['signup_weight_loss']) or
   // Redirect to login page
   header('location: login.php');
 }
-
 
 //----------------------------------------------------------------------
 // LOGIN
@@ -209,6 +219,37 @@ if(isset($_POST['login'])) {
 
         // If something went wrong adding the user into the exercise db, output msg
         if (!$isEmailInWater) {
+          echo "<p style='text-align:center;color:red'>
+                  Uh oh... Something seems to be wrong. Please come back later.
+                </p>";
+          exit();
+        }
+      }
+      
+      // Query calories db to check if the user exists
+      $query = "SELECT * FROM calories WHERE email = '{$email}'";
+      $isEmailInCalories = mysqli_query($conn, $query);
+
+      // If user doesn't exist in the calories db, add the user
+      if (mysqli_num_rows($isEmailInCalories) == 0) {
+        $calories_recommended = 0;
+        $fitness_goal = $_SESSION['fitness_goal'];
+
+        if ($fitness_goal == "weight loss") {
+          $calories_recommended = 2000;
+        }
+        elseif ($fitness_goal == "muscle building") {
+          $calories_recommended = 4750;
+        }
+        else {
+          $calories_recommended = 2000;
+        }
+
+        $query = "INSERT INTO calories VALUES('$email', 0, 0, $calories_recommended)";
+        $isEmailInCalories = mysqli_query($conn, $query);
+
+        // If something went wrong adding the user into the exercise db, output msg
+        if (!$isEmailInCalories) {
           echo "<p style='text-align:center;color:red'>
                   Uh oh... Something seems to be wrong. Please come back later.
                 </p>";

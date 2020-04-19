@@ -103,17 +103,15 @@
         header('location: ../pages/dashboard.php');
     }
     
+    // Retrieve the exercise data
     $stmt = $connection->prepare("SELECT * FROM exercise WHERE email='{$email}'");
     $stmt -> execute();
-
-    // Retrieve the data
     $exercise_result = $stmt -> get_result();
     $exercise_result = $exercise_result->fetch_array(MYSQLI_NUM);
 
+    // Retrieve the water data
     $stmt = $connection->prepare("SELECT * FROM water WHERE email='{$email}'");
     $stmt -> execute();
-
-    // Retrieve the data
     $water_result = $stmt -> get_result();
     $water_result = $water_result->fetch_array(MYSQLI_NUM)[1];
     

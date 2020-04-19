@@ -32,7 +32,7 @@ require_once("../database/connection.php");
 
       <!--  STAMINA -->
       <div class="col-sm">
-         <input type="submit" id="stamina" name="signup_stamina" value="Stamina" href="login.php">
+         <input type="submit" id="weight-gain" name="signup_weight_gain" value="Weight gain" href="login.php">
       </div>
          
     </div>
