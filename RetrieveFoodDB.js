@@ -154,7 +154,7 @@ function removeItem(nameInput, weight_or_calories_input, selector, removeBtn, br
 } 
 
 // Creates the components of a form entry from the list of foods
-function createForm(itemName, resultsArea, itemNum) {
+function createForm(itemName, resultsArea) {
     // Name input, but disabled because the name is from json file
     let labelElem = document.createElement("input");
     labelElem.setAttribute('name', `item${numOfItemsChosen}`);

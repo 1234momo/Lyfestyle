@@ -1,11 +1,12 @@
-let numOfEntries = 0;
+let numOfSelectedItems = 0;
+let numOfCustomItems = 0;
 let itemsChosen = [];
 
 function showExercises(e) {
     // Prevent page from reloading
     e.preventDefault();
 
-    // Call json file with foods and then display the data
+    // Call json file with exercises and then display the data
     fetch("../database/exercise_database.json")
     .then(function (response) {
         return response.json();
@@ -18,7 +19,7 @@ function showExercises(e) {
     });
 }
 
-// Display all the foods in the json file
+// Display all the exercises in the json file
 function displayData(data) {
     let searchTextBox = document.getElementById("keyword");
     let queryItem = searchTextBox.value;
@@ -58,7 +59,7 @@ function displayData(data) {
     else {
         let foundAName = false;
 
-        // Display all the food names that contain the query name
+        // Display all the exercise names that contain the query name
         for (let i = 0; i < data.Sheet1.length; i++) {
 
             // If a exercise name has part of the query, display it
@@ -110,7 +111,7 @@ function removeListItem(liItem) {
 
 // Remove a form entry
 function removeItem(nameInput, timeInput, removeBtn, br1, br2, isFromList) {
-    // Remove the name of the food item from the itemsChosen array
+    // Remove the name of the exercise from the itemsChosen array
     if (isFromList) {
         const index = itemsChosen.indexOf(nameInput.value);
         if (index > -1) {
@@ -138,16 +139,23 @@ function removeItem(nameInput, timeInput, removeBtn, br1, br2, isFromList) {
     elem = document.getElementById(br2.id);
     elem.remove();
 
+    if (isFromList) {
+        --numOfSelectedItems;
+    }
+    else {
+        --numOfCustomItems;
+    }
+
     showExercises(event);
 } 
 
 // Creates the components of a form entry from the list of exercises
-function createForm(itemName, resultsArea, itemNum) {
+function createForm(itemName, resultsArea) {
     // Name input, but disabled because the name is from json file
     let labelElem = document.createElement("input");
-    labelElem.setAttribute('name', `item${numOfEntries}`);
+    labelElem.setAttribute('name', `item${numOfSelectedItems}`);
     labelElem.setAttribute('class', 'form-control mr-4');
-    labelElem.setAttribute('id', `item${numOfEntries}nameInput`);
+    labelElem.setAttribute('id', `item${numOfSelectedItems}`);
     labelElem.setAttribute('type', 'text');
     labelElem.setAttribute('placeholder', 'Exercise name');
     labelElem.setAttribute('value', itemName);
@@ -157,8 +165,8 @@ function createForm(itemName, resultsArea, itemNum) {
     // Time input
     let inputTimeElement = document.createElement("input");
     inputTimeElement.setAttribute('type', 'number');
-    inputTimeElement.setAttribute('name', `item${numOfEntries}time`);
-    inputTimeElement.setAttribute('id', `item${numOfEntries}timeInput`);
+    inputTimeElement.setAttribute('name', `item${numOfSelectedItems}timeInput`);
+    inputTimeElement.setAttribute('id', `item${numOfSelectedItems}timeInput`);
     inputTimeElement.setAttribute('class', 'form-control mr-4');
     inputTimeElement.setAttribute('placeholder', 'Minutes exercised');
     inputTimeElement.setAttribute('step', '1');
@@ -167,23 +175,23 @@ function createForm(itemName, resultsArea, itemNum) {
 
     // Remove (X) button
     let removeEntry = document.createElement("button");
-    removeEntry.setAttribute('id', `remove${numOfEntries}Entry`);
+    removeEntry.setAttribute('id', `remove${numOfSelectedItems}Entry`);
     removeEntry.setAttribute('class', 'btn btn-light');
     removeEntry.setAttribute('type', 'button');
     removeEntry.innerHTML = "X";
 
     // 2 line breakers for space consistency between entries
     let linebreakElem = document.createElement("br");
-    linebreakElem.setAttribute('id', `br1${numOfEntries}`);
+    linebreakElem.setAttribute('id', `br1${numOfSelectedItems}`);
     let linebreakElem2 = document.createElement("br");
-    linebreakElem2.setAttribute('id', `br2${numOfEntries}`);
+    linebreakElem2.setAttribute('id', `br2${numOfSelectedItems}`);
 
     // Create onclick listner to know when to remove an entry
-    removeEntry.setAttribute('onClick', `removeItem(item${numOfEntries}nameInput,` + 
-                                        `item${numOfEntries}timeInput,` + 
-                                        `remove${numOfEntries}Entry,` +
-                                        `br1${numOfEntries},` +
-                                        `br2${numOfEntries},` +
+    removeEntry.setAttribute('onClick', `renameAttributes('item${numOfSelectedItems}',` + 
+                                        `'item${numOfSelectedItems}timeInput',` + 
+                                        `'remove${numOfSelectedItems}Entry',` +
+                                        `'br1${numOfSelectedItems}',` +
+                                        `'br2${numOfSelectedItems}',` +
                                         `true)`);
     
     // Appends the entry components to the entry area
@@ -193,7 +201,7 @@ function createForm(itemName, resultsArea, itemNum) {
     resultsArea.appendChild(linebreakElem);
     resultsArea.appendChild(linebreakElem2);
 
-    numOfEntries++;
+    ++numOfSelectedItems;
 }
 
 // Creates the components of a form entry based off of user input
@@ -201,52 +209,124 @@ function addCustomItem() {
     let resultsArea = document.getElementById('exerciseForm');
 
     // Name input, which can be edited
-    let foodItemElem = document.createElement("input");
-    foodItemElem.setAttribute('type', 'text');
-    foodItemElem.setAttribute('name', `item${numOfEntries}`);
-    foodItemElem.setAttribute('class', 'form-control mr-4');
-    foodItemElem.setAttribute('id', `item${numOfEntries}nameInput`);
-    foodItemElem.setAttribute('placeholder', 'Exercise name');
-    foodItemElem.required = true;
+    let exerciseNameInput = document.createElement("input");
+    exerciseNameInput.setAttribute('type', 'text');
+    exerciseNameInput.setAttribute('name', `item${numOfCustomItems}customName`);
+    exerciseNameInput.setAttribute('id', `item${numOfCustomItems}customName`);
+    exerciseNameInput.setAttribute('class', 'form-control mr-4');
+    exerciseNameInput.setAttribute('placeholder', 'Exercise name');
+    exerciseNameInput.required = true;
 
-    // Time input
-    let inputTimeElement = document.createElement("input");
-    inputTimeElement.setAttribute('type', 'number');
-    inputTimeElement.setAttribute('name', `item${numOfEntries}time`);
-    inputTimeElement.setAttribute('id', `item${numOfEntries}timeInput`);
-    inputTimeElement.setAttribute('class', 'form-control mr-4');
-    inputTimeElement.setAttribute('placeholder', 'Minutes exercised');
-    inputTimeElement.setAttribute('step', '1');
-    inputTimeElement.setAttribute('min', '1');
-    inputTimeElement.required = true;
+    // Calorie input
+    let caloriesInput = document.createElement("input");
+    caloriesInput.setAttribute('type', 'number');
+    caloriesInput.setAttribute('name', `item${numOfCustomItems}calories`);
+    caloriesInput.setAttribute('id', `item${numOfCustomItems}calories`);
+    caloriesInput.setAttribute('class', 'form-control mr-4');
+    caloriesInput.setAttribute('placeholder', 'Calories burned');
+    caloriesInput.setAttribute('step', '0.01');
+    caloriesInput.setAttribute('min', '0.01');
+    caloriesInput.required = true;
 
     // Remove (X) button
     let removeEntry = document.createElement("button");
-    removeEntry.setAttribute('id', `remove${numOfEntries}Entry`);
+    removeEntry.setAttribute('id', `remove${numOfCustomItems}customEntry`);
     removeEntry.setAttribute('class', 'btn btn-light');
     removeEntry.setAttribute('type', 'button');
     removeEntry.innerHTML = "X";
     
     // 2 line breakers for space consistency between entries
     let linebreakElem = document.createElement("br");
-    linebreakElem.setAttribute('id', `br1${numOfEntries}`);
+    linebreakElem.setAttribute('id', `br1${numOfCustomItems}custom`);
     let linebreakElem2 = document.createElement("br");
-    linebreakElem2.setAttribute('id', `br2${numOfEntries}`);
+    linebreakElem2.setAttribute('id', `br2${numOfCustomItems}custom`);
 
     // Create onclick listner to know when to remove an entry
-    removeEntry.setAttribute('onClick', `removeItem(item${numOfEntries}nameInput,` + 
-                                        `item${numOfEntries}timeInput,` + 
-                                        `remove${numOfEntries}Entry,` +
-                                        `br1${numOfEntries},` +
-                                        `br2${numOfEntries},` +
+    removeEntry.setAttribute('onClick', `renameAttributes('item${numOfCustomItems}customName',` + 
+                                        `'item${numOfCustomItems}calories',` + 
+                                        `'remove${numOfCustomItems}customEntry',` +
+                                        `'br1${numOfCustomItems}custom',` +
+                                        `'br2${numOfCustomItems}custom',` +
                                         `false)`);
     
     // Appends the entry components to the entry area
-    resultsArea.appendChild(foodItemElem);
-    resultsArea.appendChild(inputTimeElement);
+    resultsArea.appendChild(exerciseNameInput);
+    resultsArea.appendChild(caloriesInput);
     resultsArea.appendChild(removeEntry);
     resultsArea.appendChild(linebreakElem);
     resultsArea.appendChild(linebreakElem2);
     
-    numOfEntries++;
+    ++numOfCustomItems;
+}
+
+// Renames the ids and names of each element
+function renameAttributes(nameInput_id, second_input_id, removeBtn_id, br1_id, br2_id, isFromList) {
+    let nameInput = document.getElementById(nameInput_id);
+    let second_input = document.getElementById(second_input_id);
+    let removeBtn = document.getElementById(removeBtn_id);
+    let br1 = document.getElementById(br1_id);
+    let br2 = document.getElementById(br2_id);
+
+    // Retrieves the element's index
+    let itemNum;
+    if (isFromList) {
+        itemNum = parseInt(br1_id.replace('br1', ''));
+    }
+    else {
+        itemNum = br1_id.replace('br1', '');
+        itemNum = parseInt(itemNum.replace('custom', ''));
+    }
+
+    removeItem(nameInput, second_input, removeBtn, br1, br2, isFromList);
+
+    let numOfItems = isFromList ? numOfSelectedItems : numOfCustomItems;
+
+    // Loop through the elements after the current element's index
+    for (let i = itemNum + 1; i <= numOfItems; ++i) {
+
+        // Find the elements of the ith index
+        nameInput = isFromList ? document.getElementById(`item${i}`) : document.getElementById(`item${i}customName`);
+        second_input = isFromList ? document.getElementById(`item${i}timeInput`) : document.getElementById(`item${i}calories`);
+        removeBtn = isFromList ? document.getElementById(`remove${i}Entry`) : document.getElementById(`remove${i}customEntry`);
+        br1 = isFromList ? document.getElementById(`br1${i}`) : document.getElementById(`br1${i}custom`);
+        br2 = isFromList ? document.getElementById(`br2${i}`) : document.getElementById(`br2${i}custom`);
+
+        // Rename ids and names
+        if (isFromList) {
+            nameInput.setAttribute('id', `item${i - 1}`);
+            nameInput.setAttribute('name', `item${i - 1}`);
+            second_input.setAttribute('id', `item${i - 1}timeInput`);
+            second_input.setAttribute('name', `item${i - 1}timeInput`);
+            removeBtn.setAttribute('id', `remove${i - 1}Entry`);
+            br1.setAttribute('id', `br1${i - 1}`);
+            br2.setAttribute('id', `br2${i - 1}`);
+        }
+        else {
+            nameInput.setAttribute('id', `item${i - 1}customName`);
+            nameInput.setAttribute('name', `item${i - 1}customName`);
+            second_input.setAttribute('id', `item${i - 1}calories`);
+            second_input.setAttribute('name', `item${i - 1}calories`);
+            removeBtn.setAttribute('id', `remove${i - 1}customEntry`);
+            br1.setAttribute('id', `br1${i - 1}custom`);
+            br2.setAttribute('id', `br2${i - 1}custom`);
+        }
+
+        // Rename the onClick to the appropriate ith index
+        if (isFromList) {
+            removeBtn.setAttribute('onClick', `renameAttributes('item${i - 1}',` + 
+                                              `'item${i - 1}timeInput',` + 
+                                              `'remove${i - 1}Entry',` +
+                                              `'br1${i - 1}',` +
+                                              `'br2${i - 1}',` +
+                                              `true)`);
+        }
+        else {
+            removeBtn.setAttribute('onClick', `renameAttributes('item${i - 1}customName',` + 
+                                              `'item${i - 1}calories',` + 
+                                              `'remove${i - 1}customEntry',` +
+                                              `'br1${i - 1}custom',` +
+                                              `'br2${i - 1}custom',` +
+                                              `false)`);
+        }
+    }
 }
