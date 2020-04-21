@@ -31,7 +31,7 @@
         
         // Insert items to DB
         while (array_key_exists("item{$itemNum}", $_POST)) {
-            $itemName = sanitizeMySQL($connection, $_POST["item{$itemNum}"]);
+        $itemName = sanitizeMySQL($connection, $_POST["item{$itemNum}"]);
             $itemWeight = sanitizeMySQL($connection, $_POST["item{$itemNum}weight"]);
             $itemDayEaten = sanitizeMySQL($connection, $_POST["item{$itemNum}dayeaten"]);    
             

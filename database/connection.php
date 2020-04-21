@@ -32,8 +32,11 @@ $users_table = "CREATE TABLE IF NOT EXISTS `users` (
 $food_table = "CREATE TABLE IF NOT EXISTS `food` ( 
   `email` VARCHAR(128) PRIMARY KEY UNIQUE NOT NULL , 
   `Breakfast` LONGTEXT NOT NULL , 
+  `Breakfast_custom` LONGTEXT NOT NULL , 
   `Lunch` LONGTEXT NOT NULL , 
-  `Dinner` LONGTEXT NOT NULL
+  `Lunch_custom` LONGTEXT NOT NULL , 
+  `Dinner` LONGTEXT NOT NULL ,
+  `Dinner_custom` LONGTEXT NOT NULL
 )";
 
 $exercise_table = "CREATE TABLE IF NOT EXISTS `exercise` ( 
@@ -48,8 +51,8 @@ $water_table = "CREATE TABLE IF NOT EXISTS `water` (
 
 $calories_table = "CREATE TABLE IF NOT EXISTS `calories` ( 
   `email` VARCHAR(128) PRIMARY KEY UNIQUE NOT NULL , 
-  `food_calories` DOUBLE NOT NULL,
-  `exercise_calories` DOUBLE NOT NULL,
+  `food_calories` DECIMAL NOT NULL,
+  `exercise_calories` DECIMAL NOT NULL,
   `goal` INT NOT NULL
 )";
 
@@ -168,17 +171,24 @@ if(isset($_POST['login'])) {
 
     // Check password
     if ($password == $row[3]) {
-      session_start();
       $email = $row[0];
       $_SESSION['email'] = $email;
       
       // Query food db to check if the user exists
       $query = "SELECT * FROM food WHERE email = '{$email}'";
       $isEmailInFood = mysqli_query($conn, $query);
+      
+      // If something went wrong adding the user into the food db, output msg
+      if (!$isEmailInFood) {
+        echo "<p style='text-align:center;color:red'>
+                Uh oh... Something seems to be wrong. Please come back later.
+              </p>";
+        exit();
+      }
 
       // If user doesn't exist in the food db, add the user
       if (mysqli_num_rows($isEmailInFood) == 0) {
-        $query = "INSERT INTO food VALUES('$email', '','', '')";
+        $query = "INSERT INTO food VALUES('$email', '','','','','','')";
         $isEmailInFood = mysqli_query($conn, $query);
 
         // If something went wrong adding the user into the food db, output msg

@@ -7,25 +7,25 @@
         $email = $_SESSION['email'];
         $itemNum = 0;
 
-        // Insert items to DB
+        // Insert items that were from the list of foods to DB
         while (array_key_exists("item{$itemNum}", $_POST)) {
-            $itemName = sanitizeMySQL($connection, $_POST["item{$itemNum}"]);
-            $itemWeight = sanitizeMySQL($connection, $_POST["item{$itemNum}weight"]);
+            $itemName = trim(sanitizeMySQL($connection, $_POST["item{$itemNum}"]));
+            $itemWeight = trim(sanitizeMySQL($connection, $_POST["item{$itemNum}weight"]));
             $itemDayEaten = sanitizeMySQL($connection, $_POST["item{$itemNum}dayeaten"]);    
+            $calories_per_oz = search_calories_in_json($itemName);
             
             // Select the email column and column where the item should belong in
-            $stmt = $connection->prepare("SELECT email, {$itemDayEaten} FROM food WHERE email='{$email}'");
+            $stmt = $connection->prepare("SELECT {$itemDayEaten} FROM food WHERE email='{$email}'");
             $stmt -> execute();
 
             // Retrieve the data corresponding to the day eaten and spit data according to ","
             $result = $stmt -> get_result();
-            $elements = explode(",", ($result->fetch_array(MYSQLI_NUM))[1]);
+            $elements = explode(",", ($result->fetch_array(MYSQLI_NUM))[0]);
 
             $duplicate = false;
 
             // Check if food item already exists
             for ($i = 0; $i < sizeof($elements); $i += 2) {
-
                 // If a food item has the same name, add the weight entered to the weight in DB
                 // There should only be only unique names
                 if ($elements[$i] == $itemName) {
@@ -49,9 +49,100 @@
                 $query = "UPDATE food set {$itemDayEaten}=concat({$itemDayEaten},'{$infoStr}') where email='{$email}'";
             }
             
+            // Update database
             $stmt = $connection->prepare($query);
             $stmt -> execute();
 
+            // If something went wrong, output a message
+            if (!$stmt) {
+                $stmt -> close();
+                echo "<p style='text-align:center;color:red'>
+                        Unable to insert your data into the database. Please try again later.
+                      </p>";
+                exit();
+            }
+
+            // Update the calories table for food_calories
+            $calories = $calories_per_oz * $itemWeight;
+            $stmt = $connection->prepare("UPDATE calories set food_calories = food_calories + {$calories} where email='{$email}'");
+            $stmt -> execute();
+
+            // If something went wrong, output a message
+            if (!$stmt) {
+                $stmt -> close();
+                echo "<p style='text-align:center;color:red'>
+                        Unable to insert your data into the database. Please try again later.
+                      </p>";
+                exit();
+            }
+
+            $stmt -> close();
+
+            $itemNum += 1;
+        }
+
+        $itemNum = 0;
+
+        // Insert custom items that were from the user to DB
+        while (array_key_exists("item{$itemNum}customName", $_POST)) {
+            $name = trim(sanitizeMySQL($connection, $_POST["item{$itemNum}customName"]));
+            $calories = trim(sanitizeMySQL($connection, $_POST["item{$itemNum}calories"]));
+            $dayEaten = sanitizeMySQL($connection, $_POST["item{$itemNum}customSelector"]);    
+            
+            // Select the email column and column where the item should belong in
+            $stmt = $connection->prepare("SELECT {$dayEaten}_custom FROM food WHERE email='{$email}'");
+            $stmt -> execute();
+
+            // Retrieve the data corresponding to the day eaten and spit data according to ","
+            $result = $stmt -> get_result();
+            $elements = explode(",", ($result->fetch_array(MYSQLI_NUM))[0]);
+
+            $duplicate = false;
+
+            // Check if food item already exists
+            for ($i = 0; $i < sizeof($elements); $i += 2) {
+                // If a food item has the same name, add the weight entered to the weight in DB
+                // There should only be only unique names
+                if ($elements[$i] == $name) {
+                    $elements[$i + 1] += $calories;
+                    $duplicate = true;
+                    break;
+                }
+            }
+
+            $query = "";
+
+            // If a duplicate exists, update the entire data
+            if ($duplicate == true) {
+                $infoStr = implode(",", $elements);
+                $query = "UPDATE food set {$dayEaten}_custom='{$infoStr}' where email='{$email}'";
+            }
+
+            // If a duplicate doesn't exist, append food item entered into data
+            else {
+                $infoStr = $name . "," . $calories . ",";
+                $query = "UPDATE food set {$dayEaten}_custom=concat({$dayEaten}_custom,'{$infoStr}') where email='{$email}'";
+            }
+            
+            // Update database
+            $stmt = $connection->prepare($query);
+            $stmt -> execute();
+
+            // If something went wrong, output a message
+            if (!$stmt) {
+                $stmt -> close();
+                echo "<p style='text-align:center;color:red'>
+                        Unable to insert your data into the database. Please try again later.
+                      </p>";
+                exit();
+            }
+            
+            // Update the calories table for food_calories
+            $calories = doubleval($calories);
+            $stmt = $connection->prepare("UPDATE calories set food_calories = food_calories + {$calories} where email='{$email}'");
+            $stmt -> execute();
+
+            // If something went wrong, output a message
             if (!$stmt) {
                 $stmt -> close();
                 echo "<p style='text-align:center;color:red'>
@@ -76,6 +167,17 @@
     
     // Close connection
     $connection -> close();
+
+    function search_calories_in_json($search_name) {
+        $data = json_decode(file_get_contents("../database/food_database.json"), true);
+        $data = $data["Sheet1"];
+
+        foreach ($data as $name) {
+            if ($name["Food_name"] == $search_name) {
+                return floatval($name["Calories_per_oz"]);
+            }
+        }
+    }
     
     // Sanitizes a string
     function sanitizeString($var) {
