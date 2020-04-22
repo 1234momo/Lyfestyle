@@ -11,9 +11,7 @@ require_once("../database/connection.php");
 </head>
 
 <body>
-<img id="lyfestyle-logo" src="../assets/images/Lyfestyle_banner_02.png">
-
-<h1>Select fitness goal</h1>
+<img id="select-fitness-goal-logo" src="../assets/images/select_fitness_goal.png">
 
 <!--  SELECT FITNESS GOAL -->
 <div class="container">

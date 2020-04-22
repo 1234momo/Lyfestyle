@@ -19,9 +19,14 @@ label {
 }
 
 #lyfestyle-logo {
-/*  margin-bottom: 2em; */
   height: 16em; 
 }
+
+#select-fitness-goal-logo {
+  margin-bottom: 2em; 
+  height: 14em; 
+}
+
 
 .main-login-form {
   padding: 0 0 1% 0;
@@ -129,3 +134,8 @@ ul li.noResults, ul li.noResults a {
 #eatenForm, #exerciseForm {
   display: inline;
 } 
+
+.div .select {
+  color: grey; 
+  width: 13.75em;
+}

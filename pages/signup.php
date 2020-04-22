@@ -13,26 +13,12 @@ require_once("../database/connection.php");
 <body>
 <img id="lyfestyle-logo" src="../assets/images/Lyfestyle_banner_02.png">
 
-<h1 style="color: white; font-weight: bold; ">Signup</h1>
+<h1 style="color: white; font-weight: bold;">Signup</h1>
 
 <!--  SIGNUP INPUTS -->
 <div class="main-login-form">
   <form method="POST"> <!-- action="fitness_goal.php" --> 
 
-    <!--  GENDER -->
-    <div class="login-group" required>  
-      <p>Please select your gender:</p>
-      <input type="radio" id="male" name="gender" value="male" required>
-      <label for="male">Male</label><br>
-      <input type="radio" id="female" name="gender" value="female">
-      <label for="female">Female</label><br>
-    </div>
-
-    <!--  WEIGHT -->
-    <div class="login-group">  
-      <input type="number" min="1" id="lastName" name="weight" placeholder="Weight in pounds" required>
-    </div>
-    
     <!--  EMAIL -->
     <div class="login-group">  
       <input type="email" id="email" name="signup_email" placeholder="Email" required>
@@ -46,6 +32,20 @@ require_once("../database/connection.php");
     <!--  LAST NAME -->
     <div class="login-group">  
       <input type="text" id="lastName" name="signup_last_name" placeholder="Last name" required>
+    </div>
+    
+    <!--  GENDER -->
+    <div class="login-group" required>  
+      <select name="gender" style="color: grey; width: 13.75em;">
+        <option value="" selected disabled hidden>Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </div>
+
+    <!--  WEIGHT -->
+    <div class="login-group">  
+      <input type="number" min="1" id="lastName" name="weight" placeholder="Weight in pounds" required>
     </div>
     
     <!--  PASSWORD -->
