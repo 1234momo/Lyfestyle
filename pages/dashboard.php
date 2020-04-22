@@ -1,81 +1,73 @@
 <?php 
-  require_once("../database/connection.php"); 
-  $connection = new mysqli($hostname, $username, $password, $database);
-  if ($connection->connect_error) die($connection->connect_error);
-    
-  if (!isset($_SESSION['email'])) {
-    echo "<p style='text-align:center; color:red'>
-            Please <a href='./login.php'>sign in</a> to view your dashboard
-         </p>";     
-    exit();      
-  }
-  
-  $email = $_SESSION['email'];
-  
-  // Logout
-  if (isset($_POST['submit'])) {
-    echo "<p style='text-align:center; color:red'>
-            You have been signed out. Please <a href='./login.php'>sign in</a> again if you wish
-         </p>";     
-    exit(); 
-  }
+require_once("../database/connection.php"); 
+$connection = new mysqli($hostname, $username, $password, $database);
+if ($connection->connect_error) die($connection->connect_error);
 
-  // Update calorie goal
-  if (array_key_exists("new_calorie_goal", $_POST)) {
-    $new_calorie_goal = intval(sanitizeMySQL($connection, $_POST['new_calorie_goal']));
+if (!isset($_SESSION['email'])) {
+  echo "<p style='text-align:center; color:red'>
+          Please <a href='./login.php'>sign in</a> to view your dashboard
+       </p>";     
+  exit();      
+}
 
-    // Update user's calorie goal in DB
-    $query = "UPDATE calories set goal={$new_calorie_goal} where email='{$email}'";
-    $stmt = $connection->prepare($query);
-    $stmt -> execute();
+$email = $_SESSION['email'];
 
-    // TODO: output warning msg better
-    if (!$stmt) {
-        $stmt -> close();
-        echo "<p style='text-align:center;color:red'>
-                Unable to insert your data into the database. Please try again later.
-                </p>";
-        exit();
-    }
+// Update calorie goal
+if (array_key_exists("new_calorie_goal", $_POST)) {
+  $new_calorie_goal = intval(sanitizeMySQL($connection, $_POST['new_calorie_goal']));
 
-    $stmt -> close();
-  }
-
-  // Retrieve the water data
-  $stmt = $connection->prepare("SELECT * FROM water WHERE email='{$email}'");
+  // Update user's calorie goal in DB
+  $query = "UPDATE calories set goal={$new_calorie_goal} where email='{$email}'";
+  $stmt = $connection->prepare($query);
   $stmt -> execute();
-  $water_result = $stmt -> get_result();
-  $water_result = $water_result->fetch_array(MYSQLI_NUM)[1];
 
-  // Retrieve the user's target calorie goal
-  $stmt = $connection->prepare("SELECT goal FROM calories WHERE email='{$email}'");
-  $stmt -> execute();
-  $calories_result = $stmt -> get_result();
-  $calorie_goal = $calories_result->fetch_array(MYSQLI_NUM)[0];
+  // TODO: output warning msg better
+  if (!$stmt) {
+      $stmt -> close();
+      echo "<p style='text-align:center;color:red'>
+              Unable to insert your data into the database. Please try again later.
+              </p>";
+      exit();
+  }
 
-  // Close connection
-  $connection -> close();
+  $stmt -> close();
+}
 
-  // Sanitizes a string
-  function sanitizeString($var) {
-    $var = stripslashes($var);
-    $var = strip_tags($var);
-    $var = htmlentities($var);
+// Retrieve the water data
+$stmt = $connection->prepare("SELECT * FROM water WHERE email='{$email}'");
+$stmt -> execute();
+$water_result = $stmt -> get_result();
+$water_result = $water_result->fetch_array(MYSQLI_NUM)[1];
+
+// Retrieve the user's target calorie goal
+$stmt = $connection->prepare("SELECT goal FROM calories WHERE email='{$email}'");
+$stmt -> execute();
+$calories_result = $stmt -> get_result();
+$calorie_goal = $calories_result->fetch_array(MYSQLI_NUM)[0];
+
+// Close connection
+$connection -> close();
+
+// Sanitizes a string
+function sanitizeString($var) {
+  $var = stripslashes($var);
+  $var = strip_tags($var);
+  $var = htmlentities($var);
+  return $var;
+}
+
+// Sanitizes with mysqli connection object and sanitizeString method
+function sanitizeMySQL($connection, $var) {
+    $var = $connection -> real_escape_string($var);
+    $var = sanitizeString($var);
     return $var;
-  }
+}
 
-  // Sanitizes with mysqli connection object and sanitizeString method
-  function sanitizeMySQL($connection, $var) {
-      $var = $connection -> real_escape_string($var);
-      $var = sanitizeString($var);
-      return $var;
-  }
-
-  function destroy_session_and_data() {
-    $_SESSION = array();
-    setcookie(session_name(), '', time() - 2592000, '/');
-    session_destroy();
-  }     
+function destroy_session_and_data() {
+  $_SESSION = array();
+  setcookie(session_name(), '', time() - 2592000, '/');
+  session_destroy();
+}     
 ?>
 
 <html>
@@ -93,7 +85,7 @@
       <h1 class="float-left">Welcome!</h1>
   
       <form action="./dashboard.php" method="POST">
-        <button type="submit" name="submit" class="btn btn-primary float-right">Logout</button>
+        <button type="submit" name="logout" class="btn btn-primary float-right">Logout</button>
       </form>
     </div>
 

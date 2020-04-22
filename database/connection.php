@@ -33,22 +33,22 @@ $users_table = "CREATE TABLE IF NOT EXISTS `users` (
 
 $food_table = "CREATE TABLE IF NOT EXISTS `food` ( 
   `email` VARCHAR(128) PRIMARY KEY UNIQUE NOT NULL , 
-  `Breakfast` LONGTEXT NOT NULL , 
-  `Breakfast_custom` LONGTEXT NOT NULL , 
-  `Lunch` LONGTEXT NOT NULL , 
-  `Lunch_custom` LONGTEXT NOT NULL , 
-  `Dinner` LONGTEXT NOT NULL ,
-  `Dinner_custom` LONGTEXT NOT NULL
+  `breakfast` LONGTEXT NOT NULL , 
+  `breakfast_custom` LONGTEXT NOT NULL , 
+  `lunch` LONGTEXT NOT NULL , 
+  `lunch_custom` LONGTEXT NOT NULL , 
+  `dinner` LONGTEXT NOT NULL ,
+  `dinner_custom` LONGTEXT NOT NULL
 )";
 
 $exercise_table = "CREATE TABLE IF NOT EXISTS `exercise` ( 
-  `email` VARCHAR(128) PRIMARY KEY UNIQUE NOT NULL , 
-  `workout` LONGTEXT NOT NULL ,
+  `email` VARCHAR(128) PRIMARY KEY UNIQUE NOT NULL, 
+  `workout` LONGTEXT NOT NULL,
   `workout_custom` LONGTEXT NOT NULL
 )";
 
 $water_table = "CREATE TABLE IF NOT EXISTS `water` ( 
-  `email` VARCHAR(128) PRIMARY KEY UNIQUE NOT NULL , 
+  `email` VARCHAR(128) PRIMARY KEY UNIQUE NOT NULL, 
   `consumption` DOUBLE NOT NULL
 )";
 
@@ -184,7 +184,7 @@ if(isset($_POST['login'])) {
       $_SESSION['email'] = $email;
       
       // Query food db to check if the user exists
-      $query = "SELECT * FROM food WHERE email = '{$email}'";
+      $query = "SELECT * FROM food WHERE email = '$email'";
       $isEmailInFood = mysqli_query($conn, $query);
       
       // If something went wrong adding the user into the food db, output msg
@@ -228,12 +228,13 @@ if(isset($_POST['login'])) {
       }
 
       // Query water db to check if the user exists
-      $query = "SELECT * FROM water WHERE email = '{$email}'";
+      $query = "SELECT * FROM water WHERE email = '$email'";
       $isEmailInWater = mysqli_query($conn, $query);
 
       // If user doesn't exist in the water db, add the user
       if (mysqli_num_rows($isEmailInWater) == 0) {
-        $query = "INSERT INTO water VALUES('$email', '')";
+        
+        $query = "INSERT INTO water VALUES('$email', '0.0')";
         $isEmailInWater = mysqli_query($conn, $query);
 
         // If something went wrong adding the user into the exercise db, output msg
@@ -301,5 +302,12 @@ if(isset($_POST['login'])) {
   }
 
   $results -> close();
+}
+
+//----------------------------------------------------------------------
+// LOGOUT
+//----------------------------------------------------------------------
+if (isset($_POST['logout'])) {
+  header('location: login.php');
 }
 ?>
