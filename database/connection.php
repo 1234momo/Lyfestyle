@@ -26,7 +26,9 @@ $users_table = "CREATE TABLE IF NOT EXISTS `users` (
   `first_name` VARCHAR(128) NOT NULL , 
   `last_name` VARCHAR(128) NOT NULL, 
   `password` VARCHAR(256) NOT NULL, 
-  `fitness_goal` VARCHAR(128)
+  `fitness_goal` VARCHAR(128),
+  `gender` VARCHAR(6), 
+  `weight` INT
 )";
 
 $food_table = "CREATE TABLE IF NOT EXISTS `food` ( 
@@ -78,7 +80,9 @@ if(isset($_POST['signup'])) {
   $first_name = mysqli_real_escape_string($conn, $_POST["signup_first_name"]); 
   $last_name = mysqli_real_escape_string($conn, $_POST["signup_last_name"]); 
   $password1 = hash("ripemd128", $_POST["signup_password1"]); 
-  $password2 = hash("ripemd128", $_POST["signup_password2"]); 
+  $password2 = hash("ripemd128", $_POST["signup_password2"]);
+  $weight = mysqli_real_escape_string($conn, $_POST["weight"]);
+  $gender = mysqli_real_escape_string($conn, $_POST["gender"]); 
   
   $signup_errors = array(); 
   
@@ -105,6 +109,8 @@ if(isset($_POST['signup'])) {
     $_SESSION["signup_first_name"] = $first_name; 
     $_SESSION["signup_last_name"] = $last_name; 
     $_SESSION["signup_password"] = $password1; 
+    $_SESSION["gender"] = $gender; 
+    $_SESSION["weight"] = $weight; 
     
     header('location: fitness_goal.php');
   }
@@ -145,9 +151,11 @@ if(isset($_POST['signup_weight_loss']) or
   $first_name = $_SESSION["signup_first_name"];
   $last_name = $_SESSION["signup_last_name"];
   $password = $_SESSION["signup_password"];
+  $weight = $_SESSION["weight"];
+  $gender = $_SESSION["gender"]; 
   
-  $query = "INSERT INTO users (email, first_name, last_name, password, fitness_goal) 
-    VALUES('$email', '$first_name', '$last_name', '$password', '$fitness_goal')";
+  $query = "INSERT INTO users (email, first_name, last_name, password, fitness_goal, gender, weight) 
+    VALUES('$email', '$first_name', '$last_name', '$password', '$fitness_goal', '$gender', $weight)";
   mysqli_query($conn, $query);
   
   // Redirect to login page
@@ -245,15 +253,30 @@ if(isset($_POST['login'])) {
       if (mysqli_num_rows($isEmailInCalories) == 0) {
         $calories_recommended = 0;
         $fitness_goal = $_SESSION['fitness_goal'];
+        $gender = $_SESSION['gender'];
+        $weight = $_SESSION['weight'];
 
-        if ($fitness_goal == "weight loss") {
-          $calories_recommended = 2000;
-        }
-        elseif ($fitness_goal == "muscle building") {
-          $calories_recommended = 4750;
+        if ($gender = "female") {
+          if ($fitness_goal == "weight loss") {
+            $calories_recommended = 1500;
+          }
+          elseif ($fitness_goal == "muscle building") {
+            $calories_recommended = $weight * 19;
+          }
+          else {
+            $calories_recommended = 2000;
+          }
         }
         else {
-          $calories_recommended = 2000;
+          if ($fitness_goal == "weight loss") {
+            $calories_recommended = 2000;
+          }
+          elseif ($fitness_goal == "muscle building") {
+            $calories_recommended = $weight * 19;
+          }
+          else {
+            $calories_recommended = 2500;
+          }
         }
 
         $query = "INSERT INTO calories VALUES('$email', 0, 0, $calories_recommended)";

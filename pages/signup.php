@@ -18,6 +18,20 @@ require_once("../database/connection.php");
 <!--  SIGNUP INPUTS -->
 <div class="main-login-form">
   <form method="POST"> <!-- action="fitness_goal.php" --> 
+
+    <!--  GENDER -->
+    <div class="login-group" required>  
+      <p>Please select your gender:</p>
+      <input type="radio" id="male" name="gender" value="male" required>
+      <label for="male">Male</label><br>
+      <input type="radio" id="female" name="gender" value="female">
+      <label for="female">Female</label><br>
+    </div>
+
+    <!--  WEIGHT -->
+    <div class="login-group">  
+      <input type="number" min="1" id="lastName" name="weight" placeholder="Weight in pounds" required>
+    </div>
     
     <!--  EMAIL -->
     <div class="login-group">  
@@ -28,7 +42,7 @@ require_once("../database/connection.php");
     <div class="login-group"> 
       <input type="text" id="firstName" name="signup_first_name" placeholder="First name" required>
     </div>
-    
+
     <!--  LAST NAME -->
     <div class="login-group">  
       <input type="text" id="lastName" name="signup_last_name" placeholder="Last name" required>
