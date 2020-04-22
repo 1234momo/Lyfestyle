@@ -29,7 +29,7 @@
 
         $stmt -> close();
         
-        // Insert items to DB
+        // Insert items from list to DB
         while (array_key_exists("item{$itemNum}", $_POST)) {
         $itemName = sanitizeMySQL($connection, $_POST["item{$itemNum}"]);
             $itemWeight = sanitizeMySQL($connection, $_POST["item{$itemNum}weight"]);
@@ -139,21 +139,43 @@
         <h1>Edit your food log</h1>
 
         <br><br>
-        
+
+        <h2 class="text-center">Foods from list<h2><hr>
+
         <form method="POST">
             <div class="container-fluid">
                 <div class="row text-center">
                     <div class="col">
-                        <h2>Breakfast</h2>
+                        <h2 class="font-weight-light">Breakfast</h2>
                         <div id="Breakfast-forms"></div>
                     </div>
                     <div class="col">
-                        <h2>Lunch</h2>
+                        <h2 class="font-weight-light">Lunch</h2>
                         <div id="Lunch-forms"></div>
                     </div>
                     <div class="col">
-                        <h2>Dinner</h2>
+                        <h2 class="font-weight-light">Dinner</h2>
                         <div id="Dinner-forms"></div>
+                    </div>
+                </div>
+            </div>
+
+            <br><br>
+
+            <h2 class="text-center">Foods you added<h2><hr>
+            <div class="container-fluid">
+                <div class="row text-center">
+                    <div class="col">
+                        <h2 class="font-weight-light">Breakfast</h2>
+                        <div id="Breakfast-forms-custom"></div>
+                    </div>
+                    <div class="col">
+                        <h2 class="font-weight-light">Lunch</h2>
+                        <div id="Lunch-forms-custom"></div>
+                    </div>
+                    <div class="col">
+                        <h2 class="font-weight-light">Dinner</h2>
+                        <div id="Dinner-forms-custom"></div>
                     </div>
                 </div>
             </div>
