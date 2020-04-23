@@ -9,8 +9,8 @@
 
         // Insert selected items from list of exercises to DB
         while (array_key_exists("item{$itemNum}", $_POST)) {
-            $exerciseName = trim(sanitizeMySQL($connection, trim($_POST["item{$itemNum}"])));
-            $timeExercised = trim(sanitizeMySQL($connection, $_POST["item{$itemNum}timeInput"]));
+            $exerciseName = sanitizeMySQL($connection, trim($_POST["item{$itemNum}"]));
+            $timeExercised = sanitizeMySQL($connection, $_POST["item{$itemNum}timeInput"]);
             $calories_per_min_burned = search_calories_in_json($exerciseName); 
 
             // Select the row of the user from DB
@@ -88,8 +88,8 @@
 
         // Insert custom items from user to DB
         while (array_key_exists("item{$itemNum}customName", $_POST)) {
-            $exerciseName = trim(sanitizeMySQL($connection, trim($_POST["item{$itemNum}customName"])));
-            $calories = trim(sanitizeMySQL($connection, $_POST["item{$itemNum}calories"]));
+            $exerciseName = sanitizeMySQL($connection, trim($_POST["item{$itemNum}customName"]));
+            $calories = sanitizeMySQL($connection, $_POST["item{$itemNum}calories"]);
 
             // Select the row of the user from DB
             $stmt = $connection->prepare("SELECT workout_custom FROM exercise WHERE email='{$email}'");

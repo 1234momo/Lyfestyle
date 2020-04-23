@@ -15,6 +15,7 @@
     if (isset($_POST['submit']) && isset($_SESSION['email'])) {
         $itemNum = 0;
 
+        // --------------------------------------------------------------------------------------------------------------------------------------
         // Clear the Breakfast column
         $stmt = $connection->prepare("UPDATE food SET breakfast='' WHERE email='{$email}'");
         $stmt -> execute();
@@ -45,9 +46,10 @@
 
         $stmt -> close();
         
+        // --------------------------------------------------------------------------------------------------------------------------------------
         // Insert items from list to DB
         while (array_key_exists("item{$itemNum}", $_POST)) {
-            $itemName = sanitizeMySQL($connection, $_POST["item{$itemNum}"]);
+            $itemName = sanitizeMySQL($connection, trim($_POST["item{$itemNum}"]));
             $itemWeight = sanitizeMySQL($connection, $_POST["item{$itemNum}weight"]);
             $itemDayEaten = sanitizeMySQL($connection, $_POST["item{$itemNum}selector"]);
             $calories_per_oz = search_calories_in_json($itemName);
@@ -120,11 +122,12 @@
             $itemNum += 1;
         }
 
+        // --------------------------------------------------------------------------------------------------------------------------------------
         $itemNum = 0;
         
         // Insert items from list to DB
         while (array_key_exists("item{$itemNum}custom", $_POST)) {
-            $itemName = trim(sanitizeMySQL($connection, $_POST["item{$itemNum}custom"]));
+            $itemName = sanitizeMySQL($connection, trim($_POST["item{$itemNum}custom"]));
             $calories = sanitizeMySQL($connection, $_POST["item{$itemNum}calories"]);
             $itemDayEaten = sanitizeMySQL($connection, $_POST["item{$itemNum}customSelector"]);    
             
@@ -196,16 +199,18 @@
             $itemNum += 1;
         }
 
-        // header('location: ../pages/dashboard.php');
+        header('location: ../pages/dashboard.php');
     }
     
+    // --------------------------------------------------------------------------------------------------------------------------------------
     $stmt = $connection->prepare("SELECT * FROM food WHERE email='{$email}'");
     $stmt -> execute();
 
-    // Retrieve the data
+    // Retrieve the data in DB to pass to js file
     $food_result = $stmt -> get_result();
     $food_result = $food_result->fetch_array(MYSQLI_NUM);
     
+    // --------------------------------------------------------------------------------------------------------------------------------------
     // Close all connections
     $stmt -> close();
     $connection -> close();

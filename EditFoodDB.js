@@ -365,15 +365,15 @@ function updateName(newName, nameElement_id) {
 }
 
 // Renames the consecutive ids and names of each element after the elements that are being deleted
-function renameAttributes(nameInput_id, weight_or_calories_id, dayEatenSelector_id, removeBtn_id, br1_id, br2_id, isFromList) {
+function renameAttributes(nameInput_id, secondInput_id, dayEatenSelector_id, removeBtn_id, br1_id, br2_id, isFromList) {
     let nameInput = document.getElementById(nameInput_id);
-    let weight_or_calories_input = document.getElementById(weight_or_calories_id);
+    let secondInput = document.getElementById(secondInput_id);
     let dayEatenSelector = document.getElementById(dayEatenSelector_id);
     let removeBtn = document.getElementById(removeBtn_id);
     let br1 = document.getElementById(br1_id);
     let br2 = document.getElementById(br2_id);
 
-    // Retrieves the element's index
+    // Retrieves the elements' index
     let itemNum;
     if (isFromList) {
         itemNum = parseInt(br1_id.replace('br1', ''));
@@ -383,17 +383,15 @@ function renameAttributes(nameInput_id, weight_or_calories_id, dayEatenSelector_
         itemNum = parseInt(itemNum.replace('custom', ''));
     }
 
-    removeItem(nameInput, weight_or_calories_input, dayEatenSelector, removeBtn, br1, br2, isFromList, false);
+    removeItem(nameInput, secondInput, dayEatenSelector, removeBtn, br1, br2, isFromList, false);
 
     let numOfItems = isFromList ? numOfChosenItems : numOfCustomItems;
-    console.log(itemNum + " numofItems = " + numOfItems);
 
     // Loop through the elements after the current element's index
     for (let i = itemNum + 1; i <= numOfItems; ++i) {
-        console.log("i = " + i);
         // Find the elements of the ith index
         nameInput = isFromList ? document.getElementById(`item${i}`) : document.getElementById(`item${i}custom`);
-        weight_or_calories_Input = isFromList ? document.getElementById(`item${i}weight`) : document.getElementById(`item${i}calories`);
+        secondInput = isFromList ? document.getElementById(`item${i}weight`) : document.getElementById(`item${i}calories`);
         dayEatenSelector = isFromList ? document.getElementById(`item${i}selector`) : document.getElementById(`item${i}customSelector`);
         removeBtn = isFromList ? document.getElementById(`remove${i}Entry`) : document.getElementById(`remove${i}customEntry`);
         br1 = isFromList ? document.getElementById(`br1${i}`) : document.getElementById(`br1${i}custom`);
@@ -401,11 +399,10 @@ function renameAttributes(nameInput_id, weight_or_calories_id, dayEatenSelector_
 
         // Rename ids and names
         if (isFromList) {
-            console.log("i = " + i);
             nameInput.setAttribute('id', `item${i - 1}`);
             nameInput.setAttribute('name', `item${i - 1}`);
-            weight_or_calories_Input.setAttribute('id', `item${i - 1}weight`);
-            weight_or_calories_Input.setAttribute('name', `item${i - 1}weight`);
+            secondInput.setAttribute('id', `item${i - 1}weight`);
+            secondInput.setAttribute('name', `item${i - 1}weight`);
             dayEatenSelector.setAttribute('id', `item${i - 1}selector`);
             dayEatenSelector.setAttribute('name', `item${i - 1}selector`);
             removeBtn.setAttribute('id', `remove${i - 1}Entry`);
@@ -415,8 +412,8 @@ function renameAttributes(nameInput_id, weight_or_calories_id, dayEatenSelector_
         else {
             nameInput.setAttribute('id', `item${i - 1}custom`);
             nameInput.setAttribute('name', `item${i - 1}custom`);
-            weight_or_calories_Input.setAttribute('id', `item${i - 1}calories`);
-            weight_or_calories_Input.setAttribute('name', `item${i - 1}calories`);
+            secondInput.setAttribute('id', `item${i - 1}calories`);
+            secondInput.setAttribute('name', `item${i - 1}calories`);
             dayEatenSelector.setAttribute('id', `item${i - 1}customSelector`);
             dayEatenSelector.setAttribute('name', `item${i - 1}customSelector`);
             removeBtn.setAttribute('id', `remove${i - 1}customEntry`);
@@ -440,6 +437,7 @@ function renameAttributes(nameInput_id, weight_or_calories_id, dayEatenSelector_
                                                       `'br1${i - 1}',` +
                                                       `'br2${i - 1}',` +
                                                       `true)`);
+            secondInput.setAttribute('oninput', `updateSecondInput(this.value, '${secondInput.id}')`);
         }
         else {
             removeBtn.setAttribute('onClick', `renameAttributes('item${i - 1}custom',` + 
@@ -456,6 +454,8 @@ function renameAttributes(nameInput_id, weight_or_calories_id, dayEatenSelector_
                                                       `'br1${i - 1}custom',` +
                                                       `'br2${i - 1}custom',` +
                                                       `false)`);
+            secondInput.setAttribute('oninput', `updateSecondInput(this.value, '${secondInput.id}')`);
+            nameInput.setAttribute('oninput', `updateName(this.value, '${nameInput.id}')`);
         }
     }
 }
