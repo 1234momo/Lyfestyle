@@ -10,7 +10,7 @@
         // Insert items that were from the list of foods to DB
         while (array_key_exists("item{$itemNum}", $_POST)) {
             $itemName = trim(sanitizeMySQL($connection, $_POST["item{$itemNum}"]));
-            $itemWeight = trim(sanitizeMySQL($connection, $_POST["item{$itemNum}weight"]));
+            $itemWeight = sanitizeMySQL($connection, $_POST["item{$itemNum}weight"]);
             $itemDayEaten = sanitizeMySQL($connection, $_POST["item{$itemNum}dayeaten"]);    
             $calories_per_oz = search_calories_in_json($itemName);
             
@@ -86,7 +86,7 @@
         // Insert custom items that were from the user to DB
         while (array_key_exists("item{$itemNum}customName", $_POST)) {
             $name = trim(sanitizeMySQL($connection, $_POST["item{$itemNum}customName"]));
-            $calories = trim(sanitizeMySQL($connection, $_POST["item{$itemNum}calories"]));
+            $calories = sanitizeMySQL($connection, $_POST["item{$itemNum}calories"]);
             $dayEaten = sanitizeMySQL($connection, $_POST["item{$itemNum}customSelector"]);    
             
             // Select the email column and column where the item should belong in

@@ -54,8 +54,8 @@ $water_table = "CREATE TABLE IF NOT EXISTS `water` (
 
 $calories_table = "CREATE TABLE IF NOT EXISTS `calories` ( 
   `email` VARCHAR(128) PRIMARY KEY UNIQUE NOT NULL , 
-  `food_calories` DECIMAL NOT NULL,
-  `exercise_calories` DECIMAL NOT NULL,
+  `food_calories` DOUBLE NOT NULL,
+  `exercise_calories` DOUBLE NOT NULL,
   `goal` INT NOT NULL
 )";
 
