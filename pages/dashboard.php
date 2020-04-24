@@ -10,6 +10,12 @@ if (!isset($_SESSION['email'])) {
   exit();      
 }
 
+// Logout button
+if (isset($_POST['logout'])) {
+  destroy_session_and_data();
+  header("location: ../pages/login.php");     
+}
+
 $email = $_SESSION['email'];
 
 // Update calorie goal
@@ -34,16 +40,37 @@ if (array_key_exists("new_calorie_goal", $_POST)) {
 }
 
 // Retrieve the water data
-$stmt = $connection->prepare("SELECT * FROM water WHERE email='{$email}'");
+$stmt = $connection->prepare("SELECT consumption FROM water WHERE email='{$email}'");
 $stmt -> execute();
 $water_result = $stmt -> get_result();
-$water_result = $water_result->fetch_array(MYSQLI_NUM)[1];
+$water_result = $water_result->fetch_array(MYSQLI_NUM)[0];
 
 // Retrieve the user's target calorie goal
 $stmt = $connection->prepare("SELECT goal FROM calories WHERE email='{$email}'");
 $stmt -> execute();
 $calories_result = $stmt -> get_result();
 $calorie_goal = $calories_result->fetch_array(MYSQLI_NUM)[0];
+
+// Retrieve the user's food calorie 
+$stmt = $connection->prepare("SELECT food_calories FROM calories WHERE email='{$email}'");
+$stmt -> execute();
+$food_results = $stmt -> get_result();
+$food_calories = $food_results->fetch_array(MYSQLI_NUM)[0];
+$food_calories = round($food_calories, 1);
+
+// Retrieve the user's exercise calories
+$stmt = $connection->prepare("SELECT exercise_calories FROM calories WHERE email='{$email}'");
+$stmt -> execute();
+$exercise_result = $stmt -> get_result();
+$exercise_calories = $exercise_result->fetch_array(MYSQLI_NUM)[0];
+$exercise_calories = round($exercise_calories, 1);
+
+$remaining_calories = ($calorie_goal - $food_calories) + $exercise_calories;
+$remaining_calories = round($remaining_calories, 1);
+
+if ($remaining_calories < 0) {
+  $remaining_calories = 0;
+}
 
 // Close connection
 $connection -> close();
@@ -89,9 +116,56 @@ function destroy_session_and_data() {
       </form>
     </div>
 
+    <br clear="all">
+    
     <!-- Food and exercise calories with progress toward goal -->
-    <div class="container-fluid">
-      <div></div>
+    <div class="container-fluid mt-3">
+      <div class="row mb-3">
+        <div class="col-xl-3 col-sm-6 py-2">
+            <div class="card bg-success text-white h-100">
+                <div class="card-body bg-success">
+                    <div class="rotate">
+                        <i class="fa fa-user fa-4x"></i>
+                    </div>
+                    <h6 class="text-uppercase">food calories</h6>
+                    <h1 class="display-4"><?php echo $food_calories ?></h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 py-2">
+            <div class="card text-white bg-warning h-100">
+                <div class="card-body bg-warning">
+                    <div class="rotate">
+                        <i class="fa fa-list fa-4x"></i>
+                    </div>
+                    <h6 class="text-uppercase">exercise calories</h6>
+                    <h1 class="display-4"><?php echo $exercise_calories ?></h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 py-2">
+            <div class="card text-white bg-danger h-100">
+                <div class="card-body bg-danger">
+                    <div class="rotate">
+                        <i class="fa fa-twitter fa-4x"></i>
+                    </div>
+                    <h6 class="text-uppercase">remaining calorie goal</h6>
+                    <h1 class="display-4"><?php echo $remaining_calories ?></h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 py-2">
+            <div class="card text-white bg-info h-100">
+                <div class="card-body">
+                    <div class="rotate">
+                        <i class="fa fa-share fa-4x"></i>
+                    </div>
+                    <h6 class="text-uppercase">water (oz)</h6>
+                    <h1 class="display-4"><?php echo $water_result ?></h1>
+                </div>
+            </div>
+        </div>
+      </div>
     </div>
 
     <!-- Adding to logs and editing logs options -->
