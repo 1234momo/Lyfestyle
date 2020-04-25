@@ -36,19 +36,15 @@
                 }
             }
 
-            $query = "";
+            $elements = implode(",", $elements);
 
-            // If a duplicate exists, update the entire data
-            if ($duplicate == true) {
-                $infoStr = implode(",", $elements);
-                $query = "UPDATE food set {$itemDayEaten}='{$infoStr}' where email='{$email}'";
+            // If a duplicate doesn't exist, append elements with the item name and weight
+            if ($duplicate != true) {
+                $elements .= $itemName . "," . $itemWeight . ",";
             }
 
-            // If a duplicate doesn't exist, append food item entered into data
-            else {
-                $infoStr = $itemName . "," . $itemWeight . ",";
-                $query = "UPDATE food set {$itemDayEaten}=concat({$itemDayEaten},'{$infoStr}') where email='{$email}'";
-            }
+            $elements = sanitizeMySQL($connection, $elements);
+            $query = "UPDATE food SET $itemDayEaten=\"{$elements}\" WHERE email='{$email}'";
             
             // Update database
             $stmt = $connection->prepare($query);
@@ -112,19 +108,15 @@
                 }
             }
 
-            $query = "";
+            $elements = implode(",", $elements);
 
-            // If a duplicate exists, update the entire data
-            if ($duplicate == true) {
-                $infoStr = implode(",", $elements);
-                $query = "UPDATE food set {$dayEaten}_custom='{$infoStr}' where email='{$email}'";
+            // If a duplicate doesn't exist, append elements with the item name and weight
+            if (!$duplicate) {
+                $elements .= "$name,$calories,";
             }
 
-            // If a duplicate doesn't exist, append food item entered into data
-            else {
-                $infoStr = $name . "," . $calories . ",";
-                $query = "UPDATE food set {$dayEaten}_custom=concat({$dayEaten}_custom,'{$infoStr}') where email='{$email}'";
-            }
+            $elements = sanitizeMySQL($connection, $elements);
+            $query = "UPDATE food SET {$dayEaten}_custom=\"$elements\" WHERE email='{$email}'";
             
             // Update database
             $stmt = $connection->prepare($query);
@@ -206,7 +198,7 @@
 <html>
     <head>
         <title>Lyfestyle | Add Food</title>
-        <link rel="stylesheet" type="text/css", href="../assets/css/main.css">
+        <link rel="stylesheet" type="text/css", href="../assets/css/addFood.css">
         <link rel="icon" type="image/png" href="../assets/images/Lyfestyle_favicon.png">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="../RetrieveFoodDB.js"></script>
@@ -224,10 +216,11 @@
             
             </div>
             <div id="list-container">
-                <button id="addOwnFood-btn" class="btn btn-primary" onClick="addCustomItem()">Add own food</button>
+                <button id="addOwnFood-btn" class="btn btn-primary mr-3" onClick="addCustomItem()">Add own food</button>
 
                 <form id="eatenForm" class="form-inline" method="POST">
                     <button id="addLog-btn" class="btn btn-primary" type="submit" name="submit">Add log</button><br><br>
+                    <div id="results-container"></div>
                 </form>
             </div>
         </div>

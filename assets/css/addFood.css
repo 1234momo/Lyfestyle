@@ -1,0 +1,105 @@
+body {
+    background: url(../images/vanesa-conunaese-JXow53j6AtE-unsplash.jpg); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; 
+    color: white; 
+    font-family: sans-serif; 
+    padding: 2%; 
+  }
+
+ul {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    color: white;
+  }
+  
+  #search-area {
+    align-content: center;
+  }
+  
+  ul li a {
+    border: 1px solid white; /* Add a border to all links */
+    margin-top: -1px; /* Prevent double borders */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove default text underline */
+    font-size: 18px; /* Increase the font-size */
+    display: block; /* Make it into a block element to fill the whole list */
+    text-align: center;
+    background-color: rgba(58, 58, 58, 0.658);
+  }
+  
+  ul li:hover {
+    background-color:#9da1ac;
+  }
+  
+  #search-list {
+    margin-top: 2em;
+    margin-bottom: 2em;
+    max-height: 70%; /* 1.5 x 3 */
+    overflow-y: auto;
+    width: 80%;
+  }
+  
+  #keyword, #search-list {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  #keyword {
+    margin-top: 2em;
+  }
+  
+  #keyword {
+    min-width: 30em;
+    min-height: 2em;
+  }
+  
+  #search-foods, #search-exercises {
+    display: table;
+  }
+  
+  #info-log-area {
+    float: left;
+  }
+  
+  #search-container, #list-container {
+    width: 50%;
+    float: left;
+  }
+  
+  #overall-container {
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  #list-container {
+    text-align: center;
+  }
+  
+  ul li.noResults, ul li.noResults a {
+    pointer-events: none;
+    border: none;
+    background-color: transparent;
+  }
+  
+  #eatenForm, #exerciseForm {
+    display: inline;
+  } 
+  
+  .div .select {
+    color: rgb(238, 229, 229); 
+    width: 13.75em;
+  }
+
+  #results-container {
+    max-height: 75%;
+    overflow: auto;
+  }
+
+  
+  
