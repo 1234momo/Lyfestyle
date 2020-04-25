@@ -1,0 +1,17 @@
+body {
+    background-size: 100%; 
+    font-family: sans-serif; 
+    padding: 2%; 
+  }
+  
+#greeting-message {
+    text-shadow: 2px 2px #f3eded;
+}
+
+#card-header {
+    color: white;
+}
+
+#overeating-msg {
+    font-weight: normal;
+}
