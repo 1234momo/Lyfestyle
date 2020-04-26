@@ -13,7 +13,7 @@ if (!isset($_SESSION['email'])) {
 // Logout button
 if (isset($_POST['logout'])) {
   destroy_session_and_data();
-  header("location: ../pages/login.php");     
+  header("location: ../pages/login_2.php");     
 }
 
 $email = $_SESSION['email'];

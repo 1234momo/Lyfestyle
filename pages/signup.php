@@ -5,9 +5,9 @@ require_once("../database/connection.php");
 <html>
 <head>
   <title>Lyfestyle | Signup</title>
+  <link rel="icon" type="image/png" href="../assets/images/Lyfestyle_favicon.png">
   <link rel="stylesheet" type="text/css", href="../assets/css/main.css">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <link rel="icon" type="image/png" href="../assets/images/Lyfestyle_favicon.png">
 </head>
 
 <body>
