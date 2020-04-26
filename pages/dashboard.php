@@ -1,5 +1,6 @@
 <?php 
 require_once("../database/connection.php"); 
+  
 $connection = new mysqli($hostname, $username, $password, $database);
 if ($connection->connect_error) die($connection->connect_error);
 
@@ -10,15 +11,23 @@ if (!isset($_SESSION['email'])) {
   exit();      
 }
 
-// Logout button
-if (isset($_POST['logout'])) {
-  destroy_session_and_data();
-  header("location: ../pages/login_2.php");     
-}
-
 $email = $_SESSION['email'];
 
-// Update calorie goal
+//----------------------------------------------------------------------
+// CHANGE FITNESS GOAL
+//----------------------------------------------------------------------
+if (isset($_POST['new_fitness_goal'])) {
+  
+  $email = $_SESSION['email'];
+  $new_fitness_goal = sanitizeMySQL($connection, $_POST['new_fitness_goal']);  
+  
+  $query = "UPDATE users SET fitness_goal='{$new_fitness_goal}' WHERE email='{$email}'; "; 
+  mysqli_query($conn, $query);
+}
+
+//----------------------------------------------------------------------
+// CHANGE CALORIE GOAL
+//----------------------------------------------------------------------
 if (array_key_exists("new_calorie_goal", $_POST)) {
   $new_calorie_goal = intval(sanitizeMySQL($connection, $_POST['new_calorie_goal']));
 
@@ -39,7 +48,9 @@ if (array_key_exists("new_calorie_goal", $_POST)) {
   $stmt -> close();
 }
 
-// Add water consumption
+//----------------------------------------------------------------------
+// ADD WATER CONSUMPTION
+//----------------------------------------------------------------------
 if (array_key_exists("waterSubmit", $_POST)) {
   $consumption = sanitizeMySQL($connection, $_POST["addWater"]);
             
@@ -258,10 +269,41 @@ function destroy_session_and_data() {
               <div>
 
                 <!-- TODO: set path to where changing fitness occurs. The current static page for it is only for signing up -->
-                <button type="button" class="btn btn-primary mt-2" onClick="location.href = './'">Change fitness goal</button>
+                <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#changeFitnessModal">Change fitness goal</button>
                 <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#changeCalorieModal">Change calorie goal</button>
 
-                <!-- Modal for changing calories -->
+                
+                <!-- CHANGE FITNESS GOAL MODAL -->
+                <div class="modal fade" id="changeFitnessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Change Fitness Goal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <form id="changeFitnessModal" method="POST">
+                        <div class="modal-body">
+                          
+                          <!-- TODO: Display default fitness goal -->
+                          <select class="form-control" name="new_fitness_goal" id="new_fitness_goal" >
+                            <option value="" selected disabled hidden>fitness goal</option>
+                            <option value="weight loss">weight loss</option>
+                            <option value="muscle building">muscle building</option>
+                            <option value="weight gain">weight gain</option>
+                          </select>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                 
+                <!-- CHANGE CALORIE GOAL MODAL -->
                 <div class="modal fade" id="changeCalorieModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">

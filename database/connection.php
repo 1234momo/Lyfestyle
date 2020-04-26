@@ -303,4 +303,12 @@ if(isset($_POST['login'])) {
 
   $results -> close();
 }
+
+//----------------------------------------------------------------------
+// LOGOUT
+//----------------------------------------------------------------------
+if (isset($_POST['logout'])) {
+  destroy_session_and_data();
+  header("location: ../pages/login_2.php");     
+}
 ?>
