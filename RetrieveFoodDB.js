@@ -85,7 +85,7 @@ function displayData(data) {
             let liItem = document.createElement("li");
             let aElem = document.createElement("a");
 
-            aElem.setAttribute('style', 'color:black');
+            aElem.setAttribute('style', 'color:white');
 
             aElem.appendChild(msg);
             liItem.appendChild(aElem);
@@ -158,7 +158,7 @@ function createForm(itemName, resultsArea) {
     // Name input, but disabled because the name is from json file
     let labelElem = document.createElement("input");
     labelElem.setAttribute('name', `item${numOfItemsChosen}`);
-    labelElem.setAttribute('class', 'form-control mr-3 mb-3 shadow');
+    labelElem.setAttribute('class', 'form-control mr-3 mb-4 shadow');
     labelElem.setAttribute('id', `item${numOfItemsChosen}nameInput`);
     labelElem.setAttribute('type', 'text');
     labelElem.setAttribute('placeholder', 'Food name');
@@ -171,7 +171,7 @@ function createForm(itemName, resultsArea) {
     inputOZElement.setAttribute('type', 'number');
     inputOZElement.setAttribute('name', `item${numOfItemsChosen}weight`);
     inputOZElement.setAttribute('id', `item${numOfItemsChosen}weightInput`);
-    inputOZElement.setAttribute('class', 'form-control mr-3 mb-3 shadow');
+    inputOZElement.setAttribute('class', 'form-control mr-3 mb-4 shadow');
     inputOZElement.setAttribute('placeholder', 'Weight eaten in oz');
     inputOZElement.setAttribute('step', '0.01');
     inputOZElement.setAttribute('min', '0');
@@ -184,7 +184,7 @@ function createForm(itemName, resultsArea) {
     let breakfastElem = document.createElement("option");
     let lunchElem = document.createElement("option");
     let dinnerElem = document.createElement("option");
-    dayEatenElem.setAttribute('class', 'form-control mr-3 mb-3 shadow');
+    dayEatenElem.setAttribute('class', 'form-control mr-3 mb-4 shadow');
     breakfastElem.innerHTML = "Breakfast";
     lunchElem.innerHTML = "Lunch";
     dinnerElem.innerHTML = "Dinner";
@@ -195,7 +195,7 @@ function createForm(itemName, resultsArea) {
     // Remove (X) button
     let removeEntry = document.createElement("button");
     removeEntry.setAttribute('id', `remove${numOfItemsChosen}Entry`);
-    removeEntry.setAttribute('class', 'btn btn-danger mb-3 shadow');
+    removeEntry.setAttribute('class', 'btn btn-danger mb-4 shadow');
     removeEntry.setAttribute('type', 'button');
     removeEntry.innerHTML = "X";
 
@@ -233,7 +233,7 @@ function addCustomItem() {
     let foodItemElem = document.createElement("input");
     foodItemElem.setAttribute('type', 'text');
     foodItemElem.setAttribute('name', `item${numOfCustomItems}customName`);
-    foodItemElem.setAttribute('class', 'form-control mr-3 mb-3 shadow');
+    foodItemElem.setAttribute('class', 'form-control mr-3 mb-4 shadow');
     foodItemElem.setAttribute('id', `item${numOfCustomItems}customName`);
     foodItemElem.setAttribute('placeholder', 'Food name');
     foodItemElem.required = true;
@@ -243,7 +243,7 @@ function addCustomItem() {
     caloriesElement.setAttribute('type', 'number');
     caloriesElement.setAttribute('name', `item${numOfCustomItems}calories`);
     caloriesElement.setAttribute('id', `item${numOfCustomItems}calories`);
-    caloriesElement.setAttribute('class','form-control mr-3 mb-3 shadow');
+    caloriesElement.setAttribute('class','form-control mr-3 mb-4 shadow');
     caloriesElement.setAttribute('placeholder', 'Calories eaten')
     caloriesElement.setAttribute('step', '0.01');
     caloriesElement.setAttribute('min', '0.01');
@@ -256,7 +256,7 @@ function addCustomItem() {
     let breakfastElem = document.createElement("option");
     let lunchElem = document.createElement("option");
     let dinnerElem = document.createElement("option");
-    dayEatenElem.setAttribute('class', 'form-control mr-3 mb-3 shadow');
+    dayEatenElem.setAttribute('class', 'form-control mr-3 mb-4 shadow');
     breakfastElem.innerHTML = "Breakfast";
     lunchElem.innerHTML = "Lunch";
     dinnerElem.innerHTML = "Dinner";
@@ -267,7 +267,7 @@ function addCustomItem() {
     // Remove (X) button
     let removeEntry = document.createElement("button");
     removeEntry.setAttribute('id', `remove${numOfCustomItems}customEntry`);
-    removeEntry.setAttribute('class', 'btn btn-outline-danger mb-3 shadow');
+    removeEntry.setAttribute('class', 'btn btn-outline-danger mb-4 shadow');
     removeEntry.setAttribute('type', 'button');
     removeEntry.innerHTML = "X";
 

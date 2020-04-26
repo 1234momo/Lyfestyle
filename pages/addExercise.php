@@ -35,22 +35,15 @@
                 }
             }
 
-            $query = "";
+            $elements = implode(",", $elements);
 
-            // If a duplicate exists, update the entire data
-            if ($duplicate == true) {
-                // Combine the updated together with a "," separating each element
-                $infoStr = implode(",", $elements);
-
-                // Update the data in the DB with the new data
-                $query = "UPDATE exercise set workout='{$infoStr}' where email='{$email}'";
+            // If a duplicate doesn't exist, append elements with the item name and weight
+            if (!$duplicate) {
+                $elements .= "$exerciseName,$timeExercised,";
             }
 
-            // If a duplicate doesn't exist, append exercise name and time into DB data
-            else {
-                $infoStr = $exerciseName . "," . $timeExercised . ",";
-                $query = "UPDATE exercise set workout=concat(workout,'{$infoStr}') where email='{$email}'";
-            }
+            $elements = sanitizeMySQL($connection, $elements);
+            $query = "UPDATE exercise SET workout=\"{$elements}\" WHERE email='{$email}'";
             
             // Update exercise DB
             $stmt = $connection->prepare($query);
@@ -104,7 +97,7 @@
             // Look through the user's data to determine if exercise name already exists
             for ($i = 0; $i < sizeof($elements); $i += 2) {
 
-                // If a duplicate exercise name exist, add the time entered to the time of the duplicate exercise name in the DB
+                // If a duplicate exercise name exist, add the calories entered to the calories of the duplicate exercise name in the DB
                 // There should only be only unique names
                 if ($elements[$i] == $exerciseName) {
                     $elements[$i + 1] += $calories;
@@ -113,22 +106,15 @@
                 }
             }
 
-            $query = "";
+            $elements = implode(",", $elements);
 
-            // If a duplicate exists, update the entire data
-            if ($duplicate == true) {
-                // Combine the updated together with a "," separating each element
-                $infoStr = implode(",", $elements);
-
-                // Update the data in the DB with the new data
-                $query = "UPDATE exercise set workout_custom='{$infoStr}' where email='{$email}'";
+            // If a duplicate doesn't exist, append elements with the item name and weight
+            if (!$duplicate) {
+                $elements .= "$exerciseName,$calories,";
             }
 
-            // If a duplicate doesn't exist, append exercise name and time into DB data
-            else {
-                $infoStr = $exerciseName . "," . $calories . ",";
-                $query = "UPDATE exercise set workout_custom=concat(workout_custom,'{$infoStr}') where email='{$email}'";
-            }
+            $elements = sanitizeMySQL($connection, $elements);
+            $query = "UPDATE exercise SET workout_custom=\"{$elements}\" WHERE email='{$email}'";
             
             // Update exercise DB
             $stmt = $connection->prepare($query);
@@ -209,7 +195,7 @@
 <html>
     <head>
         <title>Lyfestyle | Add Exercise</title>
-        <link rel="stylesheet" type="text/css", href="../assets/css/main.css">
+        <link rel="stylesheet" type="text/css", href="../assets/css/addExercise.css">
         <link rel="icon" type="image/png" href="../assets/images/Lyfestyle_favicon.png">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="../RetrieveExerciseDB.js"></script>
@@ -227,10 +213,11 @@
             
             </div>
             <div id="list-container">
-                <button id="addOwnExercise-btn" class="btn btn-primary" onClick="addCustomItem()">Add own exercise</button>
+                <button id="addOwnExercise-btn" class="btn btn-primary mr-3" onClick="addCustomItem()">Add own exercise</button>
 
                 <form id="exerciseForm" class="form-inline" method="POST">
                     <button id="addLog-btn" class="btn btn-primary" type="submit" name="submit">Add log</button><br><br>
+                    <div id="results-container"></div>
                 </form>
             </div>
         </div>

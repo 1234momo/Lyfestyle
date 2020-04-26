@@ -85,7 +85,7 @@ function displayData(data) {
             let liItem = document.createElement("li");
             let aElem = document.createElement("a");
 
-            liItem.setAttribute('class', 'noResults');
+            liItem.setAttribute('style', 'color:white');
 
             aElem.appendChild(msg);
             liItem.appendChild(aElem);
@@ -97,7 +97,7 @@ function displayData(data) {
 
 // Adds a form entry
 function addAFormItem(itemNum, itemName) {
-    let resultsArea = document.getElementById('exerciseForm');
+    let resultsArea = document.getElementById('results-container');
     createForm(itemName, resultsArea, itemNum);
 
     itemsChosen.push(itemName);
@@ -154,7 +154,7 @@ function createForm(itemName, resultsArea) {
     // Name input, but disabled because the name is from json file
     let labelElem = document.createElement("input");
     labelElem.setAttribute('name', `item${numOfSelectedItems}`);
-    labelElem.setAttribute('class', 'form-control mr-4');
+    labelElem.setAttribute('class', 'form-control mr-5 mb-4 shadow');
     labelElem.setAttribute('id', `item${numOfSelectedItems}`);
     labelElem.setAttribute('type', 'text');
     labelElem.setAttribute('placeholder', 'Exercise name');
@@ -167,7 +167,7 @@ function createForm(itemName, resultsArea) {
     inputTimeElement.setAttribute('type', 'number');
     inputTimeElement.setAttribute('name', `item${numOfSelectedItems}timeInput`);
     inputTimeElement.setAttribute('id', `item${numOfSelectedItems}timeInput`);
-    inputTimeElement.setAttribute('class', 'form-control mr-4');
+    inputTimeElement.setAttribute('class', 'form-control mr-5 mb-4 shadow');
     inputTimeElement.setAttribute('placeholder', 'Minutes exercised');
     inputTimeElement.setAttribute('step', '1');
     inputTimeElement.setAttribute('min', '1');
@@ -176,7 +176,7 @@ function createForm(itemName, resultsArea) {
     // Remove (X) button
     let removeEntry = document.createElement("button");
     removeEntry.setAttribute('id', `remove${numOfSelectedItems}Entry`);
-    removeEntry.setAttribute('class', 'btn btn-light');
+    removeEntry.setAttribute('class', 'btn btn-danger mb-4 shadow');
     removeEntry.setAttribute('type', 'button');
     removeEntry.innerHTML = "X";
 
@@ -206,14 +206,14 @@ function createForm(itemName, resultsArea) {
 
 // Creates the components of a form entry based off of user input
 function addCustomItem() {
-    let resultsArea = document.getElementById('exerciseForm');
+    let resultsArea = document.getElementById('results-container');
 
     // Name input, which can be edited
     let exerciseNameInput = document.createElement("input");
     exerciseNameInput.setAttribute('type', 'text');
     exerciseNameInput.setAttribute('name', `item${numOfCustomItems}customName`);
     exerciseNameInput.setAttribute('id', `item${numOfCustomItems}customName`);
-    exerciseNameInput.setAttribute('class', 'form-control mr-4');
+    exerciseNameInput.setAttribute('class', 'form-control mr-5 mb-4 shadow');
     exerciseNameInput.setAttribute('placeholder', 'Exercise name');
     exerciseNameInput.required = true;
 
@@ -222,7 +222,7 @@ function addCustomItem() {
     caloriesInput.setAttribute('type', 'number');
     caloriesInput.setAttribute('name', `item${numOfCustomItems}calories`);
     caloriesInput.setAttribute('id', `item${numOfCustomItems}calories`);
-    caloriesInput.setAttribute('class', 'form-control mr-4');
+    caloriesInput.setAttribute('class', 'form-control mr-5 mb-4 shadow');
     caloriesInput.setAttribute('placeholder', 'Calories burned');
     caloriesInput.setAttribute('step', '0.01');
     caloriesInput.setAttribute('min', '0.01');
@@ -231,7 +231,7 @@ function addCustomItem() {
     // Remove (X) button
     let removeEntry = document.createElement("button");
     removeEntry.setAttribute('id', `remove${numOfCustomItems}customEntry`);
-    removeEntry.setAttribute('class', 'btn btn-light');
+    removeEntry.setAttribute('class', 'btn btn-outline-danger mb-4 shadow');
     removeEntry.setAttribute('type', 'button');
     removeEntry.innerHTML = "X";
     

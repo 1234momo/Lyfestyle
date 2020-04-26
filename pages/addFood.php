@@ -39,8 +39,8 @@
             $elements = implode(",", $elements);
 
             // If a duplicate doesn't exist, append elements with the item name and weight
-            if ($duplicate != true) {
-                $elements .= $itemName . "," . $itemWeight . ",";
+            if (!$duplicate) {
+                $elements .= "$itemName,$itemWeight,";
             }
 
             $elements = sanitizeMySQL($connection, $elements);
@@ -198,7 +198,7 @@
 <html>
     <head>
         <title>Lyfestyle | Add Food</title>
-        <link rel="stylesheet" type="text/css", href="../assets/css/addFood.css">
+        <link rel="stylesheet" type="text/css", href="../assets/css/food_pages.css">
         <link rel="icon" type="image/png" href="../assets/images/Lyfestyle_favicon.png">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="../RetrieveFoodDB.js"></script>

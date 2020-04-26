@@ -129,7 +129,7 @@ function createForm(itemName, itemWeight, day_eaten, displayArea, numItem) {
     let labelElem = document.createElement("input");
     labelElem.setAttribute('name', `item${itemNum}`);
     labelElem.setAttribute('id', `item${itemNum}`);
-    labelElem.setAttribute('class', 'form-control');
+    labelElem.setAttribute('class', 'form-control shadow');
     labelElem.setAttribute('type', 'text');
     labelElem.setAttribute('placeholder', 'Food name');
     labelElem.setAttribute('value', itemName);
@@ -147,7 +147,7 @@ function createForm(itemName, itemWeight, day_eaten, displayArea, numItem) {
     inputOZElement.setAttribute('type', 'number');
     inputOZElement.setAttribute('name', `item${itemNum}weight`);
     inputOZElement.setAttribute('id', `item${itemNum}weight`);
-    inputOZElement.setAttribute('class', 'form-control');
+    inputOZElement.setAttribute('class', 'form-control shadow');
     inputOZElement.setAttribute('placeholder', 'Weight');
     inputOZElement.setAttribute('step', '0.01');
     inputOZElement.setAttribute('min', '0.01');
@@ -167,7 +167,7 @@ function createForm(itemName, itemWeight, day_eaten, displayArea, numItem) {
     let breakfastElem = document.createElement("option");
     let lunchElem = document.createElement("option");
     let dinnerElem = document.createElement("option");
-    dayEatenElem.setAttribute('class', 'form-control');
+    dayEatenElem.setAttribute('class', 'form-control shadow');
     breakfastElem.innerHTML = "Breakfast";
     lunchElem.innerHTML = "Lunch";
     dinnerElem.innerHTML = "Dinner";
@@ -185,7 +185,7 @@ function createForm(itemName, itemWeight, day_eaten, displayArea, numItem) {
     // Remove (X) button
     let removeEntry = document.createElement("button");
     removeEntry.setAttribute('id', `remove${itemNum}Entry`);
-    removeEntry.setAttribute('class', 'btn btn-light');
+    removeEntry.setAttribute('class', 'btn btn-outline-danger shadow');
     removeEntry.setAttribute('type', 'button');
     removeEntry.innerHTML = "X";
 
@@ -255,7 +255,7 @@ function createCustomForm(itemName, itemWeight, day_eaten, displayArea, numItem)
     let labelElem = document.createElement("input");
     labelElem.setAttribute('name', `item${itemNum}custom`);
     labelElem.setAttribute('id', `item${itemNum}custom`);
-    labelElem.setAttribute('class', 'form-control');
+    labelElem.setAttribute('class', 'form-control shadow');
     labelElem.setAttribute('type', 'text');
     labelElem.setAttribute('placeholder', 'Food name');
     labelElem.setAttribute('value', itemName);
@@ -272,7 +272,7 @@ function createCustomForm(itemName, itemWeight, day_eaten, displayArea, numItem)
     caloriesInputElement.setAttribute('type', 'number');
     caloriesInputElement.setAttribute('name', `item${itemNum}calories`);
     caloriesInputElement.setAttribute('id', `item${itemNum}calories`);
-    caloriesInputElement.setAttribute('class', 'form-control');
+    caloriesInputElement.setAttribute('class', 'form-control shadow');
     caloriesInputElement.setAttribute('placeholder', 'Calories eaten');
     caloriesInputElement.setAttribute('step', '0.01');
     caloriesInputElement.setAttribute('min', '0.01');
@@ -292,7 +292,7 @@ function createCustomForm(itemName, itemWeight, day_eaten, displayArea, numItem)
     let breakfastElem = document.createElement("option");
     let lunchElem = document.createElement("option");
     let dinnerElem = document.createElement("option");
-    dayEatenElem.setAttribute('class', 'form-control');
+    dayEatenElem.setAttribute('class', 'form-control shadow');
     breakfastElem.innerHTML = "Breakfast";
     lunchElem.innerHTML = "Lunch";
     dinnerElem.innerHTML = "Dinner";
@@ -310,7 +310,7 @@ function createCustomForm(itemName, itemWeight, day_eaten, displayArea, numItem)
     // Remove (X) button
     let removeEntry = document.createElement("button");
     removeEntry.setAttribute('id', `remove${itemNum}customEntry`);
-    removeEntry.setAttribute('class', 'btn btn-light');
+    removeEntry.setAttribute('class', 'btn btn-outline-danger shadow');
     removeEntry.setAttribute('type', 'button');
     removeEntry.innerHTML = "X";
 

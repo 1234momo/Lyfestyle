@@ -267,12 +267,9 @@ function destroy_session_and_data() {
             <div class="card-body text-center">
               <h3 class="card-title">Change your goals</h3>
               <div>
-
-                <!-- TODO: set path to where changing fitness occurs. The current static page for it is only for signing up -->
                 <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#changeFitnessModal">Change fitness goal</button>
                 <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#changeCalorieModal">Change calorie goal</button>
 
-                
                 <!-- CHANGE FITNESS GOAL MODAL -->
                 <div class="modal fade" id="changeFitnessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">

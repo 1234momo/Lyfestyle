@@ -1,5 +1,5 @@
 body {
-    background: url(../images/vanesa-conunaese-JXow53j6AtE-unsplash.jpg); 
+    background: url(../images/background_01.jpg); 
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover; 
@@ -38,7 +38,7 @@ ul {
   #search-list {
     margin-top: 2em;
     margin-bottom: 2em;
-    max-height: 70%; /* 1.5 x 3 */
+    max-height: 75%; /* 1.5 x 3 */
     overflow-y: auto;
     width: 80%;
   }
@@ -81,12 +81,6 @@ ul {
     text-align: center;
   }
   
-  ul li.noResults, ul li.noResults a {
-    pointer-events: none;
-    border: none;
-    background-color: transparent;
-  }
-  
   #eatenForm, #exerciseForm {
     display: inline;
   } 
@@ -97,7 +91,7 @@ ul {
   }
 
   #results-container {
-    max-height: 75%;
+    max-height: 80%;
     overflow: auto;
   }
 
