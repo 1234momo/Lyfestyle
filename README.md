@@ -1,6 +1,6 @@
 # Lyfestyle
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Albert-C-Ong/Lyfestyle/master/assets/images/Lyfestyle_banner_02.png" width=500/>
+  <img src="https://raw.githubusercontent.com/Albert-C-Ong/Lyfestyle/master/assets/images/Lyfestyle_banner.png" width=500/>
 </p>
 
 ## Overview
