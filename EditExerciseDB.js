@@ -60,7 +60,7 @@ function createForm(itemName, exerciseTime, displayArea, numItem) {
     let labelElem = document.createElement("input");
     labelElem.setAttribute('name', `item${numItem}`);
     labelElem.setAttribute('id', `item${numItem}`);
-    labelElem.setAttribute('class', 'form-control');
+    labelElem.setAttribute('class', 'form-control shadow');
     labelElem.setAttribute('type', 'text');
     labelElem.setAttribute('placeholder', 'Exercise name');
     labelElem.setAttribute('value', itemName);
@@ -78,7 +78,7 @@ function createForm(itemName, exerciseTime, displayArea, numItem) {
     inputTimeElement.setAttribute('type', 'number');
     inputTimeElement.setAttribute('name', `item${numItem}time`);
     inputTimeElement.setAttribute('id', `item${numItem}time`);
-    inputTimeElement.setAttribute('class', 'form-control');
+    inputTimeElement.setAttribute('class', 'form-control shadow');
     inputTimeElement.setAttribute('placeholder', 'Minutes exercised');
     inputTimeElement.setAttribute('step', '0.01');
     inputTimeElement.setAttribute('min', '0.01');
@@ -94,7 +94,7 @@ function createForm(itemName, exerciseTime, displayArea, numItem) {
     // Remove (X) button
     let removeEntry = document.createElement("button");
     removeEntry.setAttribute('id', `remove${numItem}Entry`);
-    removeEntry.setAttribute('class', 'btn btn-light');
+    removeEntry.setAttribute('class', 'btn btn-outline-danger');
     removeEntry.setAttribute('type', 'button');
     removeEntry.innerHTML = "X";
 
@@ -144,7 +144,7 @@ function createCustomForm(itemName, calories, displayArea, numItem) {
     let labelElem = document.createElement("input");
     labelElem.setAttribute('name', `item${numItem}customName`);
     labelElem.setAttribute('id', `item${numItem}customName`);
-    labelElem.setAttribute('class', 'form-control');
+    labelElem.setAttribute('class', 'form-control shadow');
     labelElem.setAttribute('type', 'text');
     labelElem.setAttribute('placeholder', 'Exercise name');
     labelElem.setAttribute('value', itemName);
@@ -161,7 +161,7 @@ function createCustomForm(itemName, calories, displayArea, numItem) {
     calorieElement.setAttribute('type', 'number');
     calorieElement.setAttribute('name', `item${numItem}calories`);
     calorieElement.setAttribute('id', `item${numItem}calories`);
-    calorieElement.setAttribute('class', 'form-control');
+    calorieElement.setAttribute('class', 'form-control shadow');
     calorieElement.setAttribute('placeholder', 'Calories burned');
     calorieElement.setAttribute('step', '0.01');
     calorieElement.setAttribute('min', '0.01');
@@ -177,7 +177,7 @@ function createCustomForm(itemName, calories, displayArea, numItem) {
     // Remove (X) button
     let removeEntry = document.createElement("button");
     removeEntry.setAttribute('id', `remove${numItem}customEntry`);
-    removeEntry.setAttribute('class', 'btn btn-light');
+    removeEntry.setAttribute('class', 'btn btn-outline-danger shadow');
     removeEntry.setAttribute('type', 'button');
     removeEntry.innerHTML = "X";
 

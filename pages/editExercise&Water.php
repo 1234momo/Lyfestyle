@@ -76,22 +76,15 @@
                 }
             }
 
-            $query = "";
+            $elements = implode(",", $elements);
 
-            // If a duplicate exists, update the entire data
-            if ($duplicate == true) {
-                // Combine the updated together with a "," separating each element
-                $infoStr = implode(",", $elements);
-
-                // Update the data in the DB with the new data
-                $query = "UPDATE exercise set workout='{$infoStr}' where email='{$email}'";
+            // If a duplicate doesn't exist, append elements with the item name and weight
+            if (!$duplicate) {
+                $elements .= "$exerciseName,$timeExercised,";
             }
 
-            // If a duplicate doesn't exist, append exercise name and time into DB data
-            else {
-                $infoStr = $exerciseName . "," . $timeExercised . ",";
-                $query = "UPDATE exercise set workout=concat(workout,'{$infoStr}') where email='{$email}'";
-            }
+            $elements = sanitizeMySQL($connection, $elements);
+            $query = "UPDATE exercise SET workout=\"{$elements}\" WHERE email='{$email}'";
             
             $stmt = $connection->prepare($query);
             $stmt -> execute();
@@ -127,7 +120,7 @@
         // --------------------------------------------------------------------------------------------------------------------------------------
         $itemNum = 0;
 
-        // Insert items from list to DB
+        // Insert items from user to DB
         while (array_key_exists("item{$itemNum}customName", $_POST)) {
             $exerciseName = sanitizeMySQL($connection, trim($_POST["item{$itemNum}customName"]));
             $calories = sanitizeMySQL($connection, $_POST["item{$itemNum}calories"]);
@@ -155,22 +148,15 @@
                 }
             }
 
-            $query = "";
+            $elements = implode(",", $elements);
 
-            // If a duplicate exists, update the entire data
-            if ($duplicate == true) {
-                // Combine the updated together with a "," separating each element
-                $infoStr = implode(",", $elements);
-
-                // Update the data in the DB with the new data
-                $query = "UPDATE exercise set workout_custom='{$infoStr}' where email='{$email}'";
+            // If a duplicate doesn't exist, append elements with the item name and weight
+            if (!$duplicate) {
+                $elements .= "$exerciseName,$calories,";
             }
 
-            // If a duplicate doesn't exist, append exercise name and time into DB data
-            else {
-                $infoStr = $exerciseName . "," . $calories . ",";
-                $query = "UPDATE exercise set workout_custom=concat(workout_custom,'{$infoStr}') where email='{$email}'";
-            }
+            $elements = sanitizeMySQL($connection, $elements);
+            $query = "UPDATE exercise SET workout_custom=\"{$elements}\" WHERE email='{$email}'";
             
             $stmt = $connection->prepare($query);
             $stmt -> execute();
@@ -260,7 +246,7 @@
 <html>
     <head>
         <title>Lyfestyle | edit exercise & water</title>
-        <link rel="stylesheet" type="text/css", href="../assets/css/main.css">
+        <link rel="stylesheet" type="text/css", href="../assets/css/exercise_pages.css">
         <link rel="icon" type="image/png" href="../assets/images/Lyfestyle_favicon.png">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script type="text/javascript"> var exercise_array =<?php echo json_encode($exercise_result); ?>;</script>

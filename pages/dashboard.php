@@ -81,10 +81,20 @@ if (array_key_exists("waterSubmit", $_POST)) {
 }
 
 // Retrieve the water data
-$stmt = $connection->prepare("SELECT consumption FROM water WHERE email='{$email}'");
+$stmt = $connection->prepare("SELECT * FROM water WHERE email='{$email}'");
 $stmt -> execute();
 $water_result = $stmt -> get_result();
-$water_result = $water_result->fetch_array(MYSQLI_NUM)[0];
+$water_result = $water_result->fetch_array(MYSQLI_NUM);
+$water_intake = $water_result[1];
+$recommended_intake = $water_result[2];
+$water_card_msg;
+
+if ($recommended_intake > $water_intake) {
+  $water_card_msg = "<h1 class='display-3 float-left'>$water_intake<span class='d-inline-block'><h6> out of $recommended_intake</h6></span></h1>";
+}
+else {
+  $water_card_msg = "<h1 class='display-5 float-left' id='overdrinking-msg'>Overdrinking by ". ($water_intake - $recommended_intake) ." OZ</h1>";
+}
 
 // Retrieve the user's target calorie goal
 $stmt = $connection->prepare("SELECT * FROM calories WHERE email='{$email}'");
@@ -112,9 +122,13 @@ $name = "$first_name $last_name";
 
 $remaining_calories = ($calorie_goal - $food_calories) + $exercise_calories;
 $remaining_calories = round($remaining_calories, 1);
+$calorie_card_msg;
 
 if ($remaining_calories < 0) {
-  $remaining_calories = "Overeating " . ($remaining_calories * -1) . " calories";
+  $calorie_card_msg = "<h1 class='display-5' id='overeating-msg'>Overeating " . ($remaining_calories * -1) . " calories</h1>";
+}
+else {
+  $calorie_card_msg = "<h1 class='display-3'>$remaining_calories</h1>";
 }
 
 // Close connection
@@ -188,7 +202,7 @@ function destroy_session_and_data() {
             <div class="card text-white bg-danger h-100 shadow">
                 <div class="card-body bg-danger">
                     <h6 class="text-uppercase" id="card-header">remaining calorie goal</h6>
-                    <?php echo ($calorie_goal < $food_calories ? "<h1 class='display-5' id='overeating-msg'>$remaining_calories</h1>" : "<h1 class='display-3'>$remaining_calories</h1>") ?>
+                    <?php echo $calorie_card_msg ?>
                 </div>
             </div>
         </div>
@@ -196,7 +210,9 @@ function destroy_session_and_data() {
             <div class="card text-white bg-info h-100 shadow">
                 <div class="card-body">
                     <h6 class="text-uppercase">water (oz)</h6>
-                    <h1 class="display-3"><?php echo $water_result ?></h1>
+                    <div>
+                      <?php echo $water_card_msg ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -233,7 +249,7 @@ function destroy_session_and_data() {
                         <div class="modal-body">
                           <input type="number" class="form-control" name="addWater" id="addWater" 
                                               placeholder="Add how much water you drank in OZ" min="0.1" step="0.1" required>
-                          <p class="mt-4">Total water drank today: <?php echo $water_result ?> OZ</p>
+                          <p class="mt-4">Total water drank today: <?php echo $water_intake ?> OZ</p>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

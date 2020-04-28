@@ -49,7 +49,8 @@ $exercise_table = "CREATE TABLE IF NOT EXISTS `exercise` (
 
 $water_table = "CREATE TABLE IF NOT EXISTS `water` ( 
   `email` VARCHAR(128) PRIMARY KEY UNIQUE NOT NULL, 
-  `consumption` DOUBLE NOT NULL
+  `consumption` DOUBLE NOT NULL,
+  `recommended_intake` DOUBLE NOT NULL
 )";
 
 $calories_table = "CREATE TABLE IF NOT EXISTS `calories` ( 
@@ -234,7 +235,7 @@ if(isset($_POST['login'])) {
       // If user doesn't exist in the water db, add the user
       if (mysqli_num_rows($isEmailInWater) == 0) {
         
-        $query = "INSERT INTO water VALUES('$email', '0.0')";
+        $query = "INSERT INTO water VALUES('$email', '0.0', 64)";
         $isEmailInWater = mysqli_query($conn, $query);
 
         // If something went wrong adding the user into the exercise db, output msg
