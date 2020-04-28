@@ -21,8 +21,55 @@ if (isset($_POST['new_fitness_goal'])) {
   $email = $_SESSION['email'];
   $new_fitness_goal = sanitizeMySQL($connection, $_POST['new_fitness_goal']);  
   
-  $query = "UPDATE users SET fitness_goal='{$new_fitness_goal}' WHERE email='{$email}'; "; 
-  mysqli_query($conn, $query);
+  // Retrieve the data of the user
+  $stmt = $connection->prepare("SELECT * FROM users WHERE email='{$email}'");
+  $stmt -> execute();
+  $result = $stmt -> get_result();
+  $user_data = $result->fetch_array(MYSQLI_NUM);
+  $old_fitness_goal = $user_data[4];
+
+  // Update the calorie goal if the new calorie goal isn't the old
+  if ($new_fitness_goal != $old_fitness_goal) {
+    $query = "UPDATE users SET fitness_goal='{$new_fitness_goal}' WHERE email='{$email}'; "; 
+    mysqli_query($conn, $query);
+
+    $calories_recommended = 0;
+    $gender = $user_data[5];
+
+    // Determine the new daily calorie goal 
+    if ($gender == "female") {
+      if ($new_fitness_goal == "weight loss") {
+        $calories_recommended = 1500;
+      }
+      elseif ($new_fitness_goal == "muscle building") {
+        $calories_recommended = $user_data[6] * 19;
+      }
+      else {
+        $calories_recommended = 2000;
+      }
+    }
+    else {
+      if ($new_fitness_goal == "weight loss") {
+        $calories_recommended = 2000;
+      }
+      elseif ($new_fitness_goal == "muscle building") {
+        $calories_recommended = $user_data[6] * 19;
+      }
+      else {
+        $calories_recommended = 2500;
+      }
+    }
+
+    $query = "UPDATE calories SET goal=$calories_recommended WHERE email='$email'";
+    $updated_goal = mysqli_query($conn, $query);
+
+    if (!$updated_goal) {
+      echo "<p style='text-align:center;color:red'>
+              Uh oh... Something seems to be wrong. Please come back later.
+            </p>";
+      exit();
+    }
+  }
 }
 
 //----------------------------------------------------------------------
@@ -36,7 +83,28 @@ if (array_key_exists("new_calorie_goal", $_POST)) {
   $stmt = $connection->prepare($query);
   $stmt -> execute();
 
-  // TODO: output warning msg better
+  if (!$stmt) {
+      $stmt -> close();
+      echo "<p style='text-align:center;color:red'>
+              Unable to insert your data into the database. Please try again later.
+              </p>";
+      exit();
+  }
+
+  $stmt -> close();
+}
+
+//----------------------------------------------------------------------
+// CHANGE WATER GOAL
+//----------------------------------------------------------------------
+if (array_key_exists("new_water_goal", $_POST)) {
+  $new_water_goal = sanitizeMySQL($connection, $_POST['new_water_goal']);
+
+  // Update user's water goal in DB
+  $query = "UPDATE water set recommended_intake={$new_water_goal} where email='{$email}'";
+  $stmt = $connection->prepare($query);
+  $stmt -> execute();
+
   if (!$stmt) {
       $stmt -> close();
       echo "<p style='text-align:center;color:red'>
@@ -89,8 +157,12 @@ $water_intake = $water_result[1];
 $recommended_intake = $water_result[2];
 $water_card_msg;
 
+// Determine what type of message to display in the card
 if ($recommended_intake > $water_intake) {
   $water_card_msg = "<h1 class='display-3 float-left'>$water_intake<span class='d-inline-block'><h6> out of $recommended_intake</h6></span></h1>";
+}
+else if ($recommended_intake == $water_intake) {
+  $water_card_msg = "<h1 class='display-4 float-left'>Water intake reached!</h1>";
 }
 else {
   $water_card_msg = "<h1 class='display-5 float-left' id='overdrinking-msg'>Overdrinking by ". ($water_intake - $recommended_intake) ." OZ</h1>";
@@ -120,12 +192,17 @@ $first_name = $name_result[1];
 $last_name = $name_result[2];
 $name = "$first_name $last_name";
 
+// Calculate the remaining calories user needs to eat
 $remaining_calories = ($calorie_goal - $food_calories) + $exercise_calories;
 $remaining_calories = round($remaining_calories, 1);
 $calorie_card_msg;
 
+// Determine what type of message to display in the card
 if ($remaining_calories < 0) {
   $calorie_card_msg = "<h1 class='display-5' id='overeating-msg'>Overeating " . ($remaining_calories * -1) . " calories</h1>";
+}
+else if ($remaining_calories == 0) {
+  $calorie_card_msg = "<h1 class='display-4'>Calorie goal reached!</h1>";
 }
 else {
   $calorie_card_msg = "<h1 class='display-3'>$remaining_calories</h1>";
@@ -185,7 +262,7 @@ function destroy_session_and_data() {
         <div class="col-xl-3 col-sm-6 py-2">
             <div class="card bg-success text-white h-100 shadow">
                 <div class="card-body bg-success">
-                    <h6 class="text-uppercase" id="card-header">food calories</h6>
+                    <h6 class="text-uppercase" id="card-header">Eaten calories</h6>
                     <h1 class="display-3"><?php echo $food_calories ?></h1>
                 </div>
             </div>
@@ -193,7 +270,7 @@ function destroy_session_and_data() {
         <div class="col-xl-3 col-sm-6 py-2">
             <div class="card text-white bg-warning h-100 shadow">
                 <div class="card-body bg-warning">
-                    <h6 class="text-uppercase" id="card-header">exercise calories</h6>
+                    <h6 class="text-uppercase" id="card-header">Exercised calories</h6>
                     <h1 class="display-3"><?php echo $exercise_calories ?></h1>
                 </div>
             </div>
@@ -285,6 +362,7 @@ function destroy_session_and_data() {
               <div>
                 <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#changeFitnessModal">Change fitness goal</button>
                 <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#changeCalorieModal">Change calorie goal</button>
+                <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#changeWaterModal">Change water intake goal</button>
 
                 <!-- CHANGE FITNESS GOAL MODAL -->
                 <div class="modal fade" id="changeFitnessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -298,13 +376,14 @@ function destroy_session_and_data() {
                       </div>
                       <form id="changeFitnessModal" method="POST">
                         <div class="modal-body">
+                          <p>Select a new fitness goal to pursue</p>
                           
                           <!-- TODO: Display default fitness goal -->
                           <select class="form-control" name="new_fitness_goal" id="new_fitness_goal" >
-                            <option value="" selected disabled hidden>fitness goal</option>
-                            <option value="weight loss">weight loss</option>
-                            <option value="muscle building">muscle building</option>
-                            <option value="weight gain">weight gain</option>
+                            <option value="" selected disabled hidden>Fitness goal</option>
+                            <option value="weight loss">Weight loss</option>
+                            <option value="muscle building">Muscle building</option>
+                            <option value="weight gain">Weight gain</option>
                           </select>
                         </div>
                         <div class="modal-footer">
@@ -328,9 +407,36 @@ function destroy_session_and_data() {
                       </div>
                       <form id="changeCalorieGoal" method="POST">
                         <div class="modal-body">
+                          <p>Enter your daily calorie goal</p>
                           <input type="number" class="form-control" name="new_calorie_goal" id="new_calorie_goal" 
-                                              placeholder="Calorie goal for each day" min="0.1" step="0.1" 
+                                              placeholder="Calorie goal for each day" min="1" step="1" 
                                               value="<?php echo $calorie_goal ?>" required>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- CHANGE WATER GOAL MODAL -->
+                <div class="modal fade" id="changeWaterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Change Water Goal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <form id="changeWaterGoal" method="POST">
+                        <div class="modal-body">
+                          <p>Enter your daily recommended water intake in OZ</p>
+                          <input type="number" class="form-control" name="new_water_goal" id="new_water_goal" 
+                                              placeholder="Water intake goal for each day in OZ" min="0.1" step="0.1" 
+                                              value="<?php echo $recommended_intake ?>" required>
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

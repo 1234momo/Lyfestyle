@@ -258,7 +258,7 @@ if(isset($_POST['login'])) {
         $gender = $_SESSION['gender'];
         $weight = $_SESSION['weight'];
 
-        if ($gender = "female") {
+        if ($gender == "female") {
           if ($fitness_goal == "weight loss") {
             $calories_recommended = 1500;
           }

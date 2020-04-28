@@ -18,19 +18,19 @@
     <link href="../assets/css/login.css" rel="stylesheet">
   </head>
   <body>
-      <div class="login-page">
-  <div class="form">
-    <form class="login-form" method="POST">
-      <input type="email" id="email" name="login_email" placeholder="email" required>
-      <input type="password" id="password" name="login_password" placeholder="password"  required>
-      <input type="submit" class="login-button" name="login" value="Login">
-      <p class="message">Not registered? <a href="signup_2.php">Create an account</a></p>
-    </form>
-  </div>
-</div>
+    <div class="login-page">
+      <div class="form">
+        <form class="login-form" method="POST">
+          <input type="email" id="email" name="login_email" placeholder="Email" required>
+          <input type="password" id="password" name="login_password" placeholder="Password" required>
+          <input type="submit" class="login-button" name="login" value="Login">
+          <p class="message">Not registered? <a href="signup_2.php">Create an account</a></p>
+        </form>
+      </div>
+    </div>
+        
       
-      
-   <!-- Optional JavaScript -->
+    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
