@@ -93,13 +93,34 @@ if(isset($_POST['signup'])) {
   $check_email = mysqli_query($conn, $query); 
   
   if ($check_email -> num_rows != 0) {
-    array_push($signup_errors, "Email is already taken");
+    array_push($signup_errors, "<p style='color:red;text-align:center'>Email is already taken</p>");
   }
   
+  // CHECK IF EMAIL IS VALID
+  if (!preg_match('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/', $email)) {
+    array_push($signup_errors, "<p style='color:red;text-align:center'>Email is not valid</p>");
+  }
+
+  // CHECK IF FIRST NAME IS VALID
+  if (preg_match("/[^a-zA-Z ]+/", $first_name)) {
+    array_push($signup_errors, "<p style='color:red;text-align:center'>First name must contain only letters</p>");
+  }
+
+  // CHECK IF LAST NAME IS VALID
+  if (preg_match("/[^a-zA-Z ]+/", $last_name)) {
+    array_push($signup_errors, "<p style='color:red;text-align:center'>Last name must contain only letters</p>");
+  }
+  
+
+  // CHECK IF WEIGHT IS VALID
+  if (preg_match("/[^0-9]/", $weight) || $weight == '') {
+    array_push($signup_errors, "<p style='color:red;text-align:center'>Weight must be a whole number</p>");
+  }
+
   
   // CHECK IF PASSWORDS MATCH
   if ($password1 != $password2) {
-    array_push($signup_errors, "Passwords did not match");
+    array_push($signup_errors, "<p style='color:red;text-align:center'>Passwords did not match</p>");
   }
   
   
