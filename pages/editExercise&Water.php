@@ -250,8 +250,7 @@
         <link rel="icon" type="image/png" href="../assets/images/Lyfestyle_favicon.png">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script type="text/javascript"> var exercise_array =<?php echo json_encode($exercise_result); ?>;</script>
-        <script src="../EditExerciseDB.js"></script>
-        <!-- <script src="../EditWaterDB.js"></script> -->
+        <script src="../edit_exercise_log.js"></script>
     </head>
 
     <body onload="displayExerciseLog()">
@@ -275,7 +274,7 @@
                         <div id="Water-forms" class="form-group row text-center justify-content-center">
                             <div class="col-7 mt-1">
                                 <input type="number" class="form-control" name="consumptionNum" id="waterInput" 
-                                       placeholder="Water drank in OZ" min="0.01" step="0.01" 
+                                       placeholder="Water drank in OZ" min="0" step="0.01" 
                                        value="<?php echo $water_result ?>" required><br><br>
                             </div>
                         </div>

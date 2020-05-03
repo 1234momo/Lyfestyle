@@ -31,7 +31,7 @@ function validate_weight(form) {
 // Checks if the password and current password is the same
 function check_password(form) {
     if (form.value != document.getElementById('password').value) {
-        form.setCustomValidity('Password must be matching.');
+        form.setCustomValidity('Password and confirm password must be matching.');
         form.reportValidity();
         form.style.border = '2px solid #ff0000';
         return false;

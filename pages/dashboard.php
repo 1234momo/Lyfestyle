@@ -148,7 +148,9 @@ if (array_key_exists("waterSubmit", $_POST)) {
   $stmt -> close();
 }
 
-// Retrieve the water data
+//----------------------------------------------------------------------
+// RETRIEVE WATER DATA 
+//----------------------------------------------------------------------
 $stmt = $connection->prepare("SELECT * FROM water WHERE email='{$email}'");
 $stmt -> execute();
 $water_result = $stmt -> get_result();
@@ -165,10 +167,12 @@ else if ($recommended_intake == $water_intake) {
   $water_card_msg = "<h1 class='display-4 float-left'>Water intake reached!</h1>";
 }
 else {
-  $water_card_msg = "<h1 class='display-5 float-left' id='overdrinking-msg'>Overdrinking by ". ($water_intake - $recommended_intake) ." OZ</h1>";
+  $water_card_msg = "<h1 class='display-5 float-left' id='overdrinking-msg'>Overdrinking by ". ($water_intake - $recommended_intake) ." OZ!</h1>";
 }
 
-// Retrieve the user's target calorie goal
+//----------------------------------------------------------------------
+// RETRIEVE CALORIES DATA
+//----------------------------------------------------------------------
 $stmt = $connection->prepare("SELECT * FROM calories WHERE email='{$email}'");
 $stmt -> execute();
 $calories_result = $stmt -> get_result();
@@ -182,15 +186,6 @@ $food_calories = round($food_calories, 1);
 // Retrieve the user's exercise calories
 $exercise_calories = $calories_result[2];
 $exercise_calories = round($exercise_calories, 1);
-
-// Retrieve the user's name
-$stmt = $connection->prepare("SELECT * FROM users WHERE email='{$email}'");
-$stmt -> execute();
-$name_result = $stmt -> get_result();
-$name_result = $name_result->fetch_array(MYSQLI_NUM);
-$first_name = $name_result[1];
-$last_name = $name_result[2];
-$name = "$first_name $last_name";
 
 // Calculate the remaining calories user needs to eat
 $remaining_calories = ($calorie_goal - $food_calories) + $exercise_calories;
@@ -208,8 +203,37 @@ else {
   $calorie_card_msg = "<h1 class='display-3'>$remaining_calories</h1>";
 }
 
+//----------------------------------------------------------------------
+// RETRIEVE USER NAME
+//----------------------------------------------------------------------
+$stmt = $connection->prepare("SELECT * FROM users WHERE email='{$email}'");
+$stmt -> execute();
+$name_result = $stmt -> get_result();
+$name_result = $name_result->fetch_array(MYSQLI_NUM);
+$first_name = $name_result[1];
+$last_name = $name_result[2];
+$fitness_goal = $name_result[4];
+$name = "$first_name $last_name";
+
+//----------------------------------------------------------------------
+// RETRIEVE FOOD LOG
+//----------------------------------------------------------------------
+$stmt = $connection->prepare("SELECT * FROM food WHERE email='{$email}'");
+$stmt -> execute();
+$food_log = $stmt -> get_result();
+$food_log = $food_log->fetch_array(MYSQLI_NUM);
+
+//----------------------------------------------------------------------
+// RETRIEVE EXERCISE LOG
+//----------------------------------------------------------------------
+$stmt = $connection->prepare("SELECT * FROM exercise WHERE email='{$email}'");
+$stmt -> execute();
+$exercise_log = $stmt -> get_result();
+$exercise_log = $exercise_log->fetch_array(MYSQLI_NUM);
+
 // Close connection
 $connection -> close();
+$stmt -> close();
 
 // Sanitizes a string
 function sanitizeString($var) {
@@ -240,12 +264,16 @@ function destroy_session_and_data() {
     <link rel="stylesheet" type="text/css", href="../assets/css/dashboard.css">
     <link rel="icon" type="image/png" href="../assets/images/Lyfestyle_favicon.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript"> var food_log =<?php echo json_encode($food_log); ?>;</script>
+    <script type="text/javascript"> var exercise_log =<?php echo json_encode($exercise_log); ?>;</script>    
+    <script src="../view_exercise_log.js"></script>
+    <script src="../view_food_log.js"></script>
   </head>
 
-  <body>
+  <body onload="display_exercise_log(); display_food_log();">
     <!-- Welcome and logout btn -->
     <div class="container-fluid">
-      <h1 class="display-2 d-inline-block" id="greeting-message">Welcome <?php echo $name ?>!</h1>
+      <h1 class="display-2 d-inline-block" id="greeting-message">Welcome <?php echo $name ?>!<br>Your fitness goal is <?php echo $fitness_goal ?>.</h1>
   
       <div class="d-inline-block float-right">
         <form action="./dashboard.php" method="POST">
@@ -324,7 +352,7 @@ function destroy_session_and_data() {
                       </div>
                       <form id="addWater" method="POST">
                         <div class="modal-body">
-                          <input type="number" class="form-control" name="addWater" id="addWater" 
+                          <input type="number" class="form-control" name="addWater" id="waterInput" 
                                               placeholder="Add how much water you drank in OZ" min="0.1" step="0.1" required>
                           <p class="mt-4">Total water drank today: <?php echo $water_intake ?> OZ</p>
                         </div>
@@ -454,6 +482,153 @@ function destroy_session_and_data() {
     </div>
 
     <hr>
+
+    <!-- VIEW WHAT IS IN THE LOGS -->
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-food-tab" data-toggle="tab" href="#nav-food" role="tab" aria-controls="nav-food" aria-selected="true">Food log</a>
+        <a class="nav-item nav-link" id="nav-exercise-tab" data-toggle="tab" href="#nav-exercise" role="tab" aria-controls="nav-exercise" aria-selected="false">Exercise log</a>
+      </div>
+    </nav>
+    <div class="tab-content shadow" id="nav-tabContent">
+
+      <!-- FOOD LOG TAB -->
+      <div class="tab-pane fade show active bg-white" id="nav-food" role="tabpanel" aria-labelledby="nav-food-tab">
+        <h1 class="text-center mt-4">Foods from list<h1><hr>
+        <div class="container-fluid">
+          <div class="row text-center">
+            <div class="col">
+              <h2 class="font-weight-light">Breakfast</h2>
+              <div class="row text-center d-flex justify-content-center" id="breakfast-header">
+                <div class="col">
+                  <h5 class="font-weight-light mb-3 font-italic">Name</h5>
+                  <hr>
+                </div>
+                <div class="col">
+                  <h5 class="font-weight-light mb-3 font-italic">Weight in OZ</h5>
+                  <hr>
+                </div>
+              </div>
+              <div id="Breakfast-area" class="form-inline d-flex justify-content-center"></div>
+            </div>
+            <div class="col">
+              <h2 class="font-weight-light">Lunch</h2>
+              <div class="row text-center d-flex justify-content-center" id="lunch-header">
+                <div class="col">
+                  <h5 class="font-weight-light mb-3 font-italic">Name</h5>
+                  <hr>
+                </div>
+                <div class="col">
+                  <h5 class="font-weight-light mb-3 font-italic">Weight in OZ</h5>
+                  <hr>
+                </div>
+              </div>
+              <div id="Lunch-area" class="form-inline d-flex justify-content-center"></div>
+            </div>
+            <div class="col">
+              <h2 class="font-weight-light">Dinner</h2>
+              <div class="row text-center d-flex justify-content-center" id="dinner-header">
+                <div class="col">
+                  <h5 class="font-weight-light mb-3 font-italic">Name</h5>
+                  <hr>
+                </div>
+                <div class="col">
+                  <h5 class="font-weight-light mb-3 font-italic">Weight in OZ</h5>
+                  <hr>
+                </div>
+              </div>
+              <div id="Dinner-area" class="form-inline d-flex justify-content-center"></div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <h1 class="text-center">Foods you added<h1><hr>
+        <div class="container-fluid">
+          <div class="row text-center">
+            <div class="col">
+              <h2 class="font-weight-light">Breakfast</h2>
+              <div class="row text-center d-flex justify-content-center" id="breakfast-custom-header">
+                <div class="col">
+                  <h5 class="font-weight-light mb-3 font-italic">Name</h5>
+                  <hr>
+                </div>
+                <div class="col">
+                  <h5 class="font-weight-light mb-3 font-italic">Calories</h5>
+                  <hr>
+                </div>
+              </div>
+              <div id="Breakfast-area-custom" class="form-inline d-flex justify-content-center"></div>
+            </div>
+            <div class="col">
+              <h2 class="font-weight-light">Lunch</h2>
+              <div class="row text-center d-flex justify-content-center" id="lunch-custom-header">
+                <div class="col">
+                  <h5 class="font-weight-light mb-3 font-italic">Name</h5>
+                  <hr>
+                </div>
+                <div class="col">
+                  <h5 class="font-weight-light mb-3 font-italic">Calories</h5>
+                  <hr>
+                </div>
+              </div>
+              <div id="Lunch-area-custom" class="form-inline d-flex justify-content-center"></div>
+            </div>
+            <div class="col">
+              <h2 class="font-weight-light">Dinner</h2>
+              <div class="row text-center d-flex justify-content-center" id="dinner-custom-header">
+                <div class="col">
+                  <h5 class="font-weight-light mb-3 font-italic">Name</h5>
+                  <hr>
+                </div>
+                <div class="col">
+                  <h5 class="font-weight-light mb-3 font-italic">Calories</h5>
+                  <hr>
+                </div>
+              </div>
+              <div id="Dinner-area-custom" class="form-inline d-flex justify-content-center"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EXERCISE LOG TAB -->
+      <div class="tab-pane fade bg-white" id="nav-exercise" role="tabpanel" aria-labelledby="nav-exercise-tab">
+        <div class="container-fluid">
+          <div class="row text-center">
+            <div class="col px-4">
+              <h2 class="mt-4 mb-1">Exercises from list</h2>
+              <div class="row text-center justify-content-center" id="workout-header">
+                <div class="col-lg-4">
+                  <h5 class="font-weight-light mb-3 font-italic">Name</h5>
+                  <hr>
+                </div>
+                <div class="col-lg-4 mr-6">
+                  <h5 class="font-weight-light mb-3 font-italic">Time in min</h5>
+                  <hr>
+                </div>
+              </div>
+              <div id="Exercise-area" class="form-inline d-flex justify-content-center col-10"></div>
+            </div>
+            <div class="col px-4">
+              <h2 class="mt-4 mb-1">Exercises you added</h2>
+              <div class="row text-center justify-content-center" id="workout-custom-header">
+                <div class="col-lg-4">
+                  <h5 class="font-weight-light mb-3 font-italic">Name</h5>
+                  <hr>
+                </div>
+                <div class="col-lg-4 mr-6">
+                  <h5 class="font-weight-light mb-3 font-italic">Calories burned</h5>
+                  <hr>
+                </div>
+              </div>
+              <div id="Exercise-area-custom" class="form-inline d-flex justify-content-center col-10"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -1,7 +1,8 @@
 body {
   background: url(../images/background_03.jpeg); 
-/*  background-repeat: no-repeat; */ 
-  background-size: 100%; 
+  background-repeat: no-repeat;
+  background-position: center; 
+  background-size: cover; 
   font-family: sans-serif; 
   padding: 2%; 
 }
@@ -17,4 +18,9 @@ body {
 
 #overeating-msg, #overdrinking-msg {
   font-weight: normal;
+}
+
+#nav-food, #nav-exercise {
+  max-height: 55%;
+  overflow: auto;
 }
