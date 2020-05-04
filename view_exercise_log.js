@@ -30,15 +30,15 @@ function display_exercise_log() {
             create_empty_msg_exercise(workout_area);
         }
         else {
-            // let name_area = document.getElementById("exercise-name-area");
-            // let time_area = document.getElementById("exercise-time-area");
+            let name_area = document.getElementById("name-area");
+            let time_area = document.getElementById("time-area");
 
             // Traverse workout data
             for (let i = 0; i < workout.length - 1; i += 2) {
                 let name = workout[i];
                 let num = workout[i+1];
     
-                create_exercise_entry(name, num, workout_area);
+                create_exercise_entry(name, num, name_area, time_area);
             }
         }
 
@@ -52,21 +52,21 @@ function display_exercise_log() {
             create_empty_msg_exercise(workout_custom_area);
         }
         else {
-            // let name_area = document.getElementById("exercise-custom-name-area");
-            // let calorie_area = document.getElementById("exercise-calories-area");
+            let name_area = document.getElementById("custom-name-area");
+            let calorie_area = document.getElementById("custom-calorie-area");
 
             // Traverse custom workout data
             for (let i = 0; i < workout_custom.length - 1; i += 2) {
                 let name = workout_custom[i];
                 let num = workout_custom[i+1];
 
-                create_exercise_entry(name, num, workout_custom_area);
+                create_exercise_entry(name, num, name_area, calorie_area);
             }
         }
     }
 }
 
-function create_exercise_entry(name, num, display_area) {
+function create_exercise_entry(name, num, name_area, number_area) {
     let name_element = document.createElement("input");
     name_element.setAttribute('class', 'form-control col-auto mx-5 mb-5 text-center shadow');
     name_element.setAttribute('type', 'text');
@@ -81,14 +81,14 @@ function create_exercise_entry(name, num, display_area) {
 
     let br = document.createElement("br");
 
-    display_area.appendChild(name_element);
-    display_area.appendChild(number_element);
-    display_area.appendChild(br)
+    name_area.appendChild(name_element);
+    number_area.appendChild(number_element);
+    number_area.appendChild(br)
 }
 
 function create_empty_msg_exercise(display_area) {
     let msg = document.createElement("h5");
-    msg.className = "mt-3";
+    msg.className = "mt-3 text-center";
     msg.innerHTML = "No exercise input yet...";
 
     display_area.appendChild(msg);

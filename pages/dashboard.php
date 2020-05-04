@@ -496,45 +496,51 @@ function destroy_session_and_data() {
       <div class="tab-pane fade show active bg-white" id="nav-food" role="tabpanel" aria-labelledby="nav-food-tab">
         <h1 class="text-center mt-4">Foods from list<h1><hr>
         <div class="container-fluid">
-          <div class="row text-center">
+          <div class="row">
             <div class="col">
-              <h2 class="font-weight-light">Breakfast</h2>
+              <h2 class="font-weight-light d-flex justify-content-center">Breakfast</h2>
               <div class="row text-center d-flex justify-content-center" id="breakfast-header">
-                <div class="col">
+                <div class="col-6">
                   <h5 class="font-weight-light mb-3 font-italic">Name</h5>
                   <hr>
+                  <div id="breakfast-name-area" class="form-inline col"></div>
                 </div>
-                <div class="col">
+                <div class="col-6">
                   <h5 class="font-weight-light mb-3 font-italic">Weight in OZ</h5>
                   <hr>
+                  <div id="breakfast-weight-area" class="form-inline col"></div>
                 </div>
               </div>
               <div id="Breakfast-area" class="form-inline d-flex justify-content-center"></div>
             </div>
             <div class="col">
-              <h2 class="font-weight-light">Lunch</h2>
+              <h2 class="font-weight-light d-flex justify-content-center">Lunch</h2>
               <div class="row text-center d-flex justify-content-center" id="lunch-header">
-                <div class="col">
+                <div class="col-6">
                   <h5 class="font-weight-light mb-3 font-italic">Name</h5>
                   <hr>
+                  <div id="lunch-name-area" class="form-inline col"></div>
                 </div>
-                <div class="col">
+                <div class="col-6">
                   <h5 class="font-weight-light mb-3 font-italic">Weight in OZ</h5>
                   <hr>
+                  <div id="lunch-weight-area" class="form-inline col"></div>
                 </div>
               </div>
               <div id="Lunch-area" class="form-inline d-flex justify-content-center"></div>
             </div>
             <div class="col">
-              <h2 class="font-weight-light">Dinner</h2>
+              <h2 class="font-weight-light d-flex justify-content-center">Dinner</h2>
               <div class="row text-center d-flex justify-content-center" id="dinner-header">
-                <div class="col">
+                <div class="col-6">
                   <h5 class="font-weight-light mb-3 font-italic">Name</h5>
                   <hr>
+                  <div id="dinner-name-area" class="form-inline col"></div>
                 </div>
-                <div class="col">
+                <div class="col-6">
                   <h5 class="font-weight-light mb-3 font-italic">Weight in OZ</h5>
                   <hr>
+                  <div id="dinner-weight-area" class="form-inline col"></div>
                 </div>
               </div>
               <div id="Dinner-area" class="form-inline d-flex justify-content-center"></div>
@@ -550,13 +556,15 @@ function destroy_session_and_data() {
             <div class="col">
               <h2 class="font-weight-light">Breakfast</h2>
               <div class="row text-center d-flex justify-content-center" id="breakfast-custom-header">
-                <div class="col">
+                <div class="col-6">
                   <h5 class="font-weight-light mb-3 font-italic">Name</h5>
                   <hr>
+                  <div id="breakfast-custom-name-area" class="form-inline col"></div>
                 </div>
-                <div class="col">
+                <div class="col-6">
                   <h5 class="font-weight-light mb-3 font-italic">Calories</h5>
                   <hr>
+                  <div id="breakfast-custom-calorie-area" class="form-inline col"></div>
                 </div>
               </div>
               <div id="Breakfast-area-custom" class="form-inline d-flex justify-content-center"></div>
@@ -564,13 +572,15 @@ function destroy_session_and_data() {
             <div class="col">
               <h2 class="font-weight-light">Lunch</h2>
               <div class="row text-center d-flex justify-content-center" id="lunch-custom-header">
-                <div class="col">
+                <div class="col-6">
                   <h5 class="font-weight-light mb-3 font-italic">Name</h5>
                   <hr>
+                  <div id="lunch-custom-name-area" class="form-inline col"></div>
                 </div>
-                <div class="col">
+                <div class="col-6">
                   <h5 class="font-weight-light mb-3 font-italic">Calories</h5>
                   <hr>
+                  <div id="lunch-custom-calorie-area" class="form-inline col"></div>
                 </div>
               </div>
               <div id="Lunch-area-custom" class="form-inline d-flex justify-content-center"></div>
@@ -578,13 +588,15 @@ function destroy_session_and_data() {
             <div class="col">
               <h2 class="font-weight-light">Dinner</h2>
               <div class="row text-center d-flex justify-content-center" id="dinner-custom-header">
-                <div class="col">
+                <div class="col-6">
                   <h5 class="font-weight-light mb-3 font-italic">Name</h5>
                   <hr>
+                  <div id="dinner-custom-name-area" class="form-inline col"></div>
                 </div>
-                <div class="col">
+                <div class="col-6">
                   <h5 class="font-weight-light mb-3 font-italic">Calories</h5>
                   <hr>
+                  <div id="dinner-custom-calorie-area" class="form-inline col"></div>
                 </div>
               </div>
               <div id="Dinner-area-custom" class="form-inline d-flex justify-content-center"></div>
@@ -603,13 +615,15 @@ function destroy_session_and_data() {
                 <div class="col-lg-4">
                   <h5 class="font-weight-light mb-3 font-italic">Name</h5>
                   <hr>
+                  <div id="name-area" class="form-inline d-flex justify-content-center col-auto"></div>
                 </div>
                 <div class="col-lg-4 mr-6">
                   <h5 class="font-weight-light mb-3 font-italic">Time in min</h5>
                   <hr>
+                  <div id="time-area" class="form-inline d-flex justify-content-center col-auto"></div>
                 </div>
               </div>
-              <div id="Exercise-area" class="form-inline d-flex justify-content-center col-10"></div>
+              <div id="Exercise-area" class="form-inline d-flex justify-content-center col-auto"></div>
             </div>
             <div class="col px-4">
               <h2 class="mt-4 mb-1">Exercises you added</h2>
@@ -617,13 +631,15 @@ function destroy_session_and_data() {
                 <div class="col-lg-4">
                   <h5 class="font-weight-light mb-3 font-italic">Name</h5>
                   <hr>
+                  <div id="custom-name-area" class="form-inline d-flex justify-content-center col-auto"></div>
                 </div>
                 <div class="col-lg-4 mr-6">
                   <h5 class="font-weight-light mb-3 font-italic">Calories burned</h5>
                   <hr>
+                  <div id="custom-calorie-area" class="form-inline d-flex justify-content-center col-auto"></div>
                 </div>
               </div>
-              <div id="Exercise-area-custom" class="form-inline d-flex justify-content-center col-10"></div>
+              <div id="Exercise-area-custom" class="form-inline d-flex justify-content-center col-auto"></div>
             </div>
           </div>
         </div>
