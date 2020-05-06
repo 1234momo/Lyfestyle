@@ -1,15 +1,14 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .jumbotron {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-    margin-bottom: 0;
-    background-color: #fff;
-    background-image: url('recipesBackground.jpeg'); 
-    background-repeat: no-repeat;
-    background-position: bottom center;
-    background-size: 1800px 500px;
-    
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin-bottom: 0;
+  background-color: #fff;
+  background-image: url('recipesBackground.jpeg'); 
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 1800px 500px;   
 }
 
 @media (min-width: 768px) {
@@ -20,19 +19,19 @@
 }
 
 .col-md-4 {
-    font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 .collapse bg-dark {
-    font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 .navbar navbar-dark bg-dark shadow-sm {
-    font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 .col-sm-8 col-md-7 py-4 {
-    font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 .col-sm-4 offset-md-1 py-4 {
-     font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .jumbotron p:last-child {
@@ -44,25 +43,25 @@
 }
 
 .jumbotron .container {
-font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
   max-width: 40rem;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 2rem;
-    color: white;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2rem;
+  color: white;
 }
 
 jumbotron p{
-    font-family: "Roboto", sans-serif;
-    color: white;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  font-family: "Roboto", sans-serif;
+  color: white;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 footer {
-    font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
 
 footer p {
-    font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
   margin-bottom: .25rem;
 }

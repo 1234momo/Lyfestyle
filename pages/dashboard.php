@@ -331,7 +331,7 @@ function destroy_session_and_data() {
       <div class="row">
 
         <!-- Add to your logs card -->
-        <div class="col-md-4 d-flex justify-content-around">
+        <div class="col-md-3 d-flex justify-content-around">
           <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 20rem;">
             <div class="card-body text-center">
               <h3 class="card-title"> Add to your logs</h3>
@@ -370,7 +370,7 @@ function destroy_session_and_data() {
         </div>
 
         <!-- Edit your logs card -->
-        <div class="col-xs-12 col-md-4 d-flex justify-content-around">
+        <div class="col-xs-12 col-md-3 d-flex justify-content-around">
           <div class="card ml-2 shadow p-3 mb-5 bg-white rounded" style="width: 20rem;">
             <div class="card-body text-center">
               <h3 class="card-title">Edit your logs</h3>
@@ -383,7 +383,7 @@ function destroy_session_and_data() {
         </div>
 
         <!-- Change your goals card -->
-        <div class="col-xs-12 col-md-4 d-flex justify-content-around">
+        <div class="col-xs-12 col-md-3 d-flex justify-content-around">
           <div class="card ml-2 shadow p-3 mb-5 bg-white rounded" style="width: 20rem;">
             <div class="card-body text-center">
               <h3 class="card-title">Change your goals</h3>
@@ -474,6 +474,20 @@ function destroy_session_and_data() {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Edit your logs card -->
+        <div class="col-xs-12 col-md-3 d-flex justify-content-around">
+          <div class="card ml-2 shadow p-3 mb-5 bg-white rounded" style="width: 20rem;">
+            <div class="card-body text-center">
+              <h3 class="card-title">Additional content</h3>
+              <div>
+                <button type="button" class="btn btn-primary mt-2" onClick="location.href = './recipes/recipes.html'">Food recipies</button>
+                <br>
+                <button type="button" class="btn btn-primary mt-2" onClick="location.href = './editExercise&Water.php'">Nutrional</button>
               </div>
             </div>
           </div>
@@ -650,6 +664,15 @@ function destroy_session_and_data() {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  
   </body>  
+
+  <footer class="text-muted">
+  <div class="container">
+    <p class="float-right">
+      <a href="#">Back to top</a>
+    </p>
+    <p>Lyfestyle is created by three San Jose State University students.</p>
+  </div>
+</footer>
 </html>
 
 
