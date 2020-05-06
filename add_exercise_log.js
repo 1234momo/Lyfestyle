@@ -193,6 +193,8 @@ function createForm(itemName, resultsArea) {
                                         `'br1${numOfSelectedItems}',` +
                                         `'br2${numOfSelectedItems}',` +
                                         `true)`);
+
+    inputTimeElement.setAttribute('onInput', 'validate_time_field(this)');
     
     // Appends the entry components to the entry area
     resultsArea.appendChild(labelElem);
@@ -248,6 +250,8 @@ function addCustomItem() {
                                         `'br1${numOfCustomItems}custom',` +
                                         `'br2${numOfCustomItems}custom',` +
                                         `false)`);
+
+    caloriesInput.setAttribute('onInput', 'validate_second_field(this)');
     
     // Appends the entry components to the entry area
     resultsArea.appendChild(exerciseNameInput);
@@ -319,6 +323,8 @@ function renameAttributes(nameInput_id, second_input_id, removeBtn_id, br1_id, b
                                               `'br1${i - 1}',` +
                                               `'br2${i - 1}',` +
                                               `true)`);
+
+            second_input.setAttribute('onInput', 'validate_time_field(this)');
         }
         else {
             removeBtn.setAttribute('onClick', `renameAttributes('item${i - 1}customName',` + 
@@ -327,6 +333,8 @@ function renameAttributes(nameInput_id, second_input_id, removeBtn_id, br1_id, b
                                               `'br1${i - 1}custom',` +
                                               `'br2${i - 1}custom',` +
                                               `false)`);
+
+            second_input.setAttribute('onInput', 'validate_second_field(this)');
         }
     }
 }

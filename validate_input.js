@@ -13,8 +13,6 @@ function validate_email(form) {
 }
 
 function validate_weight(form) {
-    console.log("\'" + form.value + "\'");
-
     if (/[^0-9]/.test(form.value) || form.value === '') {
         form.setCustomValidity('Weight must be a whole number');
         form.reportValidity();
@@ -47,6 +45,36 @@ function check_password(form) {
 function validate_names(form) {
     if (/[^a-zA-Z ]+/.test(form.value)) {
         form.setCustomValidity('Name must contain only letters');
+        form.reportValidity();
+        form.style.border = '2px solid #ff0000';
+        return false;
+    } 
+    else {
+        form.setCustomValidity('');
+        form.style.border = '';
+        return true;
+    }
+}
+
+function validate_second_field(form) {
+    if (/[^0-9\.]/.test(form.value) || form.value === '') {
+        console.log("heeloo");
+        form.setCustomValidity('Must contain only whole or decimal values');
+        form.reportValidity();
+        form.style.border = '2px solid #ff0000';
+        return false;
+    } 
+    else {
+        form.setCustomValidity('');
+        form.style.border = '';
+        return true;
+    }
+}
+
+function validate_time_field(form) {
+    if (/[^0-9]./.test(form.value) || form.value === '') {
+        console.log("heeloo");
+        form.setCustomValidity('Must contain only whole values');
         form.reportValidity();
         form.style.border = '2px solid #ff0000';
         return false;

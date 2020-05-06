@@ -174,7 +174,7 @@ function createForm(itemName, resultsArea) {
     inputOZElement.setAttribute('class', 'form-control mr-3 mb-4 shadow');
     inputOZElement.setAttribute('placeholder', 'Weight eaten in oz');
     inputOZElement.setAttribute('step', '0.01');
-    inputOZElement.setAttribute('min', '0');
+    inputOZElement.setAttribute('min', '0.01');
     inputOZElement.required = true;
 
     // Breakfast, Lunch, and Dinner selector
@@ -213,6 +213,8 @@ function createForm(itemName, resultsArea) {
                                         `'br1${numOfItemsChosen}',` +
                                         `'br2${numOfItemsChosen}',` +
                                         `true)`);
+
+    inputOZElement.setAttribute('onInput', 'validate_second_field(this)');
 
     // Appends the entry components to the entry area
     resultsArea.appendChild(labelElem);
@@ -285,6 +287,8 @@ function addCustomItem() {
                                         `'br1${numOfCustomItems}custom',` +
                                         `'br2${numOfCustomItems}custom',` +
                                         `false)`);
+
+    caloriesElement.setAttribute('onInput', 'validate_second_field(this)');
 
     // Appends the entry components to the entry area
     resultsArea.appendChild(foodItemElem);
@@ -364,6 +368,7 @@ function renameAttributes(nameInput_id, weight_or_calories_id, dayEatenSelector_
                                               `'br1${i - 1}',` +
                                               `'br2${i - 1}',` +
                                               `true)`);
+            weight_or_calories_Input.setAttribute('onInput', 'validate_second_field(this)');
         }
         else {
             removeBtn.setAttribute('onClick', `renameAttributes('item${i - 1}customName',` + 
@@ -373,6 +378,7 @@ function renameAttributes(nameInput_id, weight_or_calories_id, dayEatenSelector_
                                               `'br1${i - 1}custom',` +
                                               `'br2${i - 1}custom',` +
                                               `false)`);
+            weight_or_calories_Input.setAttribute('onInput', 'validate_second_field(this)');
         }
     }
 }
