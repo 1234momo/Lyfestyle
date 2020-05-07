@@ -487,7 +487,7 @@ function destroy_session_and_data() {
               <div>
                 <button type="button" class="btn btn-primary mt-2" onClick="location.href = './recipes/recipes.html'">Food recipes</button>
                 <br>
-                <button type="button" class="btn btn-primary mt-2" onClick="location.href = './editExercise&Water.php'">Nutrional</button>
+                <button type="button" class="btn btn-primary mt-2" onClick="location.href = './nutrition/nutrition.html'">Nutritional Blogs</button>
               </div>
             </div>
           </div>
