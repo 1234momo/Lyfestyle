@@ -1,3 +1,4 @@
+// Validate if email entered is a valid format
 function validate_email(form) {
     let regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     
@@ -12,6 +13,7 @@ function validate_email(form) {
     }
 }
 
+// Makes sure weight only has whole number
 function validate_weight(form) {
     if (/[^0-9]/.test(form.value) || form.value === '') {
         form.setCustomValidity('Weight must be a whole number');
@@ -56,8 +58,9 @@ function validate_names(form) {
     }
 }
 
+// Validates calories entered 
 function validate_second_field(form) {
-    if (/[^0-9\.]/.test(form.value) || form.value === '') {
+    if (/[^0-9.]/.test(form.value) || form.value === '') {
         console.log("heeloo");
         form.setCustomValidity('Must contain only whole or decimal values');
         form.reportValidity();
@@ -71,10 +74,28 @@ function validate_second_field(form) {
     }
 }
 
+// Validate the time input to have ony whole numbers
 function validate_time_field(form) {
     if (/[^0-9]./.test(form.value) || form.value === '') {
         console.log("heeloo");
         form.setCustomValidity('Must contain only whole values');
+        form.reportValidity();
+        form.style.border = '2px solid #ff0000';
+        return false;
+    } 
+    else {
+        form.setCustomValidity('');
+        form.style.border = '';
+        return true;
+    }
+}
+
+// Validate custom name entered for adding and editing food and exercise to not have a comma
+function validate_name_field(form) {
+    console.log("name called");
+    if (/[,]/.test(form.value)) {
+        console.log(form.value);
+        form.setCustomValidity('Name must not contain a comma');
         form.reportValidity();
         form.style.border = '2px solid #ff0000';
         return false;

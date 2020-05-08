@@ -199,7 +199,7 @@ function createCustomForm(itemName, calories, displayArea, numItem) {
 
     // Update the name or calories when the user changes anything in the input fields
     calorieElement.setAttribute('oninput', `updateSecondInput(this.value, '${calorieElement.id}')`);
-    labelElem.setAttribute('oninput', `updateName(this.value, '${labelElem.id}')`);
+    labelElem.setAttribute('oninput', `updateName(this.value, '${labelElem.id}');validate_name_field(this)`);
 
     // Appends the name input, time input, and remove button to the row div 
     row_div.appendChild(name_div);
@@ -294,7 +294,7 @@ function renameAttributes(nameInput_id, secondInput_id, removeBtn_id, br1_id, br
                                               `'br2${i - 1}custom',` +
                                               `false)`);
             secondInput.setAttribute('oninput', `updateSecondInput(this.value, '${secondInput.id}')`);
-            nameInput.setAttribute('oninput', `updateName(this.value, '${nameInput.id}')`);
+            nameInput.setAttribute('oninput', `updateName(this.value, '${nameInput.id}');validate_name_field(this)`);
         }
     }
 }

@@ -252,6 +252,7 @@ function addCustomItem() {
                                         `false)`);
 
     caloriesInput.setAttribute('onInput', 'validate_second_field(this)');
+    exerciseNameInput.setAttribute('oninput', 'validate_name_field(this)');
     
     // Appends the entry components to the entry area
     resultsArea.appendChild(exerciseNameInput);
@@ -335,6 +336,7 @@ function renameAttributes(nameInput_id, second_input_id, removeBtn_id, br1_id, b
                                               `false)`);
 
             second_input.setAttribute('onInput', 'validate_second_field(this)');
+            nameInput.setAttribute('onInput', 'validate_name_field(this)');
         }
     }
 }

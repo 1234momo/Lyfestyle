@@ -101,7 +101,7 @@ function changePlaces(label, numInput, selector, removeEntry, linebreak1, linebr
     }
 
     removeItem(nameInput, weightInput, dayEatenSelector, removeBtn, br1, br2, isFromList, true);
-    isFromList ? createForm(itemName, itemWeight, dayEaten, displayArea, numItem) : createCustomForm(itemName, itemWeight, dayEaten, displayArea, numItem);
+    isFromList ? createForm(itemName, itemWeight, dayEaten, displayArea, numItem) : createCustomForm(itemName, itemWeight, dayEaten, displayArea, numItem);validate_name_field(document.getElementById(`item${numItem}custom`));
 }
 
 // Creates the components of a form entry from the list of foods
@@ -332,7 +332,7 @@ function createCustomForm(itemName, itemWeight, day_eaten, displayArea, numItem)
                                         `false)`);
 
     caloriesInputElement.setAttribute('oninput', `updateSecondInput(this.value, '${caloriesInputElement.id}')`);
-    labelElem.setAttribute('oninput', `updateName(this.value, '${labelElem.id}')`);
+    labelElem.setAttribute('oninput', `updateName(this.value, '${labelElem.id}');validate_name_field(this)`);
 
     dayEatenElem.setAttribute('onChange', `changePlaces('${labelElem.id}',` +
                                             `'${caloriesInputElement.id}',` +
@@ -455,7 +455,7 @@ function renameAttributes(nameInput_id, secondInput_id, dayEatenSelector_id, rem
                                                       `'br2${i - 1}custom',` +
                                                       `false)`);
             secondInput.setAttribute('oninput', `updateSecondInput(this.value, '${secondInput.id}')`);
-            nameInput.setAttribute('oninput', `updateName(this.value, '${nameInput.id}')`);
+            nameInput.setAttribute('oninput', `updateName(this.value, '${nameInput.id}');validate_name_field(this)`);
         }
     }
 }

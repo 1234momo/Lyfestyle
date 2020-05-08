@@ -462,8 +462,8 @@ function destroy_session_and_data() {
                       <form id="changeWaterGoal" method="POST">
                         <div class="modal-body">
                           <p>Enter your daily recommended water intake in OZ</p>
-                          <input type="number" class="form-control" name="new_water_goal" id="new_water_goal" 
-                                              placeholder="Water intake goal for each day in OZ" min="0.1" step="0.1" 
+                          <input type="number" class="form-control" name="new_water_goal" id="new_water_goal"
+                                              placeholder="Water intake goal for each day in OZ" min="0.01" step="0.01" 
                                               value="<?php echo $recommended_intake ?>" required>
                         </div>
                         <div class="modal-footer">
@@ -485,9 +485,9 @@ function destroy_session_and_data() {
             <div class="card-body text-center">
               <h3 class="card-title">Additional content</h3>
               <div>
-                <button type="button" class="btn btn-primary mt-2" onClick="location.href = './recipes/recipes.html'">Food recipes</button>
+                <button type="button" class="btn btn-primary mt-2" onclick="window.open('http://localhost/Lyfestyle/pages/recipes/recipes.html','_blank')">Food recipes</button>
                 <br>
-                <button type="button" class="btn btn-primary mt-2" onClick="location.href = './nutrition/nutrition.html'">Nutritional Blogs</button>
+                <button type="button" class="btn btn-primary mt-2" onclick="window.open('http://localhost/Lyfestyle/pages/nutrition/nutrition.html','_blank')">Nutritional Blogs</button>
               </div>
             </div>
           </div>

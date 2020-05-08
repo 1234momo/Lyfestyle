@@ -289,6 +289,7 @@ function addCustomItem() {
                                         `false)`);
 
     caloriesElement.setAttribute('onInput', 'validate_second_field(this)');
+    foodItemElem.setAttribute('onInput', 'validate_name_field(this)');
 
     // Appends the entry components to the entry area
     resultsArea.appendChild(foodItemElem);
@@ -379,6 +380,7 @@ function renameAttributes(nameInput_id, weight_or_calories_id, dayEatenSelector_
                                               `'br2${i - 1}custom',` +
                                               `false)`);
             weight_or_calories_Input.setAttribute('onInput', 'validate_second_field(this)');
+            nameInput.setAttribute('onInput', 'validate_name_field(this)');
         }
     }
 }
