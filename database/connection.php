@@ -188,6 +188,7 @@ if(isset($_POST['signup_weight_loss']) or
 // LOGIN
 //----------------------------------------------------------------------
 
+$error_message = "";
 if(isset($_POST['login'])) {
   
   $email = $_POST["login_email"];
@@ -313,13 +314,14 @@ if(isset($_POST['login'])) {
           exit();
         }
       }
+
+      $error_message = "";
     }
-    else echo "Invalid username/password";
+    else $error_message .= "<p style='color:red;text-align:center'>Invalid username/password combination</p>";
   }
-  else echo "Invalid username/password";
+  else $error_message .= "<p style='color:red;text-align:center'>Invalid username/password combination</p>";
   
   if (mysqli_num_rows($results) == 1) {
-    // session_destroy(); 
     header('location: ../pages/dashboard.php');
   }
 

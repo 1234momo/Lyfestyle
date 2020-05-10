@@ -20,6 +20,7 @@
   <body>
     <div class="login-page">
       <div class="form">
+        <?php echo $error_message ?>
         <form class="login-form" method="POST">
           <input type="email" id="email" name="login_email" placeholder="Email" required>
           <input type="password" id="password" name="login_password" placeholder="Password" required>
