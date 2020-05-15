@@ -6,6 +6,40 @@
 ## Overview
 Lyfestyle: a calorie tracking app
 
+## Installation
+### Linux
+#### 1. Install Apache, PHP, and MySQL
+```
+sudo apt-get install apache2
+sudo apt-get install php libapache2-mod-php
+sudo apt-get install mysql-server
+```
+#### 2. Restart Apache once the packages are installed
+```
+sudo systemctl restart apache2
+```
+#### 3. Install Git
+```
+sudo apt install git
+```
+Check git version to verify installation
+```
+git --version
+```
+#### 4. Clone the repository from Github to the directory /var/www/html
+```
+cd /var/www/html
+git clone https://github.com/Albert-C-Ong/Lyfestyle.git
+```
+#### 5. Start apache and open Lyfestyle in your browser
+```
+sudo systemctl start apache2
+```
+Enter the following address into your internet browser
+```
+localhost/Lyfestyle
+```
+
 ## Technologies and Tools
 **Design**
 * [Inkscape](https://inkscape.org/) // Art assets
@@ -25,4 +59,4 @@ Lyfestyle: a calorie tracking app
 * [phpmyadmin](https://www.phpmyadmin.net/)
 
 ## Acknowledgement
-CMPE 133 Spring 2020 Team #20: [Alexis Arroyo](https://github.com/Techo1000), [Gary Chang](https://github.com/1234momo), [Alisha Mehndiratta](https://github.com/alisha8899), and [Albert Ong](https://github.com/Albert-C-Ong). 
+CMPE 133 Spring 2020 Team #20: [Gary Chang](https://github.com/1234momo), [Alisha Mehndiratta](https://github.com/alisha8899), and [Albert Ong](https://github.com/Albert-C-Ong). 
