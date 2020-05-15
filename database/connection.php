@@ -134,7 +134,7 @@ if(isset($_POST['signup'])) {
     $_SESSION["gender"] = $gender; 
     $_SESSION["weight"] = $weight; 
     
-    header('location: fitness_goal_2.php');
+    header('location: fitness_goal.php');
   }
   
   // OTHERWISE PRINTS ERRORS
@@ -181,7 +181,7 @@ if(isset($_POST['signup_weight_loss']) or
   mysqli_query($conn, $query);
   
   // Redirect to login page
-  header('location: login_2.php');
+  header('location: login.php');
 }
 
 //----------------------------------------------------------------------
@@ -333,6 +333,6 @@ if(isset($_POST['login'])) {
 //----------------------------------------------------------------------
 if (isset($_POST['logout'])) {
   destroy_session_and_data();
-  header("location: ../pages/login_2.php");     
+  header("location: ../pages/login.php");     
 }
 ?>

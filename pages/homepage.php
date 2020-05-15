@@ -56,8 +56,8 @@
       <img src="../assets/images/Lyfestyle_banner.png" alt="Lyfestyle" width="280" height="100">
         <p class="lead text-muted">You don't have to eat less. You just have to eat right. </p>
         <p>
-          <a href="signup_2.php" class="btn btn-info my-2">Signup</a>
-          <a href="login_2.php" class="btn btn-secondary my-2">Login</a>
+          <a href="signup.php" class="btn btn-info my-2">Signup</a>
+          <a href="login.php" class="btn btn-secondary my-2">Login</a>
         </p>
       </div>
     </section>

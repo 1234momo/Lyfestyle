@@ -2,46 +2,39 @@
   require_once("../database/connection.php"); 
 ?>
 
-<html>
-<head>
-  <title>Lyfestyle | Login</title>
-  <link rel="stylesheet" type="text/css", href="../assets/css/main.css">
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  <link rel="icon" type="image/png" href="../assets/images/Lyfestyle_favicon.png">
-</head>
-
-<body>
-<img id="lyfestyle-logo" src="../assets/images/Lyfestyle_banner_02.png">
-
-<h1 style="color: white; font-weight: bold; ">Login</h1>
-
-<!-- LOGIN INPUTS -->
-<div class="main-login-form">
-  <form method="POST">
+<html lang="en">
+  <head>
+    <title>Lyfestyle | Login</title>
+    <link rel="icon" type="image/png" href="../assets/images/Lyfestyle_favicon.png">
     
-    <!-- EMAIL -->
-    <div class="login-group"> 
-      <input type="email" id="email" name="login_email" placeholder="Email" required>
-    </div>
-    
-    <!-- PASSWORD -->
-    <div class="login-group">  
-      <input type="password" id="password" name="login_password" placeholder="Password"  required>
-    </div>
-    
-    <!-- SUBMIT -->
-    <div class="login-group">
-      <input type="submit" name="login" value="Login">
-    </div>
-  </form>
-</div>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<div class="etc-login-form">
-Don't have an account? <a href="signup.php" >Signup here</a>
-</div>
-  
-</body>
-  
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <!-- Custom styles for this template -->
+    <link href="../assets/css/login.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="login-page">
+      <div class="form">
+        <?php echo $error_message ?>
+        <form class="login-form" method="POST">
+          <input type="email" id="email" name="login_email" placeholder="Email" required>
+          <input type="password" id="password" name="login_password" placeholder="Password" required>
+          <input type="submit" class="login-button" name="login" value="Login">
+          <p class="message">Not registered? <a href="signup.php">Create an account</a></p>
+        </form>
+      </div>
+    </div>
+        
+      
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
 </html>
-
-
