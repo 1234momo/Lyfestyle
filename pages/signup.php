@@ -36,7 +36,7 @@ require_once("../database/connection.php");
           <input type="password" id="confirmPassword" name="signup_password2" oninput="check_password(this)" placeholder="Confirm password" required>  
           <input type="submit" class="signup-button" name="signup" value="signup">
           
-          <p class="message">Already registered? <a href="login_2.php">Login</a></p>
+          <p class="message">Already registered? <a href="login.php">Login</a></p>
         </form>
 
       </div>
